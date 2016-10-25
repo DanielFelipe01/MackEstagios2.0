@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit name="test" >
+            <provider>org.hibernate.ejb.HibernatePersistence</provider>
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derbyclient</artifactId>
+                <version>10.4.2.0</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>tck-utils-api</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+
+		<class>Entidades.Usuario</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/MackEstagios" />
+			<property name="javax.persistence.jdbc.user" value="adm" />
+			<property name="javax.persistence.jdbc.password" value="adm" />
+                        
+                        <property name="hibernate.dialect"  value = "org.hibernate.dialect.DerbyDialect"/>
+                        
+                        <property name="hibernate.hbm2ddl.auto" value = "update"/>
+			<property name="hibernate.show_sql"  value = "true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
