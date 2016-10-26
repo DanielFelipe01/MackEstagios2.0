@@ -48,20 +48,5 @@ public class LoginDBDAO implements LoginDAO{
         
         return null;
     }
-    
-    public Usuario criarUsuario(String email, String senha){
-        Usuario usuario = new Usuario("danielfelipe982012@hotmail.com", "abc", "1");
-
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
-            EntityManager manager = factory.createEntityManager();
-
-            manager.getTransaction().begin();    
-            manager.persist(usuario);
-            manager.getTransaction().commit();  
-
-            manager.close();
-            
-            return usuario;
-    }
-    
+ 
 }

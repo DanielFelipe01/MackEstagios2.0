@@ -30,10 +30,11 @@ public class Administrador extends Usuario implements Serializable{
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario", insertable = false, updatable = false)
     private Usuario usuario;
     
-    public Administrador( String nome, String email, String senha, int nivel) {
+    public Administrador( String nome, String email, String senha, int nivel, Usuario usuario) {
         super(nome, email, senha);
         this.nome = nome;
         this.nivel = nivel;
+        this.usuario = usuario;
     }
 
     public Administrador() {
