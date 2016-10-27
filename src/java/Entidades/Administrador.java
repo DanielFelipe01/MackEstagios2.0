@@ -20,7 +20,7 @@ import javax.persistence.*;
 @DiscriminatorValue("1")
 public class Administrador extends Usuario implements Serializable{
     @Column(name = "idAdm")
-    private long idAdm;
+    private Integer idAdm;
     @Column(name = "nome")
     private String nome;
     @Column(name = "nivel")
@@ -56,11 +56,11 @@ public class Administrador extends Usuario implements Serializable{
         this.nivel = nivel;
     }
 
-    public long getIdAdm() {
+    public int getIdAdm() {
         return idAdm;
     }
 
-    public void setIdAdm(long idAdm) {
+    public void setIdAdm(int idAdm) {
         this.idAdm = idAdm;
     }
 

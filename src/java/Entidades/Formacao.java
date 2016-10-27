@@ -17,7 +17,7 @@ public class Formacao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idFormacao")
-    private long idFormacao;
+    private Integer idFormacao;
     @Column(name = "curso")
     private String curso;
     @Column(name = "semestre")
@@ -38,11 +38,11 @@ public class Formacao {
     }
     
     
-    public long getIdFormacao() {
+    public int getIdFormacao() {
         return idFormacao;
     }
 
-    public void setIdFormacao(long idFormacao) {
+    public void setIdFormacao(int idFormacao) {
         this.idFormacao = idFormacao;
     }
 

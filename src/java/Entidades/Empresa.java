@@ -18,8 +18,9 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="idUsuario")
 @DiscriminatorValue("3")
 public class Empresa extends Usuario implements Serializable{
+ 
     @Column(name = "idEmpresa")
-    private long idEmpresa;
+    private Integer idEmpresa;
     @Column(name = "nome")
     private String nome;
     @Column(name = "cnpj")
@@ -54,11 +55,11 @@ public class Empresa extends Usuario implements Serializable{
     public Empresa() {
     }
     
-    public long getIdEmpresa() {
+    public int getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(long idEmpresa) {
+    public void setIdEmpresa(int idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
@@ -106,8 +107,11 @@ public class Empresa extends Usuario implements Serializable{
         return situacao;
     }
 
-    public void setSituacao(Boolean situacao) {
-        this.situacao = situacao;
+    public void alteraSituacao() {
+        if(this.situacao)
+            this.situacao = false;
+        else
+            this.situacao = true;
     }
 
     public Usuario getUsuario() {

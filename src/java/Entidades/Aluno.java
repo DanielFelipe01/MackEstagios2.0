@@ -20,7 +20,7 @@ import javax.persistence.*;
 @DiscriminatorValue("2")
 public class Aluno extends Usuario implements Serializable{
     @Column(name = "idAluno")
-    private long idAluno;
+    private Integer idAluno;
     @Column(name = "nome")
     private String nome;
     @Column(name = "rg")
@@ -61,11 +61,11 @@ public class Aluno extends Usuario implements Serializable{
     public Aluno() {
     }
 
-    public long getIdAluno() {
+    public int getIdAluno() {
         return idAluno;
     }
 
-    public void setIdAluno(long idAluno) {
+    public void setIdAluno(int idAluno) {
         this.idAluno = idAluno;
     }
 

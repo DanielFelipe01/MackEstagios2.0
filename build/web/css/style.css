@@ -6,17 +6,30 @@ body{
 .conteudo{
     background-color: white;
     border-radius:5px;
+    padding: 2% 5% 2% 5%;
+
 }
 
-#perfil-form{
-    padding: 5%;
+#pesquisa-form{
+    margin-bottom: 30px;
     
 }
 
+#pesquisa{
+    min-width:50%;
+    margin-right: 10px;
+}
+
+.form-group-pesquisa{
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
 
 .title{
     width: 100%;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 20px;
     background-color: #ac1d1c;
     font-family: Arial;

@@ -9,6 +9,7 @@ import DAOs.UsuarioDBDAO;
 import Entidades.*;
 import Factory.*;
 import java.text.ParseException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -54,5 +55,36 @@ public class ControllerUsuario {
         }
         
         return usuarioTipo;
+    }
+    
+    public List<Aluno> listarAlunos(String pesquisa){
+        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
+        try{
+            return (List<Aluno>) usuarioDB.selectAlunos(pesquisa);
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    public List<Empresa> listarEmpresas(String pesquisa){
+        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
+        try{
+            return (List<Empresa>) usuarioDB.selectEmpresas(pesquisa);
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    public Empresa aprovaEmpresa(int idEmpresa){
+        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
+        Empresa empresa = usuarioDB.selectEmpresa(idEmpresa);
+        
+        empresa.alteraSituacao();
+        try{
+            usuarioDB.updateUsuario(empresa);
+            return empresa;
+        }catch(Exception ex){
+            return null;
+        }
     }
 }

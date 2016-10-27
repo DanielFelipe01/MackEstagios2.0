@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/java/Servlets/ServeletUsuario.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>97</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/index.jsp</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/css/style.css</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/principal.jsp</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Entidades/Empresa.java</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/DAOs/UsuarioDBDAO.java</file>
             <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Controllers/ControllerUsuario.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Servlets/ServeletUsuario.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/perfil.jsp</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/META-INF/persistence.xml</file>
         </group>
     </open-files>
 </project-private>

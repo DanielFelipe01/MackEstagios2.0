@@ -25,11 +25,8 @@
                     <li><a href="perfil.jsp">Perfil</a></li>
                     <li><a href="alunos.jsp">Alunos</a></li>
                     <li><a href="empresas.jsp">Empresas</a></li>
-                    <li><a href="aprovarEmpresass.jsp">Empresas pendentes</a></li>
                     <li><a href="vagas.jsp">Vagas</a></li>
                     <li><a href="administradores.jsp">Administradores</a></li>
-                    <li><a href="logs.jsp">Logs</a></li>
-                    
                 </ul>
                 <% } else if (usuario instanceof Aluno) {
                 %>

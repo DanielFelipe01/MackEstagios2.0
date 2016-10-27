@@ -17,7 +17,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idEndereco")
-    private long idEndereco;
+    private Integer idEndereco;
     @Column(name = "rua")
     private String rua;
     @Column(name = "bairro")
@@ -46,11 +46,11 @@ public class Endereco {
     public Endereco() {
     }
 
-    public long getIdEndereco() {
+    public int getIdEndereco() {
         return idEndereco;
     }
 
-    public void setIdEndereco(long idEndereco) {
+    public void setIdEndereco(int idEndereco) {
         this.idEndereco = idEndereco;
     }
 

@@ -1,7 +1,7 @@
-Wed Oct 26 14:55:30 BRST 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Thu Oct 27 11:07:58 BRST 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Wed Oct 26 14:55:54 BRST 2016:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0158-01ea-f509-000032212643
+Thu Oct 27 11:07:59 BRST 2016:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0158-0641-0358-000032212643
 no diretório de banco de dados C:\Users\Daniel\Documents\NetBeansProjects\MackEstagios2.0\MackEstagios 
 
 java.vendor=Oracle Corporation
@@ -13,4 +13,4 @@ os.version=6.3
 derby.system.home=C:\Users\Daniel\Documents\NetBeansProjects\MackEstagios2.0
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
 ----------------------------------------------------------------
-Wed Oct 26 16:19:54 BRST 2016: Shutting down Derby engine
+Thu Oct 27 16:43:50 BRST 2016: Shutting down Derby engine

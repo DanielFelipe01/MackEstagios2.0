@@ -5,12 +5,10 @@
  */
 package DAOs;
 
-import Entidades.Usuario;
+import Entidades.*;
 import Interfaces.UsuarioDAO;
 import java.util.List;
-import javax.jms.Session;
 import javax.persistence.*;
-import net.sf.ehcache.hibernate.HibernateUtil;
 
 
 /**
@@ -23,7 +21,7 @@ public class UsuarioDBDAO implements UsuarioDAO{
     public Usuario insertUsuario(Usuario usuario){
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
             EntityManager manager = factory.createEntityManager();
-
+            usuario.setIdUsuario(5);
             manager.getTransaction().begin();    
             manager.persist(usuario);
             manager.getTransaction().commit();  
@@ -33,10 +31,12 @@ public class UsuarioDBDAO implements UsuarioDAO{
             return usuario;
     }
     
+    @Override
     public Usuario updateUsuario(Usuario usuario){
            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
            EntityManager manager = factory.createEntityManager();
            
+           manager.getTransaction().begin();
            manager.merge(usuario);
            manager.getTransaction().commit(); 
            manager.close();
@@ -44,6 +44,7 @@ public class UsuarioDBDAO implements UsuarioDAO{
            return usuario;
     }
     
+    @Override
     public Usuario deleteUsuario(Usuario usuario){
            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
            EntityManager manager = factory.createEntityManager();
@@ -55,6 +56,7 @@ public class UsuarioDBDAO implements UsuarioDAO{
            return usuario;
     }
     
+    @Override
     public List<Usuario> selectUsuario(){
            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
            EntityManager manager = factory.createEntityManager();
@@ -65,33 +67,49 @@ public class UsuarioDBDAO implements UsuarioDAO{
            return usuarios;
     }
     
-    public List<Usuario> selectAlunos(){
+    @Override
+    public List<Aluno> selectAlunos(String pesquisa){
+           EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
+           EntityManager manager = factory.createEntityManager();
+
+           List<Aluno> usuarios = manager.createQuery("select a from Aluno a where nome LIKE :pesquisa")
+                                    .setParameter("pesquisa", pesquisa).getResultList();
+           
+           return usuarios;
+    }
+    
+    @Override
+    public List<Administrador> selectAdministradores(String pesquisa){
            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
            EntityManager manager = factory.createEntityManager();
            
-           List<Usuario> usuarios = manager.createQuery("select a from Aluno a")
+           List<Administrador> usuarios = manager.createQuery("select a from Administrador a")
                                     .getResultList();
            
            return usuarios;
     }
     
-    public List<Usuario> selectAdministradores(){
+    @Override
+    public List<Empresa> selectEmpresas(String pesquisa){
            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
            EntityManager manager = factory.createEntityManager();
            
-           List<Usuario> usuarios = manager.createQuery("select a from Administrador a")
-                                    .getResultList();
+           List<Empresa> usuarios = manager.createQuery("select e from Empresa e where nome LIKE :pesquisa")
+                                    .setParameter("pesquisa", pesquisa).getResultList();
            
            return usuarios;
     }
     
-    public List<Usuario> selectEmpresas(){
+    @Override
+    public Empresa selectEmpresa(int idEmpresa){
            EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
            EntityManager manager = factory.createEntityManager();
            
-           List<Usuario> usuarios = manager.createQuery("select e from Empresa e")
-                                    .getResultList();
+           Empresa empresa = (Empresa) manager.createQuery("select e from Empresa e where idEmpresa = :idEmpresa")
+                                    .setParameter("idEmpresa", idEmpresa).getSingleResult();
            
-           return usuarios;
+           return empresa;
     }
+    
+    
 }

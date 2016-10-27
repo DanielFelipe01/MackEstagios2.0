@@ -6,11 +6,11 @@
 package Servlets;
 
 import Controllers.*;
-import Entidades.Usuario;
+import Entidades.*;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,12 +33,13 @@ public class ServeletUsuario extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
+        ControllerUsuario ctrlUsuario = new ControllerUsuario();
+        
+        //CADASTRA O USUARIO
         if(action.equalsIgnoreCase("cadastro")){
             String tipo = request.getParameter("tipoUsuario");
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
-            
-            ControllerUsuario ctrlUsuario = new ControllerUsuario();
             
             Usuario usuario = ctrlUsuario.cadastrarUsuario(email, senha, tipo);
             
@@ -49,8 +50,8 @@ public class ServeletUsuario extends HttpServlet {
                 response.sendRedirect("index.jsp");
             }
             
-        }else if(action.equalsIgnoreCase("cadastro")){
-            ControllerUsuario ctrlUsuario = new ControllerUsuario();
+            //ALTERAR O CADASTRO DO USUARIO 
+        }else if(action.equalsIgnoreCase("alterarCadastro")){
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             
             try {
@@ -59,8 +60,8 @@ public class ServeletUsuario extends HttpServlet {
                 System.out.println("Erro: " + ex );
             }
             
+            //CADASTRA O TIPO DE USUARIO
         }else if(action.equalsIgnoreCase("terminaCadastro")){
-            ControllerUsuario ctrlUsuario = new ControllerUsuario();
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             
             try {
@@ -68,7 +69,35 @@ public class ServeletUsuario extends HttpServlet {
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex );
             }
+        
+            //PESQUISA OS ALUNOS
+        }else if(action.equalsIgnoreCase("pesquisaAlunos")){
+            String pesquisa = "%" + request.getParameter("pesquisa") + "%";
+            List<Aluno> alunos = ctrlUsuario.listarAlunos(pesquisa);
+            
+            request.setAttribute("alunos", alunos);
+            RequestDispatcher disp = request.getRequestDispatcher("alunos.jsp");
+            disp.forward(request, response);
+            
+            //PESQUISA AS EMPRESAS
+        }else if(action.equalsIgnoreCase("pesquisaEmpresas")){
+            String pesquisa = "%" + request.getParameter("pesquisa") + "%";
+            List<Empresa> empresas = ctrlUsuario.listarEmpresas(pesquisa);
+            
+            request.setAttribute("empresas", empresas);
+            RequestDispatcher disp = request.getRequestDispatcher("empresas.jsp");
+            disp.forward(request, response);
+            
+        }else if(action.equalsIgnoreCase("aprovacao")){
+            String IdEmpresa = request.getParameter("idEmpresa");
+            Empresa empresa = ctrlUsuario.aprovaEmpresa(Integer.parseInt(IdEmpresa));
+            
+            if(empresa != null){
+                //Empresa não aprovada
+            }
+            response.sendRedirect("empresas.jsp");
         }
+        
     }
 
 }

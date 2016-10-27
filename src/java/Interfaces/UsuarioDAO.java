@@ -5,7 +5,7 @@
  */
 package Interfaces;
 
-import Entidades.Usuario;
+import Entidades.*;
 import java.util.List;
 
 /**
@@ -22,9 +22,11 @@ public interface UsuarioDAO {
 
     public List<Usuario> selectUsuario();
     
-    public List<Usuario> selectAlunos();
+    public List<Aluno> selectAlunos(String pesquisa);
     
-    public List<Usuario> selectAdministradores();
+    public List<Administrador> selectAdministradores(String pesquisa);
     
-    public List<Usuario> selectEmpresas();
+    public List<Empresa> selectEmpresas(String pesquisa);
+    
+    public Empresa selectEmpresa(int idEmpresa);
 }

@@ -20,9 +20,8 @@ import javax.persistence.*;
 public class Usuario implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idUsuario")
-    private long idUsuario;
+    private Integer idUsuario;
     @Column(name = "email")
     private String email;
     @Column(name = "senha")
@@ -63,11 +62,11 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
 
-    public long getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(long idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
     

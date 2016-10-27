@@ -47,7 +47,7 @@ public class ServeletLogin extends HttpServlet {
                 disp.forward(request, response);
             }else{
                 RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-                request.setAttribute(email, "invalido");
+                request.setAttribute("email", "invalido");
                 disp.forward(request, response);
             }
         }else{
