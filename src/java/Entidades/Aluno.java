@@ -19,6 +19,7 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="idUsuario")
 @DiscriminatorValue("2")
 public class Aluno extends Usuario implements Serializable{
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idAluno")
     private Integer idAluno;
     @Column(name = "nome")
@@ -33,8 +34,9 @@ public class Aluno extends Usuario implements Serializable{
     @OneToOne(optional=false)
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco", insertable = false, updatable = false)
     private Endereco endereco;
+    
     @Column(name = "dataNascimento")
-    private Date dataNascimento ;
+    private String dataNascimento ;
     
     @OneToOne(optional=false)
     @JoinColumn(name = "idFormacao", referencedColumnName = "idFormacao", insertable = false, updatable = false)
@@ -46,7 +48,7 @@ public class Aluno extends Usuario implements Serializable{
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario", insertable = false, updatable = false)
     private Usuario usuario;
 
-    public Aluno(String nome, String rg, String cpf, String telefone, Endereco endereco, Date dataNascimento, Formacao formacao, String tia, String email, String senha, String tipo) {
+    public Aluno(String nome, String rg, String cpf, String telefone, Endereco endereco, String dataNascimento, Formacao formacao, String tia, String email, String senha, String tipo) {
         super(email, senha, tipo);
         this.nome = nome;
         this.rg = rg;
@@ -109,11 +111,11 @@ public class Aluno extends Usuario implements Serializable{
         this.endereco = endereco;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

@@ -59,7 +59,7 @@
                             <td>
                                 <form action="ServeletUsuario" method="Post">
                                     <input type="hidden" name="action" value="aprovacao">
-                                    <input type="hidden" name="idEmpresa" value="<%out.write(Integer.toString(e.getIdEmpresa()));%>">
+                                    <input type="hidden" name="IdUsuario" value="<%out.write(Integer.toString(e.getIdUsuario()));%>">
                                     <input type="submit" class="btn btn-default" value="Aprovar">
                                 </form>
                             </td>

@@ -13,8 +13,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Daniel Felipe">
         <link rel="icon" href="img/icon.png">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+        <script src='js/bootstrap.min.js'></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
@@ -40,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nivel">Nível:</label>
-                        <input type="text" name="nivel" id="nivel" tabindex="4" class="form-control" placeholder="Nível" value="<%  out.write(adm.getNivel()); %>" disabled="true">
+                        <input type="number" name="nivel" id="nivel" tabindex="4" class="form-control" placeholder="Nível" value="<%  out.write(Integer.toString(adm.getNivel())); %>" min="1" max="3">
                     </div>
                     <% } else if (usuario instanceof Aluno) {%>
                     <div class="form-group">
@@ -108,11 +110,11 @@
                         </div>
                         <div class="form-group">
                             <label for="cidade">Faculdade/Universidade:</label>
-                            <input type="text" name="Faculdade" id="Faculdade" tabindex="18" class="form-control" placeholder="Faculdade/Universidade" value="<% out.write(aluno.getFormacao().getFaculdade());%>">
+                            <input type="text" name="faculdade" id="faculdade" tabindex="18" class="form-control" placeholder="Faculdade/Universidade" value="<% out.write(aluno.getFormacao().getFaculdade());%>">
                         </div>
                         <div class="form-group">
                             <label for="unidade">Unidade:</label>
-                            <input type="text" name="Unidade" id="Unidade" tabindex="19" class="form-control" placeholder="Unidade" value="<% out.write(aluno.getFormacao().getUnidade());%>">
+                            <input type="text" name="unidade" id="unidade" tabindex="19" class="form-control" placeholder="Unidade" value="<% out.write(aluno.getFormacao().getUnidade());%>">
                         </div>
                     </section>    
                         

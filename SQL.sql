@@ -1,5 +1,5 @@
 CREATE TABLE usuario(
-    idUsuario INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idUsuario INTEGER NOT NULL,
     email VARCHAR(80) NOT NULL,
     senha VARCHAR(15) NOT NULL,
     tipo VARCHAR(15) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE usuario(
 );
 
 CREATE TABLE formacao(
-    idFormacao INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idFormacao INTEGER NOT NULL,
     curso VARCHAR(20) NOT NULL,
     semestre INTEGER NOT NULL,
     faculdade VARCHAR(40) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE formacao(
 );
 
 CREATE TABLE endereco(
-    idEndereco INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idEndereco INTEGER NOT NULL,
     rua VARCHAR(50) NOT NULL,
     bairro VARCHAR(50) NOT NULL,
     cidade VARCHAR(50) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE endereco(
 );
 
 CREATE TABLE aluno(
-    idAluno INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idAluno INTEGER NOT NULL,
     idUsuario INTEGER NOT NULL,
     nome VARCHAR(80) NOT NULL,
     rg VARCHAR(15) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE aluno(
     telefone VARCHAR(20) NOT NULL,
     idEndereco INTEGER NOT NULL,
     idFormacao INTEGER NOT NULL,
-    dataNascimento DATE NOT NULL,
+    dataNascimento VARCHAR(10) NOT NULL,
     tia VARCHAR(15) NOT NULL,
     PRIMARY KEY (idAluno),
     CONSTRAINT idEnderecoAluno FOREIGN KEY (idEndereco) REFERENCES endereco,
@@ -45,7 +45,7 @@ CREATE TABLE aluno(
 );
 
 CREATE TABLE empresa(
-    idEmpresa INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idEmpresa INTEGER NOT NULL,
     idUsuario INTEGER NOT NULL,
     nome VARCHAR(80) NOT NULL,
     cnpj VARCHAR(30) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE empresa(
 );
 
 CREATE TABLE administrador(
-    idAdm INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idAdm INTEGER NOT NULL,
     nome VARCHAR(80) NOT NULL,
     idUsuario INTEGER NOT NULL,
     nivel INTEGER NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE administrador(
 
 
 CREATE TABLE vaga(
-    idVaga INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idVaga INTEGER NOT NULL,
     curso VARCHAR(20) NOT NULL,
     nome VARCHAR(50) NOT NULL,
     semestre INTEGER NOT NULL,
@@ -88,26 +88,27 @@ CREATE TABLE vaga(
 );
 
 
-INSERT INTO usuario (email, senha, tipo) VALUES('danielfelipe982008@hotmail.com','abc01020304','1');
-INSERT INTO usuario (email, senha, tipo) VALUES('danielfelipe982012@hotmail.com','abc01020304','2');
-INSERT INTO usuario (email, senha, tipo) VALUES('danielfelipealmeida98@gmail.com','helloword','3');
+INSERT INTO usuario (idUsuario, email, senha, tipo) VALUES(10, 'danielfelipe982008@hotmail.com','abc01020304','1');
+INSERT INTO usuario (idUsuario, email, senha, tipo) VALUES(20, 'danielfelipe982012@hotmail.com','abc01020304','2');
+INSERT INTO usuario (idUsuario, email, senha, tipo) VALUES(30, 'danielfelipealmeida98@gmail.com','helloword','3');
 
-INSERT INTO administrador (nome, idUsuario, nivel) VALUES('Daniel Felipe',1 ,1);
+INSERT INTO administrador (idAdm, nome, idUsuario, nivel) VALUES(10, 'Daniel Felipe',10 ,1);
 
-insert into formacao (curso, semestre, faculdade, unidade) values('Sistemas ', 6, 'FCI', 'Mackenzie consolacao');
-insert into endereco (rua, bairro, cidade, estado, numero, complemento, cep) values('Rua aracitaba', 'Bonsucesso', 'Guarulhos', 'Sao paulo', 205, 'Viela', '07176-371');
-insert into aluno (idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)
-values(2, 'Daniel', '37.557.102-4', '475.488.288-10', '2438-1731', 1, 2, '1998-06-26', '41584945');
+insert into formacao (idFormacao, curso, semestre, faculdade, unidade) values(10, 'Sistemas ', 6, 'FCI', 'Mackenzie consolacao');
+insert into endereco (idEndereco, rua, bairro, cidade, estado, numero, complemento, cep) values(10, 'Rua aracitaba', 'Bonsucesso', 'Guarulhos', 'Sao paulo', 205, 'Viela', '07176-371');
 
-insert into endereco (rua, bairro, cidade, estado, numero, complemento, cep) values('Avenida Paulista', 'Centro', 'São Paulo', 'Sao paulo', 1148, 'Prédio', '07178-311');
-INSERT INTO empresa (idUsuario, nome, cnpj, site, telefone, idEndereco, situacao) VALUES(3, 'Empresa X','46489498498','www.empresaX.com.br', '94952-4381', 2, False);
+insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)
+values(10, 20, 'Daniel', '37.557.102-4', '475.488.288-10', '2438-1731', 10, 10, '1998-06-26', '41584945');
 
+insert into endereco (idEndereco, rua, bairro, cidade, estado, numero, complemento, cep) values(20, 'Avenida Paulista', 'Centro', 'São Paulo', 'Sao paulo', 1148, 'Prédio', '07178-311');
 
-INSERT INTO usuario (email, senha, tipo) VALUES('ramoncardoso@gmail.com','abc123456','2');
-
-insert into formacao (curso, semestre, faculdade, unidade) values('Sistemas ', 3, 'FCI', 'Mackenzie consolacao');
-insert into endereco (rua, bairro, cidade, estado, numero, complemento, cep) values('Av armando bei', 'Capão redondo', 'Santo Andre', 'Sao paulo', 1024, 'Apartamento', '04739-874');
-insert into aluno (idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)
-values(4, 'Ramon Cardoso', '80.800.808-8', '778.788.788-77', '949518125', 3, 2, '1978-01-10', '41582802');
+INSERT INTO empresa (idEmpresa, idUsuario, nome, cnpj, site, telefone, idEndereco, situacao) VALUES(10, 30, 'Empresa X','46489498498','www.empresaX.com.br', '94952-4381', 20, False);
 
 
+INSERT INTO usuario (idUsuario, email, senha, tipo) VALUES(40, 'ramoncardoso@gmail.com','abc123456','2');
+
+insert into formacao (idFormacao, curso, semestre, faculdade, unidade) values(20, 'Sistemas ', 3, 'FCI', 'Mackenzie consolacao');
+insert into endereco (idEndereco, rua, bairro, cidade, estado, numero, complemento, cep) values(30,'Av armando bei', 'Capão redondo', 'Santo Andre', 'Sao paulo', 1024, 'Apartamento', '04739-874');
+
+insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)
+values(20, 40, 'Ramon Cardoso', '80.800.808-8', '778.788.788-77', '949518125', 30, 20, '1978-01-10', '41582802');

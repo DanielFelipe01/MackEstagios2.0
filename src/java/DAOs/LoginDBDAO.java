@@ -9,44 +9,55 @@ import Entidades.*;
 import Interfaces.LoginDAO;
 import javax.persistence.*;
 
-
-
-
 /**
  *
  * @author Daniel
  */
-public class LoginDBDAO implements LoginDAO{
-    
-    public Usuario selectUsuario(String email, String senha){
+public class LoginDBDAO implements LoginDAO {
+    private EntityManager manager;
+
+    public LoginDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
-        EntityManager manager = factory.createEntityManager();
-
+        this.manager = factory.createEntityManager();
+    }
+    
+    
+    public Usuario selectUsuario(String email, String senha) {
+        Usuario user = null;
         Usuario usuario = new Usuario();
-        try{
-            usuario = (Usuario) manager.createQuery("Select u from Usuario u where u.email = :email and u.senha = :senha",Usuario.class).setParameter("email", email).setParameter("senha", senha).getSingleResult();
 
-            switch(usuario.getTipo()){
-                case "1":
-                    Administrador adm = (Administrador) manager.createQuery("Select a from Administrador a where a.idUsuario = :idUsuario",Usuario.class).setParameter("idUsuario", usuario.getIdUsuario()).getSingleResult();
-                    return adm;
-                case "2":
-                    Aluno aluno = (Aluno) manager.createQuery("Select a from Aluno a where a.idUsuario = :idUsuario",Usuario.class).setParameter("idUsuario", usuario.getIdUsuario()).getSingleResult();
-                    return aluno;
-                case "3":
-                    Empresa empresa = (Empresa) manager.createQuery("Select a from Empresa a where a.idUsuario = :idUsuario",Usuario.class).setParameter("idUsuario", usuario.getIdUsuario()).getSingleResult();
-                    return empresa;
-                default:
-                    System.out.println("Usuario invalido");
-            }
-            
-        }catch(Exception ex){
+        try {
+            usuario = (Usuario) manager.createQuery("Select u from Usuario u where u.email = :email and u.senha = :senha", Usuario.class).setParameter("email", email).setParameter("senha", senha).getSingleResult();
+        } catch (Exception ex) {
             return null;
-        }finally{
-            manager.close();
         }
         
-        return null;
+        if (usuario.equals(null)) {
+            return null;
+        } else {
+            try {
+                switch (usuario.getTipo()) {
+                    case "1":
+                        user = (Administrador) manager.createQuery("Select a from Administrador a where a.idUsuario = :idUsuario", Usuario.class).setParameter("idUsuario", usuario.getIdUsuario()).getSingleResult();
+                        break;
+                    case "2":
+                        user = (Aluno) manager.createQuery("Select a from Aluno a where a.idUsuario = :idUsuario", Usuario.class).setParameter("idUsuario", usuario.getIdUsuario()).getSingleResult();
+                        break;
+                    case "3":
+                        user = (Empresa) manager.createQuery("Select a from Empresa a where a.idUsuario = :idUsuario", Usuario.class).setParameter("idUsuario", usuario.getIdUsuario()).getSingleResult();
+                        break;
+                    default:
+                        System.out.println("Usuario invalido");
+                }
+            } catch (Exception ex) {
+                return usuario;
+            } finally {
+                manager.close();
+            }
+        }
+
+        return user;
+
     }
- 
+
 }

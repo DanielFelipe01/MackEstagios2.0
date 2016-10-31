@@ -5,7 +5,7 @@
             <url>src/java/Servlets/ServeletUsuario.java</url>
             <bookmark id="1">
                 <name/>
-                <line>97</line>
+                <line>0</line>
                 <key/>
             </bookmark>
         </file>
@@ -15,7 +15,7 @@
             <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Entidades/Empresa.java</file>
             <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/DAOs/UsuarioDBDAO.java</file>
             <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Controllers/ControllerUsuario.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/META-INF/persistence.xml</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Servlets/ServeletUsuario.java</file>
         </group>
     </open-files>
 </project-private>

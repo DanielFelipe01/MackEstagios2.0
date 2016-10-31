@@ -45,15 +45,15 @@ public class ServeletUsuario extends HttpServlet {
             
             if(usuario != null){
                 request.getSession().setAttribute("usuario", usuario);
-                response.sendRedirect("perfil.jsp");
+                response.sendRedirect("cadastro.jsp");
             }else{
                 response.sendRedirect("index.jsp");
             }
             
             //ALTERAR O CADASTRO DO USUARIO 
-        }else if(action.equalsIgnoreCase("alterarCadastro")){
+        }else if(action.equalsIgnoreCase("perfil")){
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-            
+
             try {
                 ctrlUsuario.alteraCadastro(request, usuario);
             } catch (ParseException ex) {
@@ -63,7 +63,6 @@ public class ServeletUsuario extends HttpServlet {
             //CADASTRA O TIPO DE USUARIO
         }else if(action.equalsIgnoreCase("terminaCadastro")){
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-            
             try {
                 ctrlUsuario.cadastrarUsuarioTipo(request, usuario);
             } catch (ParseException ex) {
@@ -89,15 +88,18 @@ public class ServeletUsuario extends HttpServlet {
             disp.forward(request, response);
             
         }else if(action.equalsIgnoreCase("aprovacao")){
-            String IdEmpresa = request.getParameter("idEmpresa");
-            Empresa empresa = ctrlUsuario.aprovaEmpresa(Integer.parseInt(IdEmpresa));
+            String IdUsuario = request.getParameter("IdUsuario");
+            Empresa empresa = ctrlUsuario.aprovaEmpresa(Integer.parseInt(IdUsuario));
             
             if(empresa != null){
                 //Empresa não aprovada
             }
             response.sendRedirect("empresas.jsp");
+            
+            //Completa cadastro
         }
         
     }
+ 
 
 }

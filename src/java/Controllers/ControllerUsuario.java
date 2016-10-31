@@ -17,14 +17,21 @@ import javax.servlet.http.HttpServletRequest;
  * @author Daniel
  */
 public class ControllerUsuario {
+    private UsuarioFactory factory;
+    private UsuarioDBDAO usuarioDB;
     
+    
+    public ControllerUsuario(){
+        this.factory = new UsuarioFactory();
+        this.usuarioDB = new UsuarioDBDAO();
+    }
     
     public Usuario cadastrarUsuario(String email, String senha, String tipo){
-        Usuario usuario = UsuarioFactory.criarUsuario(email, senha, tipo);
-        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
+        
+        Usuario usuario = factory.criarUsuario(email, senha, tipo);
         
         try{
-            usuarioDB.insertUsuario(usuario);
+            usuarioDB.insertObject(usuario);
         }catch(Exception ex){
             return null;
         }
@@ -32,24 +39,38 @@ public class ControllerUsuario {
     }
     
     public Usuario cadastrarUsuarioTipo(HttpServletRequest request,Usuario usuario) throws ParseException{
-        Usuario usuarioTipo = UsuarioFactory.criarUsuarioTipo(request, usuario);
-        
-        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
+        Usuario usuarioTipo = factory.criarUsuarioTipo(request, usuario);
         try{
-            usuarioDB.insertUsuario(usuarioTipo);
+            cadastraAdicional(usuarioTipo);
+            this.usuarioDB = new UsuarioDBDAO();
+            usuarioDB.insertObject(usuarioTipo);
         }catch(Exception ex){
+            System.out.println("Erro: " + ex);
             return null;
         }
         
         return usuarioTipo;
     }
     
+    public void cadastraAdicional(Usuario user){
+        Empresa empresa = null;
+        Aluno aluno = null;
+        if(user instanceof Empresa){
+            empresa = (Empresa) user;
+            usuarioDB.insertObject(empresa.getEndereco());
+        }else{
+            aluno = (Aluno) user;
+            usuarioDB.insertObject(aluno.getFormacao());
+            usuarioDB.insertObject(aluno.getEndereco());
+            
+        }
+    }
+    
     public Usuario alteraCadastro(HttpServletRequest request,Usuario usuario) throws ParseException{
-        Usuario usuarioTipo = UsuarioFactory.criarUsuarioTipo(request, usuario);
+        Usuario usuarioTipo = factory.criarUsuarioTipo(request, usuario);
          
-        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
         try{
-            usuarioDB.insertUsuario(usuarioTipo);
+            usuarioDB.updateObject(usuarioTipo);
         }catch(Exception ex){
             return null;
         }
@@ -58,7 +79,6 @@ public class ControllerUsuario {
     }
     
     public List<Aluno> listarAlunos(String pesquisa){
-        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
         try{
             return (List<Aluno>) usuarioDB.selectAlunos(pesquisa);
         }catch(Exception ex){
@@ -67,7 +87,6 @@ public class ControllerUsuario {
     }
     
     public List<Empresa> listarEmpresas(String pesquisa){
-        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
         try{
             return (List<Empresa>) usuarioDB.selectEmpresas(pesquisa);
         }catch(Exception ex){
@@ -75,13 +94,12 @@ public class ControllerUsuario {
         }
     }
     
-    public Empresa aprovaEmpresa(int idEmpresa){
-        UsuarioDBDAO usuarioDB = new UsuarioDBDAO();
-        Empresa empresa = usuarioDB.selectEmpresa(idEmpresa);
+    public Empresa aprovaEmpresa(int idUsuario){
+        Empresa empresa = usuarioDB.selectEmpresa(idUsuario);
         
         empresa.alteraSituacao();
         try{
-            usuarioDB.updateUsuario(empresa);
+            usuarioDB.updateObject(empresa);
             return empresa;
         }catch(Exception ex){
             return null;

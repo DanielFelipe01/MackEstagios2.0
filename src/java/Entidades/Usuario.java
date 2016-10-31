@@ -16,10 +16,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "tipo")
 public class Usuario implements Serializable{
     
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idUsuario")
     private Integer idUsuario;
     @Column(name = "email")

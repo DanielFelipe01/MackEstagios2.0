@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface UsuarioDAO {
 
-    public Usuario insertUsuario(Usuario usuario);
+    public Object insertObject(Object obj);
 
-    public Usuario updateUsuario(Usuario usuario);
+    public Object updateObject(Object obj);
 
-    public Usuario deleteUsuario(Usuario usuario);
+    public Object deleteObject(Object obj);
 
     public List<Usuario> selectUsuario();
     

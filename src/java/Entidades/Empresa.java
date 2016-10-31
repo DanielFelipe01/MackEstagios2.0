@@ -16,9 +16,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Empresa")
 @PrimaryKeyJoinColumn(name="idUsuario")
+
+@DiscriminatorColumn(name = "tipo")
 @DiscriminatorValue("3")
 public class Empresa extends Usuario implements Serializable{
- 
+    
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idEmpresa")
     private Integer idEmpresa;
     @Column(name = "nome")
@@ -62,7 +65,7 @@ public class Empresa extends Usuario implements Serializable{
     public void setIdEmpresa(int idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
-
+    
     public String getNome() {
         return nome;
     }

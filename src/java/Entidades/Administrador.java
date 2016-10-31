@@ -17,8 +17,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "administrador")
 @PrimaryKeyJoinColumn(name="idUsuario")
+@DiscriminatorColumn(name = "tipo")
 @DiscriminatorValue("1")
 public class Administrador extends Usuario implements Serializable{
+
     @Column(name = "idAdm")
     private Integer idAdm;
     @Column(name = "nome")

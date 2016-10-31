@@ -12,7 +12,7 @@ body{
 
 #pesquisa-form{
     margin-bottom: 30px;
-    
+
 }
 
 #pesquisa{
@@ -37,5 +37,18 @@ body{
     color:white;
     height: 45px;
     padding: 5px;
+
+}
+
+.incorreto{
+    color: red;
+    font-stretch: condensed;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: Arial;
+}
+
+#btnSair{
+    margin-left: 15px;
     
 }
