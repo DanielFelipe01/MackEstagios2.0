@@ -28,7 +28,7 @@
                     <div class="form-group-pesquisa">
                         <input type="text" name="pesquisa" id="pesquisa" >
                         <input type="hidden" name="action" value="pesquisaEmpresas">
-                        <input type="checkbox" name="pendente" value="False"> <label for="pendentes"> Pendentes</label>
+                        <input type="checkbox" name="pendente" value="False" > <label for="pendentes" id="pendente"> Pendentes</label>
                         <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>
                 </form>
@@ -43,31 +43,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%                                List<Empresa> empresas = (List<Empresa>) request.getAttribute("empresas");
+                        <%                            List<Empresa> empresas = (List<Empresa>) request.getAttribute("empresas");
                             if (empresas != null) {
                                 for (Empresa e : empresas) {
                         %>
                         <tr>
-                            <td><% out.write(e.getNome()); %></td>
-                            <td><% out.write(e.getUsuario().getEmail()); %></td>
-                            <td><% out.write(e.getTelefone()); %></td>
-                            <td><% out.write(e.getSite()); %></td>
-                            <%
-                                    if (e.getSituacao().equals(true)) { %>
-                            <td>Aprovada</td>
-                            <%  } else { %>
-                            <td>
-                                <form action="ServeletUsuario" method="Post">
-                                    <input type="hidden" name="action" value="aprovacao">
-                                    <input type="hidden" name="IdUsuario" value="<%out.write(Integer.toString(e.getIdUsuario()));%>">
-                                    <input type="submit" class="btn btn-default" value="Aprovar">
-                                </form>
-                            </td>
-                            <%  } %>
+                    <form method="post" action="ServeletUsuario">
+                        <input type="hidden" name="action" value="mostrarEmpresa">
+                        <input type="hidden" name="idEmpresa" value="<% out.write(Integer.toString(e.getIdEmpresa())); %>">
+                        <td><% out.write(e.getNome()); %></td>
+                        <td><% out.write(e.getUsuario().getEmail()); %></td>
+                        <td><% out.write(e.getTelefone()); %></td>
+                        <td><% out.write(e.getSite()); %></td>
+                        <%
+
+                            if (e.getSituacao().equals(true)) { %>
+                        <td>Aprovada</td>
+                        <%  } else { %>
+                        <td>Pendente</td> 
+                        <%  } %>
+                        <td><input type="submit" value="Mostrar" class="btn btn-default"></td>
                         </tr>
                         <%    }
-                                }%>
-                    </tbody>
+                        }%>
+                        </tbody>
                 </table>
             </div>
         </div>

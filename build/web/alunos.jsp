@@ -19,8 +19,6 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-
-
         <div class="container">
             <%@include  file="menu.jsp" %>
 
@@ -34,35 +32,40 @@
                     </div>
                 </form>
                 <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Telefone</th>
-                                <th>TIA</th>
-                                <th>Curso</th>
-                                <th>Semestre</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% 
-                                List<Aluno> alunos = (List<Aluno>) request.getAttribute("alunos");
-                                if(alunos != null){
-                                    for(Aluno a: alunos){
-                            %>
-                            <tr>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>TIA</th>
+                            <th>Curso</th>
+                            <th>Semestre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%  
+                            List<Aluno> alunos = (List<Aluno>) request.getAttribute("alunos");
+                            if (alunos != null) {
+                                for (Aluno a : alunos) {
+                        %>
+
+                        <tr>
+                            <form method="post" action="ServeletUsuario">
+                                <input type="hidden" name="action" value="mostrarAluno">
+                                <input type="hidden" name="idAluno" value="<% out.write(Integer.toString(a.getIdAluno())); %>">
                                 <td><% out.write(a.getNome()); %></td>
                                 <td><% out.write(a.getUsuario().getEmail()); %></td>
                                 <td><% out.write(a.getTelefone()); %></td>
                                 <td><% out.write(a.getTia()); %></td>
                                 <td><% out.write(a.getFormacao().getCurso()); %></td>
                                 <td><% out.write(Integer.toString(a.getFormacao().getSemestre())); %></td>
-                            </tr>
-                            <%      }
-                                }%>
-                        </tbody>
-                    </table>
+                                <td><input type="submit" value="Mostrar" class="btn btn-default"></td>
+                            </form>
+                        </tr>
+                    <%      }
+                        }%>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>

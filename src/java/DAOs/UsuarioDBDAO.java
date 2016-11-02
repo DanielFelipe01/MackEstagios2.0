@@ -66,20 +66,25 @@ public class UsuarioDBDAO implements UsuarioDAO {
 
         return usuarios;
     }
+    
+    @Override
+    public Aluno selectAluno(int idAluno) {
+        Aluno usuario = (Aluno) manager.createQuery("select a from Aluno a where idAluno = :idAluno")
+                .setParameter("idAluno", idAluno).getSingleResult();
+
+        return usuario;
+    }
 
     @Override
-    public List<Administrador> selectAdministradores(String pesquisa) {
-        List<Administrador> usuarios = manager.createQuery("select a from Administrador a")
-                .getResultList();
+    public List<Administrador> selectAdms(String pesquisa) {
+        List<Administrador> usuarios = manager.createQuery("select a from Administrador a where nome LIKE :pesquisa")
+                .setParameter("pesquisa", pesquisa).getResultList();
 
         return usuarios;
     }
 
     @Override
     public List<Empresa> selectEmpresas(String pesquisa) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
-        EntityManager manager = factory.createEntityManager();
-
         List<Empresa> usuarios = manager.createQuery("select e from Empresa e where nome LIKE :pesquisa")
                 .setParameter("pesquisa", pesquisa).getResultList();
 
@@ -87,11 +92,16 @@ public class UsuarioDBDAO implements UsuarioDAO {
     }
 
     @Override
-    public Empresa selectEmpresa(int idUsuario) {
-        Empresa empresa = (Empresa) manager.createQuery("select e from Empresa e where idUsuario = :idUsuario")
-                .setParameter("idUsuario", idUsuario).getSingleResult();
+    public Empresa selectEmpresa(int idEmpresa) {
+        Empresa empresa = (Empresa) manager.createQuery("select e from Empresa e where idEmpresa = :idEmpresa")
+                .setParameter("idEmpresa", idEmpresa).getSingleResult();
 
         return empresa;
+    }
+
+    @Override
+    public Administrador selectAdm(int idAdm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

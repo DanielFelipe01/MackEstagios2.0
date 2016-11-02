@@ -12,8 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Entidades/Empresa.java</file>
             <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/DAOs/UsuarioDBDAO.java</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/mostrarEmpresa.jsp</file>
             <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Controllers/ControllerUsuario.java</file>
             <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Servlets/ServeletUsuario.java</file>
         </group>
