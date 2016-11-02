@@ -86,9 +86,25 @@ public class ControllerUsuario {
         }
     }
     
+    public Aluno selecionarAluno(int idAluno){
+        try{
+            return (Aluno) usuarioDB.selectAluno(idAluno);
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
     public List<Empresa> listarEmpresas(String pesquisa){
         try{
             return (List<Empresa>) usuarioDB.selectEmpresas(pesquisa);
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    public Empresa selecionarEmpresa(int idEmpresa){
+        try{
+            return (Empresa) usuarioDB.selectEmpresa(idEmpresa);
         }catch(Exception ex){
             return null;
         }

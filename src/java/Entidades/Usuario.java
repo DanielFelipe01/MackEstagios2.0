@@ -34,7 +34,7 @@ public class Usuario implements Serializable{
         this.email = email;
         this.senha = senha;
     }
-
+    
     public Usuario() {
     }
 

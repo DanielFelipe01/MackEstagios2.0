@@ -59,7 +59,7 @@ public class Aluno extends Usuario implements Serializable{
         this.formacao = formacao;
         this.tia = tia;
     }
-
+    
     public Aluno() {
     }
 

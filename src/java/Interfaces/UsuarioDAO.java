@@ -24,7 +24,11 @@ public interface UsuarioDAO {
     
     public List<Aluno> selectAlunos(String pesquisa);
     
-    public List<Administrador> selectAdministradores(String pesquisa);
+    public Aluno selectAluno(int idAluno);
+    
+    public List<Administrador> selectAdms(String pesquisa);
+    
+    public Administrador selectAdm(int idAdm);
     
     public List<Empresa> selectEmpresas(String pesquisa);
     
