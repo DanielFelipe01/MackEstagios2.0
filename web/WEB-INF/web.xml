@@ -2,11 +2,11 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>ServeletLogin</servlet-name>
-        <servlet-class>Servlets.ServeletLogin</servlet-class>
+        <servlet-class>Servlets.ControllerLogin</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServeletUsuario</servlet-name>
-        <servlet-class>Servlets.ServeletUsuario</servlet-class>
+        <servlet-class>Servlets.ControllerUsuario</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServeletLogin</servlet-name>
