@@ -8,6 +8,10 @@
         <servlet-name>ServeletUsuario</servlet-name>
         <servlet-class>Servlets.ControllerUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerVagas</servlet-name>
+        <servlet-class>Servlets.ControllerVagas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServeletLogin</servlet-name>
         <url-pattern>/ServeletLogin</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ServeletUsuario</servlet-name>
         <url-pattern>/ServeletUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerVagas</servlet-name>
+        <url-pattern>/ControllerVagas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

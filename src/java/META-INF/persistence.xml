@@ -12,16 +12,18 @@ and open the template in the editor.
     <class>Entidades.Aluno</class>
     <class>Entidades.Endereco</class>
     <class>Entidades.Formacao</class>
-     <class>Entidades.Empresa</class>
+    <class>Entidades.Empresa</class>
+    <class>Entidades.Vaga</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-        <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver" />
-	<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/MackEstagios" />
-	<property name="javax.persistence.jdbc.user" value="adm" />
-	<property name="javax.persistence.jdbc.password" value="adm" />
-	<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />			
-	<property name="hibernate.format_sql" value="true" />
-	<property name="hibernate.hbm2ddl.auto" value="update" />			
-        <property name="hibernate.show_sql" value="true"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/MackEstagios"/>
+      <property name="javax.persistence.jdbc.user" value="adm"/>
+      <property name="javax.persistence.jdbc.password" value="adm"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>
