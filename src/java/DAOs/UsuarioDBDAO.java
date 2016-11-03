@@ -15,6 +15,7 @@ import javax.persistence.*;
  * @author Daniel
  */
 public class UsuarioDBDAO implements UsuarioDAO {
+
     private EntityManager manager;
 
     public UsuarioDBDAO() {
@@ -27,7 +28,6 @@ public class UsuarioDBDAO implements UsuarioDAO {
         manager.getTransaction().begin();
         manager.persist(obj);
         manager.getTransaction().commit();
-
 
         return obj;
     }
@@ -66,7 +66,7 @@ public class UsuarioDBDAO implements UsuarioDAO {
 
         return usuarios;
     }
-    
+
     @Override
     public Aluno selectAluno(int idAluno) {
         Aluno usuario = (Aluno) manager.createQuery("select a from Aluno a where idAluno = :idAluno")
@@ -101,7 +101,10 @@ public class UsuarioDBDAO implements UsuarioDAO {
 
     @Override
     public Administrador selectAdm(int idAdm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Administrador adm = (Administrador) manager.createQuery("select a from Administrador a where idAdm = :idAdm")
+                .setParameter("idAdm", idAdm).getSingleResult();
+
+        return adm;
     }
 
 }

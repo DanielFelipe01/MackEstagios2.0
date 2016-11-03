@@ -53,7 +53,8 @@
                     <ul class="nav navbar-nav" name="empresa" >
                         <li><a href="principal.jsp">Inicio</a></li>
                         <li><a href="perfil.jsp">Perfil</a></li>
-                        <li><a href="vagas.jsp">Vagas</a></li>
+                        <li><a href="cadastrarVaga.jsp">Cadastrar vaga</a></li>
+                        <li><a href="vagas.jsp">Minha vagas</a></li>
                     </ul>
                     <% } else {%>
                     <ul class="nav navbar-nav" name="empresa" >
@@ -62,7 +63,7 @@
                     </ul>
                     <% }%>
 
-                    <form method="post" action="ServeletLogin" class="navbar-form navbar-right">
+                    <form method="post" action="ControllerLogin" class="navbar-form navbar-right">
                         <% if (usuario instanceof Administrador) {
                                 adm = (Administrador) usuario;
                                 out.write(String.valueOf(adm.getNome()));

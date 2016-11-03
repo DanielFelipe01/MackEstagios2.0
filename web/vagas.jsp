@@ -1,9 +1,11 @@
 <%-- 
-    Document   : vagas
-    Created on : 31/10/2016, 17:39:56
-    Author     : Ramon Cardoso 41582802
+    Document   : alunos
+    Created on : 27/10/2016, 11:09:41
+    Author     : Daniel
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Controllers.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +13,7 @@
         <title> Vagas </title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Ramon Cardoso">
+        <meta name="author" content="Daniel Felipe">
         <link rel="icon" href="img/icon.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
@@ -20,52 +22,57 @@
     <body>
         <div class="container">
             <%@include  file="menu.jsp" %>
-            
-            
 
-            <section class="conteudo">
-                <form id="perfil-form" action="ControllerVagas" method="post" role="form">
-                    <div class="title"> Cadastrar Vagas</div>
-                    <div class="form-group">
-                        <label for="nome">Nome da vaga:</label>
-                        <input type="text" name="nome" id="nome" tabindex="1" class="form-control" placeholder="Nome da vaga" required>
+            <div class="conteudo">
+                <form action="ControllerVagas" method="Post" id="pesquisa-form" class="form-inline">
+                     <% if (usuario instanceof Empresa) { %>
+                    <div class="title">Minhas vagas</div>
+                    <% }else { %>
+                    <div class="title">Vagas</div>
+                    <% } %>
+                    
+                    <div class="form-group-pesquisa">
+                        <input type="text" name="pesquisa" id="pesquisa" >
+                        <input type="hidden" name="action" value="pesquisaVaga">
+                        <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>
-                    <div class="form-group">
-                        <label for="cursos">Cursos:</label>
-                        <input type="text" name="cursos" id="cursos" tabindex="1" class="form-control" placeholder="Cursos" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Semestre">Semestre:</label>
-                        <input type="number" name="semestre" id="semestre" tabindex="1" class="form-control" placeholder="Até o semestre." min="0" max="10" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Bolsa-auxilio">Valor da bolsa:</label>
-                        <input type="number" name="bolsa" id="bolsa" tabindex="1" class="form-control" placeholder="Valor da bolsa-auxilio" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="vale-refeição">Valor do vale refeição:</label>
-                        <input type="number" name="refeicao" id="refeicao" tabindex="1" class="form-control" placeholder="Valor do vale refeição" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="vale-transporte">Valor do vale transporte:</label>
-                        <input type="number" name="transporte" id="transporte" tabindex="1" class="form-control" placeholder="Valor do vale transporte" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="descrição">Descrição da vaga:</label>
-                        <input type="text" name="descricao" id="descricao" tabindex="1" class="form-control" placeholder="Descrição da vaga" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="atividades">Atividade desenvolvidas no estágio:</label>
-                        <input type="text" name="atividades" id="atividade" tabindex="1" class="form-control" placeholder="Atividades desenvolvidas no estágio" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="horario">Carga horária:</label>
-                        <input type="number" name="horario" id="horario" tabindex="1" class="form-control" placeholder="Carga horária do estágio" required>
-                    </div>
-                    <input type="hidden" name="action" value="cadastro">
-                    <input type="submit" value="Cadastrar" class="btn btn-default" style="margin-left: 40%; width: 20%;"> 
                 </form>
-            </section>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Vaga</th>
+                            <th>Curso</th>
+                            <th>Empresa</th>
+                            <th>Semestre</th>
+                            <th>Bolsa</th>
+                            <th>Horário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%  
+                            List<Vaga> vagas = (List<Vaga>) request.getAttribute("vagas");
+                            if (vagas != null) {
+                                for (Vaga v : vagas) {
+                        %>
+
+                        <tr>
+                            <form method="post" action="ControllerVagas">
+                                <input type="hidden" name="action" value="mostrarVaga">
+                                <input type="hidden" name="idVaga" value="<% out.write(Integer.toString(v.getIdVaga())); %>">
+                                <td><% out.write(v.getNome()); %></td>
+                                <td><% out.write(v.getCurso()); %></td>
+                                <td><% out.write(v.getEmpresa().getNome()); %></td>
+                                <td><% out.write(v.getSemestre()); %></td>
+                                <td><% out.write(String.valueOf(v.getBolsa())); %></td>
+                                <td><% out.write(v.getHorario()); %></td>
+                                <td><input type="submit" value="Mostrar" class="btn btn-default"></td>
+                            </form>
+                        </tr>
+                    <%      }
+                        }%>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </body>
 </html>

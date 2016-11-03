@@ -22,7 +22,7 @@
             <%@include  file="menu.jsp" %>
 
             <section class="conteudo">
-                <form id="perfil-form" action="ServeletUsuario" method="post" role="form">
+                <form id="perfil-form" action="ControllerUsuario" method="post" role="form">
                     <div class="title"> Dados</div>
                     <div class="form-group">
                         <label for="email">Email:</label>

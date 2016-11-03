@@ -6,6 +6,7 @@
 package Interfaces;
 
 import Entidades.Vaga;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,7 @@ import Entidades.Vaga;
 public interface VagaDAO {
     
     public Vaga insertObject(Vaga vaga);
+    
+    public List<Vaga> selectVagas(String pesquisa);
     
 }

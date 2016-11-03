@@ -12,12 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/web/vagas.jsp</file>
-            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Servlets/ControllerVagas.java</file>
-            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Entidades/Empresa.java</file>
-            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Interfaces/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Entidades/Aluno.java</file>
-            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Entidades/Vaga.java</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/administradores.jsp</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/DAOs/UsuarioDBDAO.java</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/mostrarAluno.jsp</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/web/mostrarAdm.jsp</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Controllers/ControllerUsuario.java</file>
+            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/MackEstagios2.0/src/java/Services/ServiceUsuario.java</file>
         </group>
     </open-files>
 </project-private>

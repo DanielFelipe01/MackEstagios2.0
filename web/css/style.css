@@ -62,3 +62,12 @@ section .form-group{
     margin-right: 10px;
     
 }
+
+.informa{
+    font-stretch: condensed;
+    font-weight: 700;
+    font-size: 25px;
+    font-family: Arial;
+    text-align: center
+    
+}

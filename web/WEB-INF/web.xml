@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>ServeletLogin</servlet-name>
-        <servlet-class>Servlets.ControllerLogin</servlet-class>
+        <servlet-name>ControllerLogin</servlet-name>
+        <servlet-class>Controllers.ControllerLogin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServeletUsuario</servlet-name>
-        <servlet-class>Servlets.ControllerUsuario</servlet-class>
+        <servlet-name>ControllerUsuario</servlet-name>
+        <servlet-class>Controllers.ControllerUsuario</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControllerVagas</servlet-name>
-        <servlet-class>Servlets.ControllerVagas</servlet-class>
+        <servlet-class>Controllers.ControllerVagas</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ServeletLogin</servlet-name>
-        <url-pattern>/ServeletLogin</url-pattern>
+        <servlet-name>ControllerLogin</servlet-name>
+        <url-pattern>/ControllerLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServeletUsuario</servlet-name>
-        <url-pattern>/ServeletUsuario</url-pattern>
+        <servlet-name>ControllerUsuario</servlet-name>
+        <url-pattern>/ControllerUsuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ControllerVagas</servlet-name>

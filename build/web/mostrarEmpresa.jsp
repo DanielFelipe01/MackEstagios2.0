@@ -83,10 +83,10 @@
                 </section>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">    
-                        <form action="ServeletUsuario" method="Post">
+                        <form action="ControllerUsuario" method="Post">
                             <input type="hidden" name="action" value="aprovacao">
                             <input type="hidden" name="IdUsuario" value="<%out.write(Integer.toString(e.getIdEmpresa()));%>">
-                            <% if (e.getSituacao()) { %>
+                            <% if (e.getSituacao().equals(true)) { %>
                             <input type="submit" class="form-control btn btn-default" value="Desaprovar">
                             <%  } else { %>
                             <input type="submit" class="form-control btn btn-default" value="Aprovar">

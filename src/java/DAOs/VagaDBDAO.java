@@ -5,8 +5,10 @@
  */
 package DAOs;
 
+import Entidades.Aluno;
 import Entidades.Vaga;
 import Interfaces.VagaDAO;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -31,5 +33,13 @@ public class VagaDBDAO implements VagaDAO {
 
 
         return vaga;
+    }
+    
+    @Override
+    public List<Vaga> selectVagas(String pesquisa) {
+        List<Vaga> vagas = manager.createQuery("select a from vaga")
+                .setParameter("pesquisa", pesquisa).getResultList();
+
+        return vagas;
     }
 }

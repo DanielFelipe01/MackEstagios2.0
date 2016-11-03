@@ -46,7 +46,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form id="login-form" action="ServeletLogin" method="post" role="form" style="display: block;">
+                                    <form id="login-form" action="ControllerLogin" method="post" role="form" style="display: block;">
                                         <div class="form-group">
                                             <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
                                         </div>
@@ -77,7 +77,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <form id="register-form" action="ServeletUsuario" method="post" role="form" style="display: none;">
+                                    <form id="register-form" action="ControllerUsuario" method="post" role="form" style="display: none;">
                                         <div class="form-group">
                                             <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
                                         </div>

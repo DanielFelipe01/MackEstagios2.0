@@ -6,9 +6,8 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +23,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "vaga")
+@PrimaryKeyJoinColumn(name="idEmpresa")
 public class Vaga  implements Serializable{
     @Id
-    @Column(name = "idvaga")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "idVaga")
     private Integer idVaga;
     @Column(name = "curso")
     private String curso;
@@ -34,37 +35,33 @@ public class Vaga  implements Serializable{
     private String nome;
     @Column(name = "semestre")
     private int semestre;
-    @Column(name = "valorbolsa")
-    private int bolsa;
-    @Column(name = "valerefeicao")
-    private int refeicao;
-    @Column(name = "valetransporte")
-    private int transporte;
+    @Column(name = "valorBolsa")
+    private double bolsa;
+    @Column(name = "valeRefeicao")
+    private double refeicao;
+    @Column(name = "valeTransporte")
+    private double transporte;
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "atividades")
     private String atividades;
     @Column(name = "horario")
-    private int horario;
-    
-    
+    private String horario;
     
     @OneToOne(optional=false)
-    @JoinColumn(name = "idEmpresa", referencedColumnName = "idempresa", insertable = false, updatable = false)
-    private Empresa idEmpresa;
-    
-    
-    
+    @JoinColumn(name = "idEmpresa", referencedColumnName = "idEmpresa", insertable = false, updatable = false)
+    private Empresa empresa;
     
     @Column(name = "adicionais")
     private String adicionais;
-    @Column(name = "atavalidade")
-    private String atavalidade;
+    @Column(name = "validade")
+    private Date validade;
 
     public Vaga() {
     }
 
-    public Vaga(String curso,String nome, int semestre, int bolsa, String descricao, String atividades, int horario, Empresa idEmpresa) {
+       
+    public Vaga(String curso,String nome, int semestre, double bolsa, String descricao, String atividades, String horario, Empresa idEmpresa) {
         this.curso = curso;
         this.nome = nome;
         this.semestre = semestre;
@@ -72,13 +69,37 @@ public class Vaga  implements Serializable{
         this.descricao = descricao;
         this.atividades = atividades;
         this.horario = horario;
-        this.idEmpresa = idEmpresa;
+        this.empresa = empresa;
         this.refeicao = 0;
         this.transporte = 0; 
         this.adicionais = "";
-        this.atavalidade = "";
     }
 
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public String getAdicionais() {
+        return adicionais;
+    }
+
+    public void setAdicionais(String adicionais) {
+        this.adicionais = adicionais;
+    }
+
+    public Date getValidade() {
+        return validade;
+    }
+
+    public void setValidade(Date validade) {
+        this.validade = validade;
+    }
+    
+    
     public Integer getIdVaga() {
         return idVaga;
     }
@@ -103,23 +124,23 @@ public class Vaga  implements Serializable{
         this.semestre = semestre;
     }
 
-    public int getBolsa() {
+    public double getBolsa() {
         return bolsa;
     }
 
-    public void setBolsa(int bolsa) {
+    public void setBolsa(double bolsa) {
         this.bolsa = bolsa;
     }
 
-    public int getRefeicao() {
+    public double getRefeicao() {
         return refeicao;
     }
 
-    public void setRefeicao(int refeicao) {
+    public void setRefeicao(double refeicao) {
         this.refeicao = refeicao;
     }
 
-    public int getTransporte() {
+    public double getTransporte() {
         return transporte;
     }
 
@@ -143,20 +164,20 @@ public class Vaga  implements Serializable{
         this.atividades = atividades;
     }
 
-    public int getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(int horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 
-    public Empresa getIdEmpresa() {
-        return idEmpresa;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setIdEmpresa(Empresa idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
     
     

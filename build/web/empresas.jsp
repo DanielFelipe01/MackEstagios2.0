@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="java.util.List"%>
+<%@page import="Controllers.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
         <div class="container">
             <%@include  file="menu.jsp" %>
             <div class="conteudo">
-                <form action="ServeletUsuario" method="Post" id="pesquisa-form" class="form-inline">
+                <form action="ControllerUsuario" method="Post" id="pesquisa-form" class="form-inline">
                     <div class="title"> Empresas</div>
                     <div class="form-group-pesquisa">
                         <input type="text" name="pesquisa" id="pesquisa" >
@@ -48,7 +48,7 @@
                                 for (Empresa e : empresas) {
                         %>
                         <tr>
-                    <form method="post" action="ServeletUsuario">
+                    <form method="post" action="ControllerUsuario">
                         <input type="hidden" name="action" value="mostrarEmpresa">
                         <input type="hidden" name="idEmpresa" value="<% out.write(Integer.toString(e.getIdEmpresa())); %>">
                         <td><% out.write(e.getNome()); %></td>
