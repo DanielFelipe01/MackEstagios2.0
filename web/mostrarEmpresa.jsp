@@ -83,7 +83,7 @@
                 </section>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">    
-                        <form action="ControllerUsuario" method="Post">
+                        <form action="ControllerEmpresa" method="Post">
                             <input type="hidden" name="action" value="aprovacao">
                             <input type="hidden" name="IdUsuario" value="<%out.write(Integer.toString(e.getIdEmpresa()));%>">
                             <% if (e.getSituacao().equals(true)) { %>

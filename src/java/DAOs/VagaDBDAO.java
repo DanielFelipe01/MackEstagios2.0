@@ -5,7 +5,6 @@
  */
 package DAOs;
 
-import Entidades.Aluno;
 import Entidades.Vaga;
 import Interfaces.VagaDAO;
 import java.util.List;
@@ -37,9 +36,18 @@ public class VagaDBDAO implements VagaDAO {
     
     @Override
     public List<Vaga> selectVagas(String pesquisa) {
-        List<Vaga> vagas = manager.createQuery("select a from vaga")
+        List<Vaga> vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa")
                 .setParameter("pesquisa", pesquisa).getResultList();
 
         return vagas;
+
+    }
+    
+    @Override
+    public Vaga selectVaga(int idVaga) {
+        Vaga vaga = (Vaga) manager.createQuery("select e from Vaga e where idVaga = :idVaga")
+                .setParameter("idVaga", idVaga).getSingleResult();
+
+        return vaga;
     }
 }

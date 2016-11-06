@@ -36,10 +36,10 @@
                     <ul class="nav navbar-nav" name="administrador" style="display: block;">
                         <li><a href="principal.jsp">Inicio</a></li>
                         <li><a href="perfil.jsp">Perfil</a></li>
-                        <li><a href="alunos.jsp">Alunos</a></li>
-                        <li><a href="empresas.jsp">Empresas</a></li>
-                        <li><a href="vagas.jsp">Vagas</a></li>
-                        <li><a href="administradores.jsp">Administradores</a></li>
+                        <li><a href="ControllerAluno?action=pesquisaAlunos&pesquisa=">Alunos</a></li>
+                        <li><a href="ControllerEmpresa?action=pesquisaEmpresas&pesquisa=">Empresas</a></li>
+                        <li><a href="ControllerVagas?action=pesquisaVagas&pesquisa=">Vagas</a></li>
+                        <li><a href="ControllerAdm?action=pesquisaAdm&pesquisa=">Administradores</a></li>
                     </ul>
                     <% } else if (usuario instanceof Aluno) {
                     %>

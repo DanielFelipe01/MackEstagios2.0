@@ -23,12 +23,11 @@
         <div class="container">
             <%@include  file="menu.jsp" %>
             <div class="conteudo">
-                <form action="ControllerUsuario" method="Post" id="pesquisa-form" class="form-inline">
+                <form action="ControllerEmpresa" method="Post" id="pesquisa-form" class="form-inline">
                     <div class="title"> Empresas</div>
                     <div class="form-group-pesquisa">
                         <input type="text" name="pesquisa" id="pesquisa" >
                         <input type="hidden" name="action" value="pesquisaEmpresas">
-                        <input type="checkbox" name="pendente" value="False" > <label for="pendentes" id="pendente"> Pendentes</label>
                         <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>
                 </form>
@@ -48,7 +47,7 @@
                                 for (Empresa e : empresas) {
                         %>
                         <tr>
-                    <form method="post" action="ControllerUsuario">
+                    <form method="post" action="ControllerEmpresa">
                         <input type="hidden" name="action" value="mostrarEmpresa">
                         <input type="hidden" name="idEmpresa" value="<% out.write(Integer.toString(e.getIdEmpresa())); %>">
                         <td><% out.write(e.getNome()); %></td>

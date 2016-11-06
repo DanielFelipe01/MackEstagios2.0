@@ -6,9 +6,7 @@
 package Services;
 
 import DAOs.VagaDBDAO;
-import Entidades.Aluno;
 import Entidades.Vaga;
-import Factory.UsuarioFactory;
 import java.util.List;
 
 /**
@@ -39,6 +37,16 @@ public class ServiceVaga {
         try{
             return (List<Vaga>) vagaDB.selectVagas(pesquisa);
         }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }
+    }
+    
+    public Vaga selecionarVaga(int idVaga) {
+        try {
+            return (Vaga) vagaDB.selectVaga(idVaga);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
             return null;
         }
     }

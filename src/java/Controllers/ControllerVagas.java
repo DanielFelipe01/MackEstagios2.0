@@ -22,14 +22,19 @@ import javax.servlet.http.HttpServletResponse;
  * @author Cardo
  */
 public class ControllerVagas extends HttpServlet {
-
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        ServiceVaga ctrlVaga = new ServiceVaga();
+        ServiceVaga serviceVaga = new ServiceVaga();
         
         if (action.equalsIgnoreCase("cadastro")){
             
@@ -47,30 +52,31 @@ public class ControllerVagas extends HttpServlet {
             Vaga vaga = null;
             //= new Vaga(curso, nome, semestre, bolsa, refeicao, transporte, descricao, atividades, horario, empresa, adicionais, validade);
             
-            if (ctrlVaga.cadastrarVaga(vaga) != null){
+            if (serviceVaga.cadastrarVaga(vaga) != null){
                 RequestDispatcher disp = request.getRequestDispatcher("vagas.jsp");
                 disp.forward(request, response);
             }
             
-        }else if(action.equalsIgnoreCase("pesquisaVaga")){
+        }else if(action.equalsIgnoreCase("pesquisaVagas")){
             String pesquisa = "%" + request.getParameter("pesquisa") + "%";
-            List<Vaga> vagas = ctrlVaga.listarVagas(pesquisa);
+            List<Vaga> vagas = serviceVaga.listarVagas(pesquisa);
 
             request.setAttribute("vagas", vagas);
             RequestDispatcher disp = request.getRequestDispatcher("vagas.jsp");
             disp.forward(request, response);
         
+          //MOSTRAR DADOS DA VAGA SELECIONADA
+        } else if (action.equalsIgnoreCase("mostrarVaga")) {
+            int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
+            Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
+
+            if (vaga != null) {
+                request.setAttribute("vaga", vaga);
+                RequestDispatcher disp = request.getRequestDispatcher("mostrarVaga.jsp");
+                disp.forward(request, response);
+            } else {
+                response.sendRedirect("vagas.jsp");
+            }
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

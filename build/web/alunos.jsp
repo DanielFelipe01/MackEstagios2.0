@@ -23,7 +23,7 @@
             <%@include  file="menu.jsp" %>
 
             <div class="conteudo">
-                <form action="ControllerUsuario" method="Post" id="pesquisa-form" class="form-inline">
+                <form action="ControllerAluno" method="Post" id="pesquisa-form" class="form-inline">
                     <div class="title"> Alunos</div>
                     <div class="form-group-pesquisa">
                         <input type="text" name="pesquisa" id="pesquisa" >
@@ -50,7 +50,7 @@
                         %>
 
                         <tr>
-                            <form method="post" action="ControllerUsuario">
+                            <form method="post" action="ControllerAluno">
                                 <input type="hidden" name="action" value="mostrarAluno">
                                 <input type="hidden" name="idAluno" value="<% out.write(Integer.toString(a.getIdAluno())); %>">
                                 <td><% out.write(a.getNome()); %></td>

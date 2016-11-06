@@ -16,31 +16,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author Cardo
  */
+
 @Entity
 @Table(name = "vaga")
 @PrimaryKeyJoinColumn(name="idEmpresa")
+
 public class Vaga  implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idVaga")
     private Integer idVaga;
+    
     @Column(name = "curso")
     private String curso;
+    
     @Column(name = "nome")
     private String nome;
+    
     @Column(name = "semestre")
     private int semestre;
+    
     @Column(name = "valorBolsa")
     private double bolsa;
+    
     @Column(name = "valeRefeicao")
     private double refeicao;
+    
     @Column(name = "valeTransporte")
     private double transporte;
+    
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "atividades")
@@ -54,7 +64,9 @@ public class Vaga  implements Serializable{
     
     @Column(name = "adicionais")
     private String adicionais;
+    
     @Column(name = "validade")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date validade;
 
     public Vaga() {
@@ -69,7 +81,7 @@ public class Vaga  implements Serializable{
         this.descricao = descricao;
         this.atividades = atividades;
         this.horario = horario;
-        this.empresa = empresa;
+        this.empresa = idEmpresa;
         this.refeicao = 0;
         this.transporte = 0; 
         this.adicionais = "";

@@ -33,7 +33,7 @@
                     
                     <div class="form-group-pesquisa">
                         <input type="text" name="pesquisa" id="pesquisa" >
-                        <input type="hidden" name="action" value="pesquisaVaga">
+                        <input type="hidden" name="action" value="pesquisaVagas">
                         <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>
                 </form>
@@ -62,7 +62,7 @@
                                 <td><% out.write(v.getNome()); %></td>
                                 <td><% out.write(v.getCurso()); %></td>
                                 <td><% out.write(v.getEmpresa().getNome()); %></td>
-                                <td><% out.write(v.getSemestre()); %></td>
+                                <td><% out.write(String.valueOf(v.getSemestre())); %></td>
                                 <td><% out.write(String.valueOf(v.getBolsa())); %></td>
                                 <td><% out.write(v.getHorario()); %></td>
                                 <td><input type="submit" value="Mostrar" class="btn btn-default"></td>

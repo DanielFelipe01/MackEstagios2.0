@@ -23,7 +23,7 @@
         <div class="container">
             <%@include  file="menu.jsp" %>
             <div class="conteudo">
-                <form action="ControllerUsuario" method="Post" id="pesquisa-form" class="form-inline">
+                <form action="ControllerAdm" method="Post" id="pesquisa-form" class="form-inline">
                     <div class="title"> Admistradores</div>
                     <div class="form-group-pesquisa">
                         <input type="text" name="pesquisa" id="pesquisa" >
@@ -45,7 +45,7 @@
                                 for (Administrador a : administradores) {
                         %>
                         <tr>
-                    <form method="post" action="ControllerUsuario">
+                    <form method="post" action="ControllerAdm">
                         <input type="hidden" name="action" value="mostrarAdm">
                         <input type="hidden" name="idAdm" value="<% out.write(Integer.toString(a.getIdAdm())); %>">
                         <td><% out.write(a.getNome()); %></td>

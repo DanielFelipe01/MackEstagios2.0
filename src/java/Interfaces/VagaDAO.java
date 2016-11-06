@@ -18,4 +18,6 @@ public interface VagaDAO {
     
     public List<Vaga> selectVagas(String pesquisa);
     
+    public Vaga selectVaga(int idVaga);
+    
 }
