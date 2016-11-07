@@ -6,6 +6,7 @@
 package Services;
 
 import DAOs.EmpresaDBDAO;
+import DAOs.EnderecoDBDAO;
 import Entidades.Empresa;
 import Factory.UsuarioFactory;
 import java.util.List;
@@ -49,5 +50,18 @@ public class ServiceEmpresa {
         } catch (Exception ex) {
             return null;
         }
+    }
+    
+    public Empresa cadastrarEmpresa(Empresa empresa){
+        EnderecoDBDAO enderecoDB = new EnderecoDBDAO();
+        
+        try {
+            enderecoDB.insertEndereco(empresa.getEndereco());
+            return empresaDB.insertEmpresa(empresa);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+            return null;
+        }
+    
     }
 }

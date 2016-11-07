@@ -6,6 +6,8 @@
 package Services;
 
 import DAOs.AlunoDBDAO;
+import DAOs.EnderecoDBDAO;
+import DAOs.FormacaoDBDAO;
 import Entidades.Aluno;
 import Factory.UsuarioFactory;
 import java.util.List;
@@ -38,5 +40,21 @@ public class ServiceAluno {
         }catch(Exception ex){
             return null;
         }
+    }
+    
+    public Aluno cadastrarAluno(Aluno aluno){
+        EnderecoDBDAO enderecoDB = new EnderecoDBDAO();
+        FormacaoDBDAO formacaoDB = new FormacaoDBDAO();
+        
+        try {
+            aluno.setTelefone("fsafsafas");
+            enderecoDB.insertEndereco(aluno.getEndereco());
+            formacaoDB.insertFormacao(aluno.getFormacao());
+            return alunoDB.insertAluno(aluno);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+            return null;
+        }
+    
     }
 }

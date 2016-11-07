@@ -38,31 +38,19 @@ public class ServiceUsuario {
     }
 
     public Usuario cadastrarUsuarioTipo(HttpServletRequest request, Usuario usuario) throws ParseException {
+        ServiceAluno alunoServ = new ServiceAluno();
+        ServiceEmpresa empresaServ = new ServiceEmpresa();
+        
         Usuario usuarioTipo = factory.criarUsuarioTipo(request, usuario);
-        try {
-            cadastraAdicional(usuarioTipo);
-            this.usuarioDB = new UsuarioDBDAO();
-            usuarioDB.insertObject(usuarioTipo);
-        } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
-            return null;
+        
+        if(usuarioTipo instanceof Aluno){
+            Aluno a = (Aluno) usuarioTipo;
+            return alunoServ.cadastrarAluno(a);
+        }else{
+            Empresa e = (Empresa) usuarioTipo;
+            return empresaServ.cadastrarEmpresa(e);
         }
-
-        return usuarioTipo;
-    }
-
-    public void cadastraAdicional(Usuario user) {
-        Empresa empresa = null;
-        Aluno aluno = null;
-        if (user instanceof Empresa) {
-            empresa = (Empresa) user;
-            usuarioDB.insertObject(empresa.getEndereco());
-        } else {
-            aluno = (Aluno) user;
-            usuarioDB.insertObject(aluno.getFormacao());
-            usuarioDB.insertObject(aluno.getEndereco());
-
-        }
+ 
     }
 
     public Usuario alteraCadastro(HttpServletRequest request, Usuario usuario) throws ParseException {

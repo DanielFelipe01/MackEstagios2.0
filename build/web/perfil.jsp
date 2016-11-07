@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dataNascimento">Data nascimento:</label>
-                        <input type="date" name="dataNascimento" id="dataNascimento" class="form-control" placeholder="Data de nascimento" value="<% aluno.getDataNascimento();%>">
+                        <input type="date" name="dataNascimento" id="dataNascimento" class="form-control" placeholder="Data de nascimento" value="<% String.valueOf(aluno.getDataNascimento());%>">
                     </div>
                     <div class="form-group">
                         <label for="rg">RG:</label>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="form-group">
                     </div>
-                    <section class="form-group" name="endereco">
+                    <section class="form-group">
                         <div class="title">Endereço </div>
                         <div class="form-group">
                             <label for="rua">Rua/Av:</label>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group">
                             <label for="número">Número:</label>
-                            <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(aluno.getEndereco().getNumero());%>">
+                            <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(String.valueOf(aluno.getEndereco().getNumero()));%>">
                         </div>
                         <div class="form-group">
                             <label for="bairro">Bairro:</label>
@@ -102,7 +102,7 @@
                             <input type="text" name="complemento" id="complemento" tabindex="15" class="form-control" placeholder="Complemento" value="<% out.write(aluno.getEndereco().getComplemento());%>">
                         </div>
                     </section>
-                    <section class="form-group" name="formacao">
+                    <section class="form-group">
                         <div class="title">Formação </div>
                         <div class="form-group">
                             <label for="curso">Curso:</label>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="form-group">
                             <label for="semestre">Semestre:</label>
-                            <input type="text" name="semestre" id="semestre" tabindex="17" class="form-control" placeholder="Semestre" value="<% out.write(aluno.getFormacao().getSemestre());%>">
+                            <input type="text" name="semestre" id="semestre" tabindex="17" class="form-control" placeholder="Semestre" value="<% out.write(String.valueOf(aluno.getFormacao().getSemestre()));%>">
                         </div>
                         <div class="form-group">
                             <label for="faculdade">Faculdade/Universidade:</label>
@@ -139,51 +139,50 @@
                         <label for="site">Site</label>
                         <input type="text" name="site" id="site" tabindex="6" class="form-control" placeholder="Site" value="<% out.write(emp.getSite());%>" >
                     </div>
-                    <section class="form-group" name="endereco">
-                        <section class="form-group" name="endereco">
-                            <div class="form-group">
-                                <label for="rua">Rua/Av:</label>
-                                <input type="text" name="rua" id="rua" tabindex="8" class="form-control" placeholder="Rua" value="<% out.write(emp.getEndereco().getRua());%>">
-                            </div>
-                            <div class="form-group">
-                                <label for="número">Número:</label>
-                                <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(emp.getEndereco().getNumero());%>">
-                            </div>
-                            <div class="form-group">
-                                <label for="bairro">Bairro:</label>
-                                <input type="text" name="bairro" id="bairro" tabindex="10" class="form-control" placeholder="Bairro" value="<% out.write(emp.getEndereco().getBairro());%>">
-                            </div>
-                            <div class="form-group">
-                                <label for="cidade">Cidade:</label>
-                                <input type="text" name="cidade" id="cidade" tabindex="11" class="form-control" placeholder="Cidade" value="<% out.write(emp.getEndereco().getCidade());%>">
-                            </div>
-                            <div class="form-group">
-                                <label for="estado">Estado:</label>
-                                <input type="text" name="estado" id="estado" tabindex="12" class="form-control" placeholder="Estado" value="<% out.write(emp.getEndereco().getEstado());%>">
-                            </div>
-                            <div class="form-group">
-                                <label for="cep">CEP:</label>
-                                <input type="text" name="cep" id="cep" tabindex="14" class="form-control" placeholder="CEP" value="<% out.write(emp.getEndereco().getCep());%>">
-                            </div>
-                            <div class="form-group">
-                                <label for="complemento">Complemento:</label>
-                                <input type="text" name="complemento" id="complemento" tabindex="15" class="form-control" placeholder="Complemento" value="<% out.write(emp.getEndereco().getComplemento());%>">
-                            </div>
-                        </section>
-
-                        <% }%>
-
-
+                    <div class="title"> Endereço</div>
+                    <section class="form-group">
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <input type="hidden" name="action" value="perfil">
-                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-default" value="Confirmar">
-                                </div>
+                            <label for="rua">Rua/Av:</label>
+                            <input type="text" name="rua" id="rua" tabindex="8" class="form-control" placeholder="Rua" value="<% out.write(emp.getEndereco().getRua());%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="número">Número:</label>
+                            <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(String.valueOf(emp.getEndereco().getNumero()));%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" name="bairro" id="bairro" tabindex="10" class="form-control" placeholder="Bairro" value="<% out.write(emp.getEndereco().getBairro());%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" name="cidade" id="cidade" tabindex="11" class="form-control" placeholder="Cidade" value="<% out.write(emp.getEndereco().getCidade());%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado:</label>
+                            <input type="text" name="estado" id="estado" tabindex="12" class="form-control" placeholder="Estado" value="<% out.write(emp.getEndereco().getEstado());%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="cep">CEP:</label>
+                            <input type="text" name="cep" id="cep" tabindex="14" class="form-control" placeholder="CEP" value="<% out.write(emp.getEndereco().getCep());%>">
+                        </div>
+                        <div class="form-group">
+                            <label for="complemento">Complemento:</label>
+                            <input type="text" name="complemento" id="complemento" tabindex="15" class="form-control" placeholder="Complemento" value="<% out.write(emp.getEndereco().getComplemento());%>">
+                        </div>
+                    </section>
+
+                    <% }%>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="hidden" name="action" value="perfil">
+                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-default" value="Confirmar">
                             </div>
                         </div>
+                    </div>
                 </form>
-            </section>
         </div>
     </body>
 </html>

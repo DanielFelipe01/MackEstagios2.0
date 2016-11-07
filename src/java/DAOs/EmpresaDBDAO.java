@@ -5,8 +5,10 @@
  */
 package DAOs;
 
+import Conexao.Conexao;
 import Entidades.Empresa;
 import Interfaces.EmpresaDAO;
+import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -48,5 +50,35 @@ public class EmpresaDBDAO implements EmpresaDAO{
                 .setParameter("idEmpresa", idEmpresa).getSingleResult();
 
         return empresa;
+    }
+    
+    @Override
+    public Empresa insertEmpresa(Empresa emp) {
+        Conexao c = new Conexao();
+        
+        String sql = "INSERT INTO empresa (idEmpresa, idUsuario, nome, cnpj, site, telefone, idEndereco,"
+                + " situacao) VALUES(?,?,?,?,?,?,?,?)";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setInt(1, emp.getUsuario().getIdUsuario());
+            stmt.setInt(2, emp.getUsuario().getIdUsuario());
+            stmt.setString(3, emp.getNome());
+            stmt.setString(4, emp.getCnpj());
+            stmt.setString(5, emp.getSite());
+            stmt.setString(6, emp.getTelefone());
+            stmt.setInt(7, emp.getEndereco().getIdEndereco());
+            stmt.setBoolean(8, false);
+
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+
+        return emp;
     }
 }

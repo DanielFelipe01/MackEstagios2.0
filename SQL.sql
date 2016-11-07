@@ -1,6 +1,6 @@
 CREATE TABLE usuario(
     idUsuario INTEGER NOT NULL,
-    email VARCHAR(80) NOT NULL,
+    email VARCHAR(80),
     senha VARCHAR(15) NOT NULL,
     tipo VARCHAR(15) NOT NULL,
     PRIMARY KEY (idUsuario)
@@ -28,14 +28,14 @@ CREATE TABLE endereco(
 );
 
 CREATE TABLE aluno(
-    idAluno INTEGER NOT NULL,
+    idAluno INTEGER,
     idUsuario INTEGER NOT NULL,
     nome VARCHAR(80) NOT NULL,
     rg VARCHAR(15) NOT NULL,
     cpf VARCHAR(15) NOT NULL,
     telefone VARCHAR(20) NOT NULL,
-    idEndereco INTEGER NOT NULL,
-    idFormacao INTEGER NOT NULL,
+    idEndereco INTEGER,
+    idFormacao INTEGER,
     dataNascimento VARCHAR(10) NOT NULL,
     tia VARCHAR(15) NOT NULL,
     PRIMARY KEY (idAluno),
@@ -114,4 +114,4 @@ insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFo
 values(20, 40, 'Ramon Cardoso', '80.800.808-8', '778.788.788-77', '949518125', 30, 20, '1978-01-10', '41582802');
 
 INSERT INTO vaga (idVaga, idEmpresa, curso, nome, semestre, valorBolsa, valeRefeicao, valeTransporte, descricao, atividades, adicionais, validade, horario)
-VALUES(10, 'Sistemas', 10, 'Programador', 6, 2000, 25, 10, 'Trabalhar programando', 'Programar com sql,e afins', 'possivel efetivação', '1998-06-26', '9:00' );
+VALUES(10,  10, 'Sistemas', 'Programador', 6, 2000, 25, 10, 'Trabalhar programando', 'Programar com sql,e afins', 'possivel efetivação', '1998-06-26', '9:00' );

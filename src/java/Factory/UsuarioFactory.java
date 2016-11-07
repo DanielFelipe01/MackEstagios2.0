@@ -37,7 +37,7 @@ public class UsuarioFactory implements Factory {
 
                    return new Aluno(request.getParameter("nome"), request.getParameter("rg"), request.getParameter("cpf"),
                         request.getParameter("telefone"), endereco, request.getParameter("dataNascimento"),
-                        formacao, request.getParameter("tia"), request.getParameter("email"), request.getParameter("senha"), usuario.getTipo());
+                        formacao, request.getParameter("tia"), request.getParameter("email"), request.getParameter("senha"), usuario.getTipo(), usuario);
             case "3":
                 endereco = new Endereco(request.getParameter("rua"), request.getParameter("bairro"),
                         request.getParameter("cidade"), request.getParameter("estado"), Integer.parseInt(request.getParameter("numero")),

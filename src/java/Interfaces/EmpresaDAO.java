@@ -19,4 +19,6 @@ public interface EmpresaDAO {
     public List<Empresa> selectEmpresas(String pesquisa);
     
     public Empresa selectEmpresa(int idEmpresa);
+    
+    public Empresa insertEmpresa(Empresa emp);
 }

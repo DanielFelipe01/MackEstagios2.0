@@ -18,9 +18,12 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="idUsuario")
 @DiscriminatorValue("2")
 public class Aluno extends Usuario implements Serializable{
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    
+    
     @Column(name = "idAluno")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer idAluno;
+    
     @Column(name = "nome")
     private String nome;
     @Column(name = "rg")
@@ -37,17 +40,20 @@ public class Aluno extends Usuario implements Serializable{
     @Column(name = "dataNascimento")
     private String dataNascimento ;
     
-    @OneToOne(optional=false)
+     @OneToOne(optional=false)
     @JoinColumn(name = "idFormacao", referencedColumnName = "idFormacao", insertable = false, updatable = false)
     private Formacao formacao;
+    
+    
     @Column(name = "tia")
     private String tia;
     
+   
     @OneToOne(optional=false)
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario", insertable = false, updatable = false)
     private Usuario usuario;
 
-    public Aluno(String nome, String rg, String cpf, String telefone, Endereco endereco, String dataNascimento, Formacao formacao, String tia, String email, String senha, String tipo) {
+    public Aluno(String nome, String rg, String cpf, String telefone, Endereco endereco, String dataNascimento, Formacao formacao, String tia, String email, String senha, String tipo, Usuario usuario) {
         super(email, senha, tipo);
         this.nome = nome;
         this.rg = rg;
@@ -57,6 +63,7 @@ public class Aluno extends Usuario implements Serializable{
         this.dataNascimento = dataNascimento;
         this.formacao = formacao;
         this.tia = tia;
+        this.usuario = usuario;
     }
     
     public Aluno() {

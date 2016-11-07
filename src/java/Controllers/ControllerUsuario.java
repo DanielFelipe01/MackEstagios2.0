@@ -61,7 +61,9 @@ public class ControllerUsuario extends HttpServlet {
         } else if (action.equalsIgnoreCase("terminaCadastro")) {
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             try {
-                serviceUsuario.cadastrarUsuarioTipo(request, usuario);
+                usuario = serviceUsuario.cadastrarUsuarioTipo(request, usuario);
+                request.getSession().setAttribute("usuario", usuario);
+                response.sendRedirect("principal.jsp");
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex);
             }

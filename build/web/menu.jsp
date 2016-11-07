@@ -73,8 +73,6 @@
                             } else if (usuario instanceof Empresa) {
                                 emp = (Empresa) usuario;
                                 out.write(String.valueOf(emp.getNome()));
-                            } else {
-                                out.write(String.valueOf(usuario.getTipo()));
                             }
                         %>
                         <input type="hidden" name="action" value="sair">

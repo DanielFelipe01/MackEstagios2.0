@@ -5,8 +5,10 @@
  */
 package DAOs;
 
+import Conexao.Conexao;
 import Entidades.Aluno;
 import Interfaces.AlunoDAO;
+import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,5 +41,37 @@ public class AlunoDBDAO implements AlunoDAO{
                 .setParameter("idAluno", idAluno).getSingleResult();
 
         return usuario;
+    }
+    
+    @Override
+    public Aluno insertAluno(Aluno aluno) {
+        Conexao c = new Conexao();
+        
+        String sql = "insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)"
+                + "values(?,?,?,?,?,?,?,?,?,?)";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setInt(1, aluno.getUsuario().getIdUsuario());
+            stmt.setInt(2, aluno.getUsuario().getIdUsuario());
+            stmt.setString(3, aluno.getNome());
+            stmt.setString(4, aluno.getRg());
+            stmt.setString(5, aluno.getCpf());
+            stmt.setString(6, aluno.getTelefone());
+            stmt.setInt(7, aluno.getEndereco().getIdEndereco());
+            stmt.setInt(8, aluno.getFormacao().getIdFormacao());
+            stmt.setString(9, aluno.getDataNascimento());
+            stmt.setString(10, aluno.getTia());
+
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
+        return aluno;
     }
 }
