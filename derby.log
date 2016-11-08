@@ -1,7 +1,7 @@
-Tue Nov 08 01:16:51 BRST 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Tue Nov 08 12:13:28 BRST 2016 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Tue Nov 08 01:17:17 BRST 2016:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0158-41f0-23e9-000032212643
+Tue Nov 08 12:13:59 BRST 2016:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0158-4449-48eb-000032212643
 no diretório de banco de dados C:\Users\Daniel\Documents\NetBeansProjects\MackEstagios2.0\MackEstagios 
 
 java.vendor=Oracle Corporation
@@ -12,5 +12,20 @@ os.arch=amd64
 os.version=6.3
 derby.system.home=C:\Users\Daniel\Documents\NetBeansProjects\MackEstagios2.0
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Nov 08 01:55:28 BRST 2016: Shutting down Derby engine
+Tue Nov 08 13:09:18 BRST 2016 Thread[DRDAConnThread_18,5,main] (XID = 115708), (SESSIONID = 81), (DATABASE = MackEstagios), (DRDAID = ????????.????-579555498429483368{41}), Cleanup action starting
+Tue Nov 08 13:09:18 BRST 2016 Thread[DRDAConnThread_18,5,main] (XID = 115708), (SESSIONID = 81), (DATABASE = MackEstagios), (DRDAID = ????????.????-579555498429483368{41}), Failed Statement is: alter table aluno 
+        drop constraint UK_9nfk95c88ov83axe7myrbil1
+java.lang.NullPointerException
+	at org.apache.derby.impl.sql.execute.DDLConstantAction.lockTableForDDL(Unknown Source)
+	at org.apache.derby.impl.sql.execute.AlterTableConstantAction.executeConstantActionBody(Unknown Source)
+	at org.apache.derby.impl.sql.execute.AlterTableConstantAction.executeConstantAction(Unknown Source)
+	at org.apache.derby.impl.sql.execute.MiscResultSet.open(Unknown Source)
+	at org.apache.derby.impl.sql.GenericPreparedStatement.executeStmt(Unknown Source)
+	at org.apache.derby.impl.sql.GenericPreparedStatement.execute(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedStatement.executeStatement(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedStatement.execute(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedStatement.executeLargeUpdate(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseEXCSQLIMM(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
+Cleanup action completed

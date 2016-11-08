@@ -47,7 +47,7 @@ public class ControllerLogin extends HttpServlet {
                 disp.forward(request, response);
             }else{
                 RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-                request.setAttribute("incorreto", true);
+                request.setAttribute("mensagem", 1);
                 disp.forward(request, response);
             }
         }else{

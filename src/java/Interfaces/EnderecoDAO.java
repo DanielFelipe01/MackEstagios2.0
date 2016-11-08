@@ -13,4 +13,6 @@ import Entidades.Endereco;
  */
 public interface EnderecoDAO {
     public Endereco insertEndereco(Endereco end);
+    
+    public Endereco updateEndereco(Endereco end);
 }

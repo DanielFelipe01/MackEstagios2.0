@@ -9,6 +9,7 @@ import Services.ServiceUsuario;
 import Entidades.*;
 import java.io.IOException;
 import java.text.ParseException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,16 +39,23 @@ public class ControllerUsuario extends HttpServlet {
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
 
-            Usuario usuario = serviceUsuario.cadastrarUsuario(email, senha, tipo);
+            Usuario usuario = null;
 
+            try {
+                usuario = serviceUsuario.cadastrarUsuario(email, senha, tipo);
+            } catch (Exception ex) {
+                usuario = null;
+            }
             if (usuario != null) {
-                request.getSession().invalidate();
+                request.getSession().setAttribute("usuario", usuario);
                 response.sendRedirect("index.jsp");
             } else {
-                response.sendRedirect("principal.jsp");
+                RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+                request.setAttribute("mensagem", 2);
+                disp.forward(request, response);
             }
 
-        //ALTERAR O CADASTRO DO USUARIO 
+            //ALTERAR O CADASTRO DO USUARIO 
         } else if (action.equalsIgnoreCase("perfil")) {
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
@@ -60,7 +68,7 @@ public class ControllerUsuario extends HttpServlet {
                 response.sendRedirect("perfil.jsp");
             }
 
-        //CADASTRA O TIPO DE USUARIO
+            //CADASTRA O TIPO DE USUARIO
         } else if (action.equalsIgnoreCase("terminaCadastro")) {
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             try {

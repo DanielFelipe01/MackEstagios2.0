@@ -54,17 +54,20 @@
                                             <input type="password" name="senha" id="senha" tabindex="2" class="form-control" placeholder="Senha">
                                         </div>
                                         <div class="form-group text-center">
-                                            <%
-                                                Boolean errado = false;
+                                            <%  int mensagem = 0;
                                                 try {
-                                                    errado = (Boolean) request.getAttribute("incorreto");
-                                                    if (errado) { %>
+                                                    mensagem = (Integer) request.getAttribute("mensagem");
+                                                    if (mensagem == 1) { %>
                                             <label class="incorreto" for="emailErrado">
-                                                Usuário ou senha incorretos!
+                                                Email ou senha incorretos!
                                             </label>    
-                                            <% }
+                                            <%      }else if (mensagem == 2) {%>
+                                            <label class="incorreto" for="emailErrado">
+                                                Email já cadastrado!
+                                            </label> 
+                                            <%      }
                                                 } catch (Exception ex) {
-                                                    System.out.println(errado + " - " + ex);
+                                                    System.out.println(mensagem + " - " + ex);
                                                 }
                                             %>
                                         </div>
@@ -98,6 +101,7 @@
                                                 <label><input type="radio" name="tipoUsuario" value="3">Empresa</label>
                                             </div>
                                         </section>
+                                        
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3">

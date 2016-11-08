@@ -18,10 +18,13 @@ import java.util.List;
 public class ServiceEmpresa {
     private UsuarioFactory factory;
     private EmpresaDBDAO empresaDB;
+    private EnderecoDBDAO enderecoDB;
+
 
     public ServiceEmpresa() {
         this.factory = new UsuarioFactory();
         this.empresaDB = new EmpresaDBDAO();
+        this.enderecoDB = new EnderecoDBDAO();
     }
     
     public List<Empresa> listarEmpresas(String pesquisa) {
@@ -53,7 +56,6 @@ public class ServiceEmpresa {
     }
     
     public Empresa cadastrarEmpresa(Empresa empresa){
-        EnderecoDBDAO enderecoDB = new EnderecoDBDAO();
         
         try {
             enderecoDB.insertEndereco(empresa.getEndereco());
@@ -67,6 +69,7 @@ public class ServiceEmpresa {
     
     public Empresa alterarEmpresa(Empresa empresa){
        try{
+            enderecoDB.updateEndereco(empresa.getEndereco());
             return (Empresa) empresaDB.updateEmpresa(empresa);
         }catch(Exception ex){
             return null;

@@ -13,4 +13,6 @@ import Entidades.Formacao;
  */
 public interface FormacaoDAO {
     public Formacao insertFormacao(Formacao form);
+    
+    public Formacao updateFormacao(Formacao form);
 }

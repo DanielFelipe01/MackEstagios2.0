@@ -26,15 +26,21 @@ public class ServiceUsuario {
     }
 
     public Usuario cadastrarUsuario(String email, String senha, String tipo) {
+        ServiceLogin loginServ = new ServiceLogin();
+        
+        if(!loginServ.validaUsuario(email, senha).equals(null)){    
+            Usuario usuario = factory.criarUsuario(email, senha, tipo);
 
-        Usuario usuario = factory.criarUsuario(email, senha, tipo);
-
-        try {
-            usuarioDB.insertUsuario(usuario);
-        } catch (Exception ex) {
-            return null;
+            try {
+                usuarioDB.insertUsuario(usuario);
+            } catch (Exception ex) {
+                return null;
+            }
+        
+            return usuario;
         }
-        return usuario;
+        
+        return null;
     }
 
     public Usuario cadastrarUsuarioTipo(HttpServletRequest request, Usuario usuario) throws ParseException {
@@ -64,6 +70,8 @@ public class ServiceUsuario {
             Aluno a = (Aluno) usuarioTipo;
             Aluno user = (Aluno) usuario;
             
+            a.getEndereco().setIdEndereco(user.getEndereco().getIdEndereco());
+            a.getFormacao().setIdFormacao(user.getFormacao().getIdFormacao());
             a.setIdAluno(user.getIdAluno());
             
             return alunoServ.alterarAluno(a);

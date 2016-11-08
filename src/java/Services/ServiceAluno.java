@@ -17,37 +17,38 @@ import java.util.List;
  * @author Daniel
  */
 public class ServiceAluno {
+
     private UsuarioFactory factory;
     private AlunoDBDAO alunoDB;
-    
-    
-    public ServiceAluno(){
+    private EnderecoDBDAO enderecoDB;
+    private FormacaoDBDAO formacaoDB;
+
+    public ServiceAluno() {
         this.factory = new UsuarioFactory();
         this.alunoDB = new AlunoDBDAO();
+        this.formacaoDB = new FormacaoDBDAO();
+        this.enderecoDB = new EnderecoDBDAO();
     }
-    
-    public List<Aluno> listarAlunos(String pesquisa){
-        try{
-            return (List<Aluno>) alunoDB.selectAlunos(pesquisa);
-        }catch(Exception ex){
-            return null;
-        }
-    }
-    
-    public Aluno selecionarAluno(int idAluno){
-        try{
-            return (Aluno) alunoDB.selectAluno(idAluno);
-        }catch(Exception ex){
-            return null;
-        }
-    }
-    
-    public Aluno cadastrarAluno(Aluno aluno){
-        EnderecoDBDAO enderecoDB = new EnderecoDBDAO();
-        FormacaoDBDAO formacaoDB = new FormacaoDBDAO();
-        
+
+    public List<Aluno> listarAlunos(String pesquisa) {
         try {
-            aluno.setTelefone("fsafsafas");
+            return (List<Aluno>) alunoDB.selectAlunos(pesquisa);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public Aluno selecionarAluno(int idAluno) {
+        try {
+            return (Aluno) alunoDB.selectAluno(idAluno);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public Aluno cadastrarAluno(Aluno aluno) {
+        try {
+            aluno.setTelefone("949518128");
             enderecoDB.insertEndereco(aluno.getEndereco());
             formacaoDB.insertFormacao(aluno.getFormacao());
             return alunoDB.insertAluno(aluno);
@@ -55,14 +56,16 @@ public class ServiceAluno {
             System.out.println("Erro: " + ex);
             return null;
         }
-    
+
     }
-    
-    public Aluno alterarAluno(Aluno aluno){
-       try{
+
+    public Aluno alterarAluno(Aluno aluno) {
+        try {
+            enderecoDB.updateEndereco(aluno.getEndereco());
+            formacaoDB.updateFormacao(aluno.getFormacao());
             return (Aluno) alunoDB.updateAluno(aluno);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return null;
-        } 
+        }
     }
 }

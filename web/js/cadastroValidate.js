@@ -61,7 +61,7 @@ $(document).ready(function () {
                 required: true
             },
             nome: {
-                minlength: 10,
+                minlength: 5,
                 maxlength: 80,
                 required: true
             },
@@ -75,7 +75,7 @@ $(document).ready(function () {
                 required: true
             },
             rg: {
-                minlength: 13,
+                minlength: 10,
                 maxlength: 15,
                 required: true
             },
@@ -90,7 +90,7 @@ $(document).ready(function () {
                 required: true
             },
             telefone: {
-                minlength: 10,
+                minlength: 8,
                 maxlength: 20,
                 required: true
             },
@@ -140,7 +140,7 @@ $(document).ready(function () {
                 required: true
             },
             faculdade: {
-                minlength: 5,
+                minlength: 2,
                 maxlength: 60,
                 required: true
             },

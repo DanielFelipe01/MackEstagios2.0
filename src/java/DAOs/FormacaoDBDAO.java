@@ -5,8 +5,10 @@
  */
 package DAOs;
 
+import Conexao.Conexao;
 import Entidades.Formacao;
 import Interfaces.FormacaoDAO;
+import java.sql.PreparedStatement;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -29,6 +31,34 @@ public class FormacaoDBDAO implements FormacaoDAO{
         manager.persist(form);
         manager.getTransaction().commit();
 
+        return form;
+    }
+    
+    @Override
+    public Formacao updateFormacao(Formacao form) {
+        Conexao c = new Conexao();
+        
+        String sql = "UPDATE formacao set curso = ?, semestre = ?, faculdade = ?, unidade = ?"
+                + " WHERE idFormacao = ?";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setString(1, form.getCurso());
+            stmt.setInt(2, form.getSemestre());
+            stmt.setString(3, form.getFaculdade());
+            stmt.setString(4, form.getUnidade());
+            stmt.setInt(5, form.getIdFormacao());
+
+ 
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
         return form;
     }
 }

@@ -30,14 +30,15 @@ public class EmpresaDBDAO implements EmpresaDAO{
     public Empresa updateEmpresa(Empresa emp) {
         Conexao c = new Conexao();
         
-        String sql = "UPDATE empresa set nome = ?, cnpj = ?, site = ?, telefone = ? WHERE idEmpresa = ?";
+        String sql = "UPDATE empresa set nome = ?, cnpj = ?, site = ?, telefone = ?, situacao = ? WHERE idEmpresa = ?";
         try{
             PreparedStatement stmt = c.getConexao().prepareStatement(sql);
             stmt.setString(1, emp.getNome());
             stmt.setString(2, emp.getCnpj());
             stmt.setString(3, emp.getSite());
             stmt.setString(4, emp.getTelefone());
-            stmt.setInt(5, emp.getIdEmpresa());
+            stmt.setBoolean(5, emp.getSituacao());
+            stmt.setInt(6, emp.getIdEmpresa());
  
             stmt.execute();
             stmt.close();
