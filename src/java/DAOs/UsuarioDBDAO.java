@@ -5,8 +5,10 @@
  */
 package DAOs;
 
+import Conexao.Conexao;
 import Entidades.*;
 import Interfaces.UsuarioDAO;
+import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.*;
 
@@ -24,31 +26,45 @@ public class UsuarioDBDAO implements UsuarioDAO {
     }
 
     @Override
-    public Object insertObject(Object obj) {
+    public Usuario insertUsuario(Usuario usuario) {
         manager.getTransaction().begin();
-        manager.persist(obj);
+        manager.persist(usuario);
         manager.getTransaction().commit();
 
-        return obj;
+        return usuario;
     }
 
     @Override
-    public Object updateObject(Object obj) {
-        manager.getTransaction().begin();
-        manager.merge(obj);
-        manager.getTransaction().commit();
-        manager.close();
+    public Usuario updateUsuario(Usuario usuario) {
+        Conexao c = new Conexao();
+        
+        String sql = "UPDATE usuario set senha = ? WHERE idUsuario = ?";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
 
-        return obj;
+            stmt.setString(1, usuario.getSenha());
+            stmt.setInt(2, usuario.getIdUsuario());
+            
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
+        return usuario;
     }
 
     @Override
-    public Object deleteObject(Object obj) {
-        manager.remove(obj);
+    public Usuario deleteUsuario(Usuario usuario) {
+        manager.remove(usuario);
         manager.getTransaction().commit();
         manager.close();
 
-        return obj;
+        return usuario;
     }
 
     @Override

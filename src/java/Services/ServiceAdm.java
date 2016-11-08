@@ -39,4 +39,12 @@ public class ServiceAdm {
             return null;
         }
     }
+    
+    public Administrador alterarAdm(Administrador adm){
+       try{
+            return (Administrador) admDB.updateAdm(adm);
+        }catch(Exception ex){
+            return null;
+        } 
+    }
 }

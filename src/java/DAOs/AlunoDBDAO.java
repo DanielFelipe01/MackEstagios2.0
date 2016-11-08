@@ -74,4 +74,33 @@ public class AlunoDBDAO implements AlunoDAO{
        
         return aluno;
     }
+    
+    @Override
+    public Aluno updateAluno(Aluno aluno) {
+        Conexao c = new Conexao();
+        
+        String sql = "UPDATE aluno set nome = ?, rg = ?, cpf = ?, telefone = ?, dataNascimento = ?,"
+                + " tia = ? WHERE idAluno = ?";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setString(1, aluno.getNome());
+            stmt.setString(2, aluno.getRg());
+            stmt.setString(3, aluno.getCpf());
+            stmt.setString(4, aluno.getTelefone());
+            stmt.setString(5, aluno.getDataNascimento());
+            stmt.setString(6, aluno.getTia());
+            stmt.setInt(7, aluno.getIdAluno());
+ 
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
+        return aluno;
+    }
 }

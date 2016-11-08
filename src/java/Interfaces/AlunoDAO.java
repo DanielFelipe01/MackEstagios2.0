@@ -16,6 +16,8 @@ public interface AlunoDAO {
     
     public Aluno insertAluno(Aluno aluno);
     
+    public Aluno updateAluno(Aluno aluno);
+    
     public List<Aluno> selectAlunos(String pesquisa);
     
     public Aluno selectAluno(int idAluno);

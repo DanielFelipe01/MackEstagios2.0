@@ -64,4 +64,12 @@ public class ServiceEmpresa {
         }
     
     }
+    
+    public Empresa alterarEmpresa(Empresa empresa){
+       try{
+            return (Empresa) empresaDB.updateEmpresa(empresa);
+        }catch(Exception ex){
+            return null;
+        } 
+    }
 }

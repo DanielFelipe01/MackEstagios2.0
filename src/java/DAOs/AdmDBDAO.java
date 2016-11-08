@@ -5,8 +5,10 @@
  */
 package DAOs;
 
+import Conexao.Conexao;
 import Entidades.Administrador;
 import Interfaces.AdmDAO;
+import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,31 +28,45 @@ public class AdmDBDAO implements AdmDAO{
     }
     
     @Override
-    public Object insertObject(Object obj) {
+    public Administrador insertAdm(Administrador adm) {
         manager.getTransaction().begin();
-        manager.persist(obj);
+        manager.persist(adm);
         manager.getTransaction().commit();
 
-        return obj;
+        return adm;
     }
 
     @Override
-    public Object updateObject(Object obj) {
-        manager.getTransaction().begin();
-        manager.merge(obj);
-        manager.getTransaction().commit();
-        manager.close();
-
-        return obj;
+    public Administrador updateAdm(Administrador adm) {
+        Conexao c = new Conexao();
+        
+        String sql = "UPDATE administrador set nome = ?, nivel = ? WHERE idAdm = ?";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setString(1, adm.getNome());
+            stmt.setInt(2, adm.getNivel());
+            stmt.setInt(3, adm.getIdAdm());
+ 
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
+        return adm;
     }
 
     @Override
-    public Object deleteObject(Object obj) {
-        manager.remove(obj);
+    public Administrador deleteAdm(Administrador adm) {
+        manager.remove(adm);
         manager.getTransaction().commit();
         manager.close();
 
-        return obj;
+        return adm;
     }
     
     @Override

@@ -30,7 +30,7 @@ public class ServiceUsuario {
         Usuario usuario = factory.criarUsuario(email, senha, tipo);
 
         try {
-            usuarioDB.insertObject(usuario);
+            usuarioDB.insertUsuario(usuario);
         } catch (Exception ex) {
             return null;
         }
@@ -55,14 +55,35 @@ public class ServiceUsuario {
 
     public Usuario alteraCadastro(HttpServletRequest request, Usuario usuario) throws ParseException {
         Usuario usuarioTipo = factory.criarUsuarioTipo(request, usuario);
-
-        try {
-            usuarioDB.updateObject(usuarioTipo);
-        } catch (Exception ex) {
-            return null;
+        
+        usuario.setSenha(request.getParameter("senha"));
+        usuarioDB.updateUsuario(usuario);
+                
+        if(usuarioTipo instanceof Aluno){
+            ServiceAluno alunoServ = new ServiceAluno();
+            Aluno a = (Aluno) usuarioTipo;
+            Aluno user = (Aluno) usuario;
+            
+            a.setIdAluno(user.getIdAluno());
+            
+            return alunoServ.alterarAluno(a);
+        }else if(usuarioTipo instanceof Empresa){
+            ServiceEmpresa empresaServ = new ServiceEmpresa();
+            Empresa e = (Empresa) usuarioTipo;
+            Empresa user = (Empresa) usuario;
+            
+            e.setIdEmpresa(user.getIdEmpresa());
+            
+            return empresaServ.alterarEmpresa(e);
+        }else{
+            ServiceAdm admServ = new ServiceAdm();
+            Administrador adm = (Administrador) usuarioTipo;
+            Administrador user = (Administrador) usuario;
+            
+            adm.setIdAdm(user.getIdAdm());
+            
+            return admServ.alterarAdm(adm);
         }
-
-        return usuarioTipo;
     }
 
     

@@ -14,11 +14,11 @@ import java.util.List;
  */
 public interface AdmDAO {
     
-    public Object insertObject(Object obj);
+    public Administrador insertAdm(Administrador adm);
 
-    public Object updateObject(Object obj);
+    public Administrador updateAdm(Administrador adm);
 
-    public Object deleteObject(Object obj);
+    public Administrador deleteAdm(Administrador adm);
     
     public List<Administrador> selectAdms(String pesquisa);
     

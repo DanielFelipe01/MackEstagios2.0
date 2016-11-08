@@ -41,10 +41,10 @@ public class ControllerUsuario extends HttpServlet {
             Usuario usuario = serviceUsuario.cadastrarUsuario(email, senha, tipo);
 
             if (usuario != null) {
-                request.getSession().setAttribute("usuario", usuario);
-                response.sendRedirect("cadastro.jsp");
-            } else {
+                request.getSession().invalidate();
                 response.sendRedirect("index.jsp");
+            } else {
+                response.sendRedirect("principal.jsp");
             }
 
         //ALTERAR O CADASTRO DO USUARIO 
@@ -52,9 +52,12 @@ public class ControllerUsuario extends HttpServlet {
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
             try {
-                serviceUsuario.alteraCadastro(request, usuario);
+                usuario = serviceUsuario.alteraCadastro(request, usuario);
+                request.getSession().invalidate();
+                response.sendRedirect("index.jsp");
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex);
+                response.sendRedirect("perfil.jsp");
             }
 
         //CADASTRA O TIPO DE USUARIO
@@ -66,6 +69,7 @@ public class ControllerUsuario extends HttpServlet {
                 response.sendRedirect("principal.jsp");
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex);
+                response.sendRedirect("principal.jsp");
             }
 
         }

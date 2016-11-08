@@ -15,9 +15,11 @@
         <link rel="icon" href="img/icon.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+        <script src="js/jquery.validate.js"></script> 
         <script src='js/bootstrap.min.js'></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet">
+        <script src='js/cadastroValidate.js'></script>
     </head>
     <body>
         <div class="container">
@@ -55,15 +57,15 @@
                     </div>
                     <div class="form-group">
                         <label for="rg">RG:</label>
-                        <input type="text" name="rg" id="rg" tabindex="4" class="form-control" placeholder="RG" value="<% out.write(aluno.getRg());%>" disabled="true">
+                        <input type="text" name="rg" id="rg" tabindex="4" class="form-control" placeholder="RG" value="<% out.write(aluno.getRg());%>" >
                     </div>
                     <div class="form-group">
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf" id="cpf" tabindex="5" class="form-control" placeholder="CPF" value="<% out.write(aluno.getCpf());%>" disabled="true">
+                        <input type="text" name="cpf" id="cpf" tabindex="5" class="form-control" placeholder="CPF" value="<% out.write(aluno.getCpf());%>" >
                     </div>
                     <div class="form-group">
                         <label for="tia">TIA:</label>
-                        <input type="text" name="tia" id="tia" tabindex="6" class="form-control" placeholder="tia" value="<% out.write(aluno.getTia());%>" disabled="true">
+                        <input type="text" name="tia" id="tia" tabindex="6" class="form-control" placeholder="tia" value="<% out.write(aluno.getTia());%>" >
                     </div>
                     <div class="form-group">
                         <label for="telefone">Telefone:</label>
@@ -79,7 +81,7 @@
                         </div>
                         <div class="form-group">
                             <label for="número">Número:</label>
-                            <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(String.valueOf(aluno.getEndereco().getNumero()));%>">
+                            <input type="number" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(String.valueOf(aluno.getEndereco().getNumero()));%>" min="1" max="999999">
                         </div>
                         <div class="form-group">
                             <label for="bairro">Bairro:</label>
@@ -110,7 +112,7 @@
                         </div>
                         <div class="form-group">
                             <label for="semestre">Semestre:</label>
-                            <input type="text" name="semestre" id="semestre" tabindex="17" class="form-control" placeholder="Semestre" value="<% out.write(String.valueOf(aluno.getFormacao().getSemestre()));%>">
+                            <input type="number" name="semestre" id="semestre" tabindex="17" class="form-control" placeholder="Semestre" value="<% out.write(String.valueOf(aluno.getFormacao().getSemestre()));%>" min="1" max="20">
                         </div>
                         <div class="form-group">
                             <label for="faculdade">Faculdade/Universidade:</label>
@@ -129,7 +131,7 @@
                     </div>
                     <div class="form-group">
                         <label for="cnpj">CNPJ:</label>
-                        <input type="text" name="cnpj" id="cnpj" tabindex="4" class="form-control" placeholder="cnpj" value="<% out.write(emp.getCnpj());%>" disabled="true">
+                        <input type="text" name="cnpj" id="cnpj" tabindex="4" class="form-control" placeholder="cnpj" value="<% out.write(emp.getCnpj());%>">
                     </div>
                     <div class="form-group">
                         <label for="telefone">Telefone:</label>
@@ -147,7 +149,7 @@
                         </div>
                         <div class="form-group">
                             <label for="número">Número:</label>
-                            <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(String.valueOf(emp.getEndereco().getNumero()));%>">
+                            <input type="number" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número" value="<% out.write(String.valueOf(emp.getEndereco().getNumero()));%>" min="1" max="999999">
                         </div>
                         <div class="form-group">
                             <label for="bairro">Bairro:</label>

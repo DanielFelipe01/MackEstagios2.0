@@ -28,11 +28,27 @@ public class EmpresaDBDAO implements EmpresaDAO{
     
     @Override
     public Empresa updateEmpresa(Empresa emp) {
-        manager.getTransaction().begin();
-        manager.merge(emp);
-        manager.getTransaction().commit();
-        manager.close();
-
+        Conexao c = new Conexao();
+        
+        String sql = "UPDATE empresa set nome = ?, cnpj = ?, site = ?, telefone = ? WHERE idEmpresa = ?";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setString(1, emp.getNome());
+            stmt.setString(2, emp.getCnpj());
+            stmt.setString(3, emp.getSite());
+            stmt.setString(4, emp.getTelefone());
+            stmt.setInt(5, emp.getIdEmpresa());
+ 
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
         return emp;
     }
     

@@ -8,10 +8,10 @@ CREATE TABLE usuario(
 
 CREATE TABLE formacao(
     idFormacao INTEGER NOT NULL,
-    curso VARCHAR(20) NOT NULL,
+    curso VARCHAR(70) NOT NULL,
     semestre INTEGER NOT NULL,
-    faculdade VARCHAR(40) NOT NULL,
-    unidade VARCHAR(50) NOT NULL,
+    faculdade VARCHAR(60) NOT NULL,
+    unidade VARCHAR(60) NOT NULL,
     PRIMARY KEY (idFormacao)
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE empresa(
     idUsuario INTEGER NOT NULL,
     nome VARCHAR(80) NOT NULL,
     cnpj VARCHAR(30) NOT NULL,
-    site VARCHAR(60) NOT NULL,
+    site VARCHAR(100) NOT NULL,
     telefone VARCHAR(20) NOT NULL,
     idEndereco INTEGER NOT NULL,
     situacao BOOLEAN NOT NULL,

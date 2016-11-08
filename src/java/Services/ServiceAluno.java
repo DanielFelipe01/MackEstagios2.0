@@ -57,4 +57,12 @@ public class ServiceAluno {
         }
     
     }
+    
+    public Aluno alterarAluno(Aluno aluno){
+       try{
+            return (Aluno) alunoDB.updateAluno(aluno);
+        }catch(Exception ex){
+            return null;
+        } 
+    }
 }
