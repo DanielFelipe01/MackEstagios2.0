@@ -11,6 +11,17 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/DAOs/AlunoDBDAO.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Entidades/Endereco.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Controllers/ControllerVagas.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Controllers/ControllerAluno.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/DAOs/VagaDBDAO.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Entidades/Empresa.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Services/ServiceAluno.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Services/ServiceVaga.java</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/web/cadastrarVaga.jsp</file>
+            <file>file:/C:/Users/Cardo/Documents/MackEstagios2.0/src/java/Entidades/Vaga.java</file>
+        </group>
     </open-files>
 </project-private>

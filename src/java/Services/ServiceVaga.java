@@ -25,7 +25,7 @@ public class ServiceVaga {
         Vaga vaga;
         
         try{
-            vaga = vagaDB.insertObject(newVaga);
+            vaga = vagaDB.insertVaga(newVaga);
         }catch(Exception ex){
             return null;
         }

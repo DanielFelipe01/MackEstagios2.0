@@ -47,11 +47,15 @@
                     </div>
                     <div class="form-group">
                         <label for="vale-refeição">Valor do vale refeição:</label>
-                        <input type="number" name="refeicao" id="refeicao" tabindex="1" class="form-control" placeholder="Valor do vale refeição" required>
+                        <input type="number" name="refeicao" id="refeicao" tabindex="1" class="form-control" placeholder="Valor do vale refeição" >
                     </div>
                     <div class="form-group">
                         <label for="vale-transporte">Valor do vale transporte:</label>
-                        <input type="number" name="transporte" id="transporte" tabindex="1" class="form-control" placeholder="Valor do vale transporte" required>
+                        <input type="number" name="transporte" id="transporte" tabindex="1" class="form-control" placeholder="Valor do vale transporte">
+                    </div>
+                    <div class="form-group">
+                        <label for="adicionais">Adicionais da vaga:</label>
+                        <input type="text" name="adicionais" id="adicionais" tabindex="1" class="form-control" placeholder="Adicionais da vaga" >
                     </div>
                     <div class="form-group">
                         <label for="descrição">Descrição da vaga:</label>
@@ -64,6 +68,10 @@
                     <div class="form-group">
                         <label for="horario">Carga horária:</label>
                         <input type="number" name="horario" id="horario" tabindex="1" class="form-control" placeholder="Carga horária do estágio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="validade">Validade da vaga:</label>
+                        <input type="date" name="validade" id="validade" tabindex="1" class="form-control" required>
                     </div>
                     <input type="hidden" name="action" value="cadastro">
                     <input type="submit" value="Cadastrar" class="btn btn-default" style="margin-left: 40%; width: 20%;"> 

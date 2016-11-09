@@ -66,14 +66,13 @@ public class Vaga  implements Serializable{
     private String adicionais;
     
     @Column(name = "validade")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date validade;
+    private String validade;
 
     public Vaga() {
     }
 
        
-    public Vaga(String curso,String nome, int semestre, double bolsa, String descricao, String atividades, String horario, Empresa idEmpresa) {
+    public Vaga(String curso,String nome, int semestre, double bolsa, String descricao, String atividades, String horario, Empresa idEmpresa, String validade, double refeicao,double transporte,String adicionais) {
         this.curso = curso;
         this.nome = nome;
         this.semestre = semestre;
@@ -82,9 +81,10 @@ public class Vaga  implements Serializable{
         this.atividades = atividades;
         this.horario = horario;
         this.empresa = idEmpresa;
-        this.refeicao = 0;
-        this.transporte = 0; 
-        this.adicionais = "";
+        this.refeicao = refeicao;
+        this.transporte = transporte; 
+        this.adicionais = adicionais;
+        this.validade = validade;
     }
 
     public String getCurso() {
@@ -103,11 +103,11 @@ public class Vaga  implements Serializable{
         this.adicionais = adicionais;
     }
 
-    public Date getValidade() {
+    public String getValidade() {
         return validade;
     }
 
-    public void setValidade(Date validade) {
+    public void setValidade(String validade) {
         this.validade = validade;
     }
     

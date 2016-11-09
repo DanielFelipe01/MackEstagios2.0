@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface VagaDAO {
     
-    public Vaga insertObject(Vaga vaga);
+    public Vaga insertVaga(Vaga vaga);
     
     public List<Vaga> selectVagas(String pesquisa);
     

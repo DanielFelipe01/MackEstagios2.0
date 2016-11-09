@@ -5,8 +5,11 @@
  */
 package DAOs;
 
+import Conexao.Conexao;
 import Entidades.Vaga;
 import Interfaces.VagaDAO;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,12 +28,36 @@ public class VagaDBDAO implements VagaDAO {
     }
 
     @Override
-    public Vaga insertObject(Vaga vaga) {
-        manager.getTransaction().begin();
-        manager.persist(vaga);
-        manager.getTransaction().commit();
-
-
+    public Vaga insertVaga(Vaga vaga) {
+       Conexao c = new Conexao();
+        
+        String sql = "insert into vaga (curso, nome, semestre, valorbolsa, valerefeicao, valetransporte, descricao, atividades, adicionais, validade, horario, idempresa)"
+                + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setString(1, vaga.getCurso());
+            stmt.setString(2, vaga.getNome());
+            stmt.setInt(3, vaga.getSemestre());
+            stmt.setDouble(4, vaga.getBolsa());
+            stmt.setDouble(5, vaga.getRefeicao());
+            stmt.setDouble(6, vaga.getTransporte());
+            stmt.setString(7, vaga.getDescricao());
+            stmt.setString(8, vaga.getAtividades());
+            stmt.setString(9, vaga.getAdicionais());
+            stmt.setString(10, vaga.getValidade());
+            stmt.setString(11, vaga.getHorario());
+            stmt.setInt(12, vaga.getEmpresa().getIdEmpresa());
+               
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
         return vaga;
     }
     
