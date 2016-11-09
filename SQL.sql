@@ -79,12 +79,22 @@ CREATE TABLE vaga(
     valeTransporte FLOAT(5),
     descricao VARCHAR(1500) NOT NULL,
     atividades VARCHAR(1500) NOT NULL,
-    adicionais VARCHAR(1000) NOT NULL,
+    adicionais VARCHAR(1000),
     validade Date NOT NULL,
     horario VARCHAR(15),
     idEmpresa INTEGER NOT NULL,
     PRIMARY KEY (idVaga),
     FOREIGN KEY (idEmpresa) REFERENCES empresa
+);
+
+CREATE TABLE candidatos(
+    idCandidato INTEGER NOT NULL,
+    idAluno INTEGER NOT NULL,
+    idVaga INTEGER NOT NULL,
+	
+    PRIMARY KEY (idCandidato),
+    FOREIGN KEY (idAluno) REFERENCES aluno,
+    FOREIGN KEY (idVaga ) REFERENCES vaga
 );
 
 

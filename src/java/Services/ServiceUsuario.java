@@ -26,9 +26,8 @@ public class ServiceUsuario {
     }
 
     public Usuario cadastrarUsuario(String email, String senha, String tipo) {
-        ServiceLogin loginServ = new ServiceLogin();
-        
-        if(!loginServ.validaUsuario(email, senha).equals(null)){    
+
+        if (!this.validarUsuario(email, senha).equals(null)) {
             Usuario usuario = factory.criarUsuario(email, senha, tipo);
 
             try {
@@ -36,63 +35,71 @@ public class ServiceUsuario {
             } catch (Exception ex) {
                 return null;
             }
-        
+
             return usuario;
         }
-        
+
         return null;
     }
 
     public Usuario cadastrarUsuarioTipo(HttpServletRequest request, Usuario usuario) throws ParseException {
         ServiceAluno alunoServ = new ServiceAluno();
         ServiceEmpresa empresaServ = new ServiceEmpresa();
-        
+
         Usuario usuarioTipo = factory.criarUsuarioTipo(request, usuario);
-        
-        if(usuarioTipo instanceof Aluno){
+
+        if (usuarioTipo instanceof Aluno) {
             Aluno a = (Aluno) usuarioTipo;
             return alunoServ.cadastrarAluno(a);
-        }else{
+        } else {
             Empresa e = (Empresa) usuarioTipo;
             return empresaServ.cadastrarEmpresa(e);
         }
- 
+
     }
 
     public Usuario alteraCadastro(HttpServletRequest request, Usuario usuario) throws ParseException {
         Usuario usuarioTipo = factory.criarUsuarioTipo(request, usuario);
-        
+
         usuario.setSenha(request.getParameter("senha"));
         usuarioDB.updateUsuario(usuario);
-                
-        if(usuarioTipo instanceof Aluno){
+
+        if (usuarioTipo instanceof Aluno) {
             ServiceAluno alunoServ = new ServiceAluno();
             Aluno a = (Aluno) usuarioTipo;
             Aluno user = (Aluno) usuario;
-            
+
             a.getEndereco().setIdEndereco(user.getEndereco().getIdEndereco());
             a.getFormacao().setIdFormacao(user.getFormacao().getIdFormacao());
             a.setIdAluno(user.getIdAluno());
-            
+
             return alunoServ.alterarAluno(a);
-        }else if(usuarioTipo instanceof Empresa){
+        } else if (usuarioTipo instanceof Empresa) {
             ServiceEmpresa empresaServ = new ServiceEmpresa();
             Empresa e = (Empresa) usuarioTipo;
             Empresa user = (Empresa) usuario;
-            
+
             e.setIdEmpresa(user.getIdEmpresa());
-            
+
             return empresaServ.alterarEmpresa(e);
-        }else{
+        } else {
             ServiceAdm admServ = new ServiceAdm();
             Administrador adm = (Administrador) usuarioTipo;
             Administrador user = (Administrador) usuario;
-            
+
             adm.setIdAdm(user.getIdAdm());
-            
+
             return admServ.alterarAdm(adm);
         }
     }
 
-    
+    public Usuario validarUsuario(String email, String senha) {
+        try {
+            return usuarioDB.selectUsuario(email, senha);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+            return null;
+        }
+    }
+
 }

@@ -63,7 +63,7 @@
                     </ul>
                     <% }%>
 
-                    <form method="post" action="ControllerLogin" class="navbar-form navbar-right">
+                    <form method="post" action="ControllerUsuario" class="navbar-form navbar-right">
                         <% if (usuario instanceof Administrador) {
                                 adm = (Administrador) usuario;
                                 out.write(String.valueOf(adm.getNome()));

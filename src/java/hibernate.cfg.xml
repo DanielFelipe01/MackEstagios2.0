@@ -27,5 +27,6 @@
     <mapping class="Entidades.Formacao"/>
     <mapping class="Entidades.Empresa"/>
     <mapping class="Entidades.Vaga"/>
+    <mapping class="Entidades.Candidato"/>
   </session-factory>
 </hibernate-configuration>

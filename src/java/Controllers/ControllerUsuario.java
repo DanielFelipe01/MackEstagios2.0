@@ -80,6 +80,25 @@ public class ControllerUsuario extends HttpServlet {
                 response.sendRedirect("principal.jsp");
             }
 
+        }else if(!action.equalsIgnoreCase("sair")){
+            String email, senha;
+            email = request.getParameter("email");
+            senha = request.getParameter("senha");
+
+            Usuario usuario = serviceUsuario.validarUsuario(email, senha);
+            if(usuario != null){
+                request.getSession().setAttribute("usuario", usuario);
+                
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
+            }else{
+                RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+                request.setAttribute("mensagem", 1);
+                disp.forward(request, response);
+            }
+        }else if (action.equalsIgnoreCase("sair")){
+            request.getSession().invalidate();
+            response.sendRedirect("index.jsp");
         }
 
     }

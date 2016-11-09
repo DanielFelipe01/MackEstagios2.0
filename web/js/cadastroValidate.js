@@ -167,5 +167,63 @@ $(document).ready(function () {
             $(element).closest('.form-group').removeClass('has-error');
         }
     });
+    
+    $('#vaga-form').validate({
+        rules: {
+            cursos: {
+                minlength: 3,
+                maxlength: 70,
+                required: true
+            },
+            semestre: {
+                maxlength: 2,
+                required: true
+            },
+            nome: {
+                minlength: 3,
+                maxlength: 80,
+                required: true
+            },
+            bolsa: {
+                minlength: 1,
+                maxlength: 5,
+                required: true
+            },
+            refeicao: {
+                minlength: 1,
+                maxlength: 5
+            },
+            transporte: {
+                maxlength: 5
+            },
+            adicionais: {
+                maxlength: 1000
+            },
+            descricao: {
+                minlength: 10,
+                maxlength: 1500,
+                required: true
+            },
+            atividades: {
+                minlength: 5,
+                maxlength: 1500,
+                required: true
+            },
+            horario: {
+                maxlength: 15
+            },
+            validade: {
+                minlength: 5,
+                maxlength: 15,
+                required: true
+            }
+        },
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        }
+    });
 
 });

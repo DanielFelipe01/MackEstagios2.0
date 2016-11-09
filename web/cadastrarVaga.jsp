@@ -15,6 +15,8 @@
         <link rel="icon" href="img/icon.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+        <script src="js/jquery.validate.js"></script> 
+        <script src='js/cadastroValidate.js'></script>
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
@@ -27,51 +29,51 @@
                 Empresa e = (Empresa) session.getAttribute("usuario");
 
                 if (e.getSituacao()) { %>
-                <form id="perfil-form" action="ControllerVagas" method="post" role="form">
+                <form id="vaga-form" action="ControllerVagas" method="post" role="form">
                     <div class="title"> Cadastrar Vagas</div>
                     <div class="form-group">
                         <label for="nome">Nome da vaga:</label>
-                        <input type="text" name="nome" id="nome" tabindex="1" class="form-control" placeholder="Nome da vaga" required>
+                        <input type="text" name="nome" id="nome" tabindex="1" class="form-control" placeholder="Nome da vaga">
                     </div>
                     <div class="form-group">
                         <label for="cursos">Cursos:</label>
-                        <input type="text" name="cursos" id="cursos" tabindex="1" class="form-control" placeholder="Cursos" required>
+                        <input type="text" name="cursos" id="cursos" tabindex="2" class="form-control" placeholder="Cursos">
                     </div>
                     <div class="form-group">
                         <label for="Semestre">Semestre:</label>
-                        <input type="number" name="semestre" id="semestre" tabindex="1" class="form-control" placeholder="Até o semestre." min="0" max="10" required>
+                        <input type="number" name="semestre" id="semestre" tabindex="3" class="form-control" placeholder="Até o semestre." min="0" max="10">
                     </div>
                     <div class="form-group">
                         <label for="Bolsa-auxilio">Valor da bolsa:</label>
-                        <input type="number" name="bolsa" id="bolsa" tabindex="1" class="form-control" placeholder="Valor da bolsa-auxilio" required>
+                        <input type="number" name="bolsa" id="bolsa" tabindex="4" class="form-control" placeholder="Valor da bolsa-auxilio">
                     </div>
                     <div class="form-group">
                         <label for="vale-refeição">Valor do vale refeição:</label>
-                        <input type="number" name="refeicao" id="refeicao" tabindex="1" class="form-control" placeholder="Valor do vale refeição" >
+                        <input type="number" name="refeicao" id="refeicao" tabindex="5" class="form-control" placeholder="Valor do vale refeição" >
                     </div>
                     <div class="form-group">
                         <label for="vale-transporte">Valor do vale transporte:</label>
-                        <input type="number" name="transporte" id="transporte" tabindex="1" class="form-control" placeholder="Valor do vale transporte">
+                        <input type="number" name="transporte" id="transporte" tabindex="6" class="form-control" placeholder="Valor do vale transporte">
                     </div>
                     <div class="form-group">
                         <label for="adicionais">Adicionais da vaga:</label>
-                        <input type="text" name="adicionais" id="adicionais" tabindex="1" class="form-control" placeholder="Adicionais da vaga" >
+                        <input type="text" name="adicionais" id="adicionais" tabindex="7" class="form-control" placeholder="Adicionais da vaga" >
                     </div>
                     <div class="form-group">
                         <label for="descrição">Descrição da vaga:</label>
-                        <input type="text" name="descricao" id="descricao" tabindex="1" class="form-control" placeholder="Descrição da vaga" required>
+                        <input type="text" name="descricao" id="descricao" tabindex="8" class="form-control" placeholder="Descrição da vaga">
                     </div>
                     <div class="form-group">
                         <label for="atividades">Atividade desenvolvidas no estágio:</label>
-                        <input type="text" name="atividades" id="atividade" tabindex="1" class="form-control" placeholder="Atividades desenvolvidas no estágio" required>
+                        <input type="text" name="atividades" id="atividade" tabindex="9" class="form-control" placeholder="Atividades desenvolvidas no estágio">
                     </div>
                     <div class="form-group">
                         <label for="horario">Carga horária:</label>
-                        <input type="number" name="horario" id="horario" tabindex="1" class="form-control" placeholder="Carga horária do estágio" required>
+                        <input type="number" name="horario" id="horario" tabindex="10" class="form-control" placeholder="Carga horária do estágio">
                     </div>
                     <div class="form-group">
                         <label for="validade">Validade da vaga:</label>
-                        <input type="date" name="validade" id="validade" tabindex="1" class="form-control" required>
+                        <input type="date" name="validade" id="validade" tabindex="11" class="form-control">
                     </div>
                     <input type="hidden" name="action" value="cadastro">
                     <input type="submit" value="Cadastrar" class="btn btn-default" style="margin-left: 40%; width: 20%;"> 

@@ -20,6 +20,9 @@ public interface UsuarioDAO {
 
     public Usuario deleteUsuario(Usuario usuario);
 
-    public List<Usuario> selectUsuario();
+    public List<Usuario> selectUsuarios();
+    
+    public Usuario selectUsuario(String email, String senha);
+
 
 }
