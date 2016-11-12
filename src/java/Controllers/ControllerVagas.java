@@ -7,10 +7,8 @@ package Controllers;
 
 import Services.ServiceVaga;
 import Entidades.Empresa;
-import Entidades.Usuario;
 import Entidades.Vaga;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -61,7 +59,19 @@ public class ControllerVagas extends HttpServlet {
             
         }else if(action.equalsIgnoreCase("pesquisaVagas")){
             String pesquisa = "%" + request.getParameter("pesquisa") + "%";
-            List<Vaga> vagas = serviceVaga.listarVagas(pesquisa);
+            String tipo = request.getParameter("tipo");
+            
+            String empresa = null;
+            try{
+                if(tipo.equals("empresa")){
+                    Empresa e = (Empresa) request.getSession().getAttribute("usuario");
+                    empresa = String.valueOf(e.getIdEmpresa());
+                }
+            }catch(Exception ex){
+                System.out.println("Tipo de empresa igual a null");
+            }
+            
+            List<Vaga> vagas = serviceVaga.listarVagas(pesquisa, empresa);
 
             request.setAttribute("vagas", vagas);
             RequestDispatcher disp = request.getRequestDispatcher("vagas.jsp");
@@ -71,6 +81,18 @@ public class ControllerVagas extends HttpServlet {
         } else if (action.equalsIgnoreCase("mostrarVaga")) {
             int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
             Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
+
+            if (vaga != null) {
+                request.setAttribute("vaga", vaga);
+                RequestDispatcher disp = request.getRequestDispatcher("mostrarVaga.jsp");
+                disp.forward(request, response);
+            } else {
+                response.sendRedirect("vagas.jsp");
+            }
+            
+        } else if (action.equalsIgnoreCase("desabilitarVaga")) {
+            int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
+            Vaga vaga = serviceVaga.deletarVaga(IdVaga);
 
             if (vaga != null) {
                 request.setAttribute("vaga", vaga);

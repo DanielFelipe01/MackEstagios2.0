@@ -16,8 +16,10 @@ public interface VagaDAO {
     
     public Vaga insertVaga(Vaga vaga);
     
-    public List<Vaga> selectVagas(String pesquisa);
+    public List<Vaga> selectVagas(String pesquisa, String empresa);
     
     public Vaga selectVaga(int idVaga);
+    
+    public Vaga deleteVaga(Vaga vaga);
     
 }

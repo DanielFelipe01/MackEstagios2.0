@@ -1,0 +1,73 @@
+body{
+    background-color: #ac1d1c;
+}
+
+
+.conteudo{
+    background-color: white;
+    border-radius:5px;
+    padding: 2% 5% 2% 5%;
+
+}
+
+#pesquisa-form{
+    margin-bottom: 30px;
+
+}
+
+#pesquisa{
+    min-width:50%;
+    margin-right: 10px;
+}
+
+.form-group-pesquisa{
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.title{
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: #ac1d1c;
+    font-family: Arial;
+    font-size: 25px;
+    color:white;
+    height: 45px;
+    padding: 5px;
+
+}
+
+.incorreto{
+    color: red;
+    font-stretch: condensed;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: Arial;
+}
+
+#btnSair{
+    margin-left: 15px;
+    
+}
+
+section .form-group{
+    margin-left: 15px;
+    
+}
+
+#pendente{
+    margin-right: 10px;
+    
+}
+
+.informa{
+    font-stretch: condensed;
+    font-weight: 700;
+    font-size: 25px;
+    font-family: Arial;
+    text-align: center
+    
+}

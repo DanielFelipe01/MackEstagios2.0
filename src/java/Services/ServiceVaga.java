@@ -32,10 +32,10 @@ public class ServiceVaga {
         return vaga;
     }
     
-    public List<Vaga> listarVagas(String pesquisa){
+    public List<Vaga> listarVagas(String pesquisa, String empresa){
         
         try{
-            return (List<Vaga>) vagaDB.selectVagas(pesquisa);
+            return (List<Vaga>) vagaDB.selectVagas(pesquisa, empresa);
         }catch(Exception ex){
             System.out.println("Erro: " + ex);
             return null;
@@ -45,6 +45,16 @@ public class ServiceVaga {
     public Vaga selecionarVaga(int idVaga) {
         try {
             return (Vaga) vagaDB.selectVaga(idVaga);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+            return null;
+        }
+    }
+    
+    public Vaga deletarVaga(int idVaga) {
+        try {
+            Vaga v = (Vaga) vagaDB.selectVaga(idVaga);
+            return (Vaga) vagaDB.deleteVaga(v);
         } catch (Exception ex) {
             System.out.println("Erro: " + ex);
             return null;

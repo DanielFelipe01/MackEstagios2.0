@@ -5,8 +5,10 @@
  */
 package DAOs;
 
+import Conexao.Conexao;
 import Entidades.Candidato;
 import Interfaces.CandidatoDAO;
+import java.sql.PreparedStatement;
 import javax.persistence.*;
 
 /**
@@ -24,20 +26,17 @@ public class CandidatoDBDAO implements CandidatoDAO {
 
     @Override
     public Candidato insertCandidato(Candidato candidato) {
-        try {
-            manager.getTransaction().begin();
-            manager.persist(candidato);
-            manager.getTransaction().commit();
 
-            return candidato;
-        } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
-            return null;
-        }
+        manager.getTransaction().begin();
+        manager.persist(candidato);
+        manager.getTransaction().commit();
+
+        return candidato;
     }
 
     @Override
-    public Candidato deleteCandidato(Candidato candidato) {
+    public Candidato deleteCandidato(Candidato candidato
+    ) {
         try {
             manager.remove(candidato);
             manager.getTransaction().commit();
