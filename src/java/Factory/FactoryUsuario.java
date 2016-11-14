@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Daniel
  */
-public interface Factory {
+public interface FactoryUsuario {
     
     
     public Usuario criarUsuario(String email, String senha, String tipo);

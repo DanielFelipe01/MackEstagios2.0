@@ -31,8 +31,8 @@ public class VagaDBDAO implements VagaDAO {
     public Vaga insertVaga(Vaga vaga) {
         Conexao c = new Conexao();
 
-        String sql = "insert into vaga (curso, nome, semestre, valorbolsa, valerefeicao, valetransporte, descricao, atividades, adicionais, validade, horario, idempresa)"
-                + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into vaga (curso, nome, semestre, valorbolsa, valerefeicao, valetransporte, descricao, atividades, adicionais, validade, horario, idempresa, status)"
+                + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = c.getConexao().prepareStatement(sql);
             stmt.setString(1, vaga.getCurso());
@@ -47,6 +47,7 @@ public class VagaDBDAO implements VagaDAO {
             stmt.setString(10, vaga.getValidade());
             stmt.setString(11, vaga.getHorario());
             stmt.setInt(12, vaga.getEmpresa().getIdEmpresa());
+            stmt.setBoolean(13, vaga.isStatus());
 
             stmt.execute();
             stmt.close();

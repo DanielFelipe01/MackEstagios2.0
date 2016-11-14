@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Daniel
  */
-public class UsuarioFactory implements Factory {
+public class UsuarioFactory implements FactoryUsuario {
 
     @Override
     public Usuario criarUsuario(String email, String senha, String tipo) {

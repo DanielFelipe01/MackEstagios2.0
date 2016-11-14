@@ -68,9 +68,8 @@ CREATE TABLE administrador(
     FOREIGN KEY (idUsuario) REFERENCES usuario
 );
 
-
 CREATE TABLE vaga(
-    idVaga INTEGER NOT NULL,
+    idVaga INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     curso VARCHAR(70) NOT NULL,
     nome VARCHAR(80) NOT NULL,
     semestre INTEGER NOT NULL,
@@ -83,7 +82,7 @@ CREATE TABLE vaga(
     validade Date NOT NULL,
     horario VARCHAR(15),
     idEmpresa INTEGER NOT NULL,
-    PRIMARY KEY (idVaga),
+    status BOOLEAN NOT NULL,
     FOREIGN KEY (idEmpresa) REFERENCES empresa
 );
 
@@ -123,5 +122,5 @@ insert into endereco (idEndereco, rua, bairro, cidade, estado, numero, complemen
 insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)
 values(20, 40, 'Ramon Cardoso', '80.800.808-8', '778.788.788-77', '949518125', 30, 20, '1978-01-10', '41582802');
 
-INSERT INTO vaga (idEmpresa, curso, nome, semestre, valorBolsa, valeRefeicao, valeTransporte, descricao, atividades, adicionais, validade, horario)
-VALUES(10, 'Sistemas', 'Programador', 6, 2000, 25, 10, 'Trabalhar programando', 'Programar com sql,e afins', 'possivel efetivação', '1998-06-26', '9:00' );
+INSERT INTO vaga (idEmpresa,curso, nome, semestre, valorBolsa, valeRefeicao, valeTransporte, descricao, atividades, adicionais, validade, horario, status)
+VALUES(10,'Sistemas', 'Programador', 6, 2000, 25, 10, 'Trabalhar programando', 'Programar com sql,e afins', 'possivel efetivação', '1998-06-26', '9:00', true );

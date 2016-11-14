@@ -38,25 +38,8 @@ public class ControllerVagas extends HttpServlet {
 
         //CADASTRA UMA VAGA
         if (action.equalsIgnoreCase("cadastro")) {
-            //COLOQUE O TRY CATCH AQUI E TIRE ISSO DAQUI
-            //----{
-            Empresa empresa = (Empresa) request.getSession().getAttribute("usuario");
-            String curso = request.getParameter("cursos");
-            String nome = request.getParameter("nome");
-            int semestre = Integer.parseInt(request.getParameter("semestre"));
-            double bolsa = Integer.parseInt(request.getParameter("bolsa"));
-            double refeicao = Double.parseDouble(request.getParameter("refeicao"));
-            double transporte = Double.parseDouble(request.getParameter("transporte"));
-            String descricao = request.getParameter("descricao");
-            String atividades = request.getParameter("atividades");
-            String horario = request.getParameter("horario");
-            String validade = request.getParameter("validade");
-            String adicionais = request.getParameter("adicionais");
-            //}----
 
-            Vaga vaga = new Vaga(curso, nome, semestre, bolsa, descricao, atividades, horario, empresa, validade, refeicao, transporte, adicionais);
-
-            if (serviceVaga.cadastrarVaga(vaga) != null) {
+            if (serviceVaga.cadastrarVaga(request) != null) {
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }

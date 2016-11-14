@@ -7,7 +7,9 @@ package Services;
 
 import DAOs.VagaDBDAO;
 import Entidades.Vaga;
+import Factory.VagaFactory;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -15,17 +17,19 @@ import java.util.List;
  */
 public class ServiceVaga {
     private VagaDBDAO vagaDB;
+    private VagaFactory factory;
     
     public ServiceVaga(){
         this.vagaDB = new VagaDBDAO();
+        this.factory = new VagaFactory();
     }
     
-    public Vaga cadastrarVaga(Vaga newVaga){
+    public Vaga cadastrarVaga(HttpServletRequest request){
         
-        Vaga vaga;
+        Vaga vaga = factory.criarVaga(request);
         
         try{
-            vaga = vagaDB.insertVaga(newVaga);
+            vaga = vagaDB.insertVaga(vaga);
         }catch(Exception ex){
             return null;
         }

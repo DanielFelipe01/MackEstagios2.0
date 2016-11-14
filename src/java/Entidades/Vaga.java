@@ -29,7 +29,6 @@ import javax.persistence.Transient;
 
 public class Vaga  implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idVaga")
     private Integer idVaga;
     
@@ -68,6 +67,9 @@ public class Vaga  implements Serializable{
     @Column(name = "validade")
     private String validade;
     
+    @Column(name = "status")
+    private boolean status;
+    
     @Transient
     private List<Candidato> candidatos;
 
@@ -88,6 +90,7 @@ public class Vaga  implements Serializable{
         this.transporte = transporte; 
         this.adicionais = adicionais;
         this.validade = validade;
+        this.status = true;
     }
 
     public String getCurso() {
@@ -201,6 +204,14 @@ public class Vaga  implements Serializable{
 
     public void setCandidatos(List<Candidato> candidatos) {
         this.candidatos = candidatos;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
     
