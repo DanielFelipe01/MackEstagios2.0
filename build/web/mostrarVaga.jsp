@@ -4,6 +4,7 @@
     Author     : Daniel
 --%>
 
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,6 @@
 
             <section class="conteudo">
                 <% Vaga v = (Vaga) request.getAttribute("vaga"); %>
-
 
                 <div class="title"> Dados da Vaga</div>
                 <section class="form-group" name="dados" >
@@ -83,21 +83,47 @@
 
                 </section>
 
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">    
+                <div class="linha">
+                    <div id="centraliza">
                         <form action="ControllerCandidato" method="Post">
                             <input type="hidden" name="idVaga" value="<%out.write(Integer.toString(v.getIdVaga()));%>">
 
-                            <% if (usuario instanceof Aluno) { %>
+                            <% if (usuario instanceof Aluno) {
+                                    List<Candidato> candidatosList = v.getCandidatos();
+                                    Boolean excluir = false;
+
+                                    for (Candidato cand : candidatosList) {
+                                        if (cand.getAluno().getUsuario().getIdUsuario() == usuario.getIdUsuario()) {
+                                            excluir = true;
+                                        }
+                                    }
+                                    
+                                    if (!excluir) {
+                            %>
                             <input type="hidden" name="action" value="candidatar">
-                            <input type="submit" class="form-control btn btn-default" value="Cantidatar-se">
-                            <% }else if(usuario instanceof Empresa){ %> 
+                            <input type="submit" class="btn-simples" value="Cantidatar-se">
+                                    <%} else if (excluir) { %>
+                            <input type="hidden" name="action" value="descandidatar">
+                            <input type="submit" class="btn-simples" value="Descantidatar-se">
+                                    <% } %>
+
+                            <% } else if (usuario instanceof Empresa) { %> 
                             <input type="hidden" name="action" value="desabilitarVaga">
-                            <input type="submit" class="form-control btn btn-default" value="Excluir vaga">
-                            <% }else { %>
-                            
+                            <input type="submit" class="btn-simples" value="Excluir vaga">
+                            <% } else { %>
+
                             <% }%>
                         </form>
+
+                        <%       if (usuario instanceof Empresa || usuario instanceof Administrador) {
+                                request.getSession().setAttribute("candidatos", v.getCandidatos());
+
+                        %>
+                        <form action="ControllerCandidato" method="Post">
+                            <input type="hidden" name="action" value="mostrarCandidatos">
+                            <input type="submit" class="btn-simples" value="Ver candidatos">
+                        </form>
+                        <%}%>
                     </div>
                 </div>
             </section>

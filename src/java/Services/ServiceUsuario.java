@@ -26,20 +26,18 @@ public class ServiceUsuario {
     }
 
     public Usuario cadastrarUsuario(String email, String senha, String tipo) {
-
-        if (!this.validarUsuario(email, senha).equals(null)) {
+        Usuario user = null;
+        try {
+            user = usuarioDB.selectEmailUsuario(email);
+            if (user.equals(null));
+            
+            return null;
+        } catch (Exception ex) {
             Usuario usuario = factory.criarUsuario(email, senha, tipo);
-
-            try {
-                usuarioDB.insertUsuario(usuario);
-            } catch (Exception ex) {
-                return null;
-            }
+            usuarioDB.insertUsuario(usuario);
 
             return usuario;
         }
-
-        return null;
     }
 
     public Usuario cadastrarUsuarioTipo(HttpServletRequest request, Usuario usuario) throws ParseException {

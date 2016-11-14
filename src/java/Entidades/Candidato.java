@@ -5,6 +5,7 @@
  */
 package Entidades;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -14,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "candidatos")
-public class Candidato {
+public class Candidato implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idCandidato")

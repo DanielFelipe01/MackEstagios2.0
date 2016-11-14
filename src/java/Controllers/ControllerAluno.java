@@ -29,37 +29,51 @@ public class ControllerAluno extends HttpServlet {
         doPost(request, response);
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
         ServiceAluno serviceAluno = new ServiceAluno();
-        
+
         //PESQUISA OS ALUNOS
         if (action.equalsIgnoreCase("pesquisaAlunos")) {
-            String pesquisa = "%" + request.getParameter("pesquisa") + "%";
-            List<Aluno> alunos = serviceAluno.listarAlunos(pesquisa);
+            try {
+                String pesquisa = "%" + request.getParameter("pesquisa") + "%";
+                List<Aluno> alunos = serviceAluno.listarAlunos(pesquisa);
 
-            request.setAttribute("alunos", alunos);
-            RequestDispatcher disp = request.getRequestDispatcher("alunos.jsp");
-            disp.forward(request, response);
+                if (!alunos.isEmpty()) {
+                    request.setAttribute("alunos", alunos);
+                } else {
+                    request.setAttribute("alunos", null);
+                }
 
-        //MOSTRAR DADOS DO ALUNO SELECIONADO
-        }else if (action.equalsIgnoreCase("mostrarAluno")) {
-            int IdUsuario = Integer.parseInt(request.getParameter("idAluno"));
-            Aluno aluno = serviceAluno.selecionarAluno(IdUsuario);
+                RequestDispatcher disp = request.getRequestDispatcher("alunos.jsp");
+                disp.forward(request, response);
+            } catch (Exception ex) {
+                System.out.println("Erro: " + ex);
+                request.setAttribute("erro", true);
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
+            }
 
-            if (aluno != null) {
+            //MOSTRAR DADOS DO ALUNO SELECIONADO
+        } else if (action.equalsIgnoreCase("mostrarAluno")) {
+            try {
+                int IdUsuario = Integer.parseInt(request.getParameter("idAluno"));
+                Aluno aluno = serviceAluno.selecionarAluno(IdUsuario);
+
                 request.setAttribute("aluno", aluno);
                 RequestDispatcher disp = request.getRequestDispatcher("mostrarAluno.jsp");
                 disp.forward(request, response);
-            } else {
-                response.sendRedirect("alunos.jsp");
+
+            } catch (Exception ex) {
+                System.out.println("Erro: " + ex);
+                request.setAttribute("erro", true);
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
             }
         }
     }
 
-    
 }

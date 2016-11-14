@@ -42,10 +42,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%                            List<Empresa> empresas = (List<Empresa>) request.getAttribute("empresas");
+
+                        <%  List<Empresa> empresas = (List<Empresa>) request.getAttribute("empresas");
                             if (empresas != null) {
-                                for (Empresa e : empresas) {
-                        %>
+                                for (Empresa e : empresas) {%>
                         <tr>
                     <form method="post" action="ControllerEmpresa">
                         <input type="hidden" name="action" value="mostrarEmpresa">
@@ -54,19 +54,21 @@
                         <td><% out.write(e.getUsuario().getEmail()); %></td>
                         <td><% out.write(e.getTelefone()); %></td>
                         <td><% out.write(e.getSite()); %></td>
-                        <%
-
-                            if (e.getSituacao().equals(true)) { %>
+                        <% if (e.getSituacao().equals(true)) { %>
                         <td>Aprovada</td>
                         <%  } else { %>
                         <td>Pendente</td> 
                         <%  } %>
                         <td><input type="submit" value="Mostrar" class="btn btn-default"></td>
-                        </tr>
-                        <%    }
-                        }%>
-                        </tbody>
+                    </form>
+                    </tr>
+                    <% }
+                    } else { %>
+                    <p class="informa"> Ops... Sem empresas. </p>
+                    <% }%>
+                    </tbody>
                 </table>
+
             </div>
         </div>
     </body>

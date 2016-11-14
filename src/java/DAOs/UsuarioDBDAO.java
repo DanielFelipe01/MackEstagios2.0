@@ -37,24 +37,24 @@ public class UsuarioDBDAO implements UsuarioDAO {
     @Override
     public Usuario updateUsuario(Usuario usuario) {
         Conexao c = new Conexao();
-        
+
         String sql = "UPDATE usuario set senha = ? WHERE idUsuario = ?";
-        try{
+        try {
             PreparedStatement stmt = c.getConexao().prepareStatement(sql);
 
             stmt.setString(1, usuario.getSenha());
             stmt.setInt(2, usuario.getIdUsuario());
-            
+
             stmt.execute();
             stmt.close();
-            
-        }catch(Exception ex){
+
+        } catch (Exception ex) {
             System.out.println("Erro: " + ex);
             return null;
-        }finally{
+        } finally {
             c.close();
         }
-       
+
         return usuario;
     }
 
@@ -74,7 +74,7 @@ public class UsuarioDBDAO implements UsuarioDAO {
 
         return usuarios;
     }
-    
+
     @Override
     public Usuario selectUsuario(String email, String senha) {
         Usuario user = null;
@@ -85,7 +85,7 @@ public class UsuarioDBDAO implements UsuarioDAO {
         } catch (Exception ex) {
             return null;
         }
-        
+
         if (usuario.equals(null)) {
             return null;
         } else {
@@ -112,5 +112,18 @@ public class UsuarioDBDAO implements UsuarioDAO {
 
         return user;
 
+    }
+
+    @Override
+    public Usuario selectEmailUsuario(String email) {
+        Usuario usuario = new Usuario();
+
+        try {
+            usuario = (Usuario) manager.createQuery("Select u from Usuario u where u.email = :email", Usuario.class)
+                    .setParameter("email", email).getSingleResult();
+        } catch (Exception ex) {
+            return null;
+        }
+         return usuario;
     }
 }

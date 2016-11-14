@@ -23,42 +23,51 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ControllerAdm", urlPatterns = {"/ControllerAdm"})
 public class ControllerAdm extends HttpServlet {
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         doPost(request, response);
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
         ServiceAdm serviceAdm = new ServiceAdm();
-        
-        //Pesquisa todos os adms
+
+        //PESQUISA OS ADMINISTRADORES DO SISTEMA
         if (action.equalsIgnoreCase("pesquisaAdm")) {
-            String pesquisa = "%" + request.getParameter("pesquisa") + "%";
-            List<Administrador> adm = serviceAdm.listarAdm(pesquisa);
+            try {
+                String pesquisa = "%" + request.getParameter("pesquisa") + "%";
+                List<Administrador> adm = serviceAdm.listarAdm(pesquisa);
 
-            request.setAttribute("adm", adm);
-            RequestDispatcher disp = request.getRequestDispatcher("administradores.jsp");
-            disp.forward(request, response);
-        
-        //Seleciona um adm
-        }else if (action.equalsIgnoreCase("mostrarAdm")) {
-            int IdUsuario = Integer.parseInt(request.getParameter("idAdm"));
-            Administrador adm = serviceAdm.selecionarAdm(IdUsuario);
+                request.setAttribute("adm", adm);
+                RequestDispatcher disp = request.getRequestDispatcher("administradores.jsp");
+                disp.forward(request, response);
+            } catch (Exception ex) {
+                System.out.println("Erro: " + ex);
+                request.setAttribute("erro", true);
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
+            }
 
-            if (adm != null) {
+            //MOSTRAR DADOS DE UM ADMINISTRADOR SELECIONADO
+        } else if (action.equalsIgnoreCase("mostrarAdm")) {
+            try {
+                int IdUsuario = Integer.parseInt(request.getParameter("idAdm"));
+                Administrador adm = serviceAdm.selecionarAdm(IdUsuario);
+
                 request.setAttribute("adm", adm);
                 RequestDispatcher disp = request.getRequestDispatcher("mostrarAdm.jsp");
                 disp.forward(request, response);
-            } else {
-                response.sendRedirect("administradores.jsp");
+
+            } catch (Exception ex) {
+                System.out.println("Erro: " + ex);
+                request.setAttribute("erro", true);
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
             }
         }
     }

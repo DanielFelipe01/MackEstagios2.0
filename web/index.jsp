@@ -61,14 +61,19 @@
                                             <label class="incorreto" for="emailErrado">
                                                 Email ou senha incorretos!
                                             </label>    
-                                            <%      }else if (mensagem == 2) {%>
+                                            <%      } else if (mensagem == 2) {%>
                                             <label class="incorreto" for="emailErrado">
                                                 Email já cadastrado!
                                             </label> 
-                                            <%      }
-                                                } catch (Exception ex) {
-                                                    System.out.println(mensagem + " - " + ex);
-                                                }
+                                            <%      } else if (mensagem == 3) {%>
+                                            <label class="incorreto" for="emailErrado">
+                                                Ops... Ocorreu um erro, tente novamente mais tarde!
+                                            </label> 
+                                            <%    }
+                                                }catch (Exception ex) {
+
+                                                   System.out.println(mensagem + " - " + ex);
+                                               }
                                             %>
                                         </div>
                                         <div class="form-group">
@@ -101,7 +106,7 @@
                                                 <label><input type="radio" name="tipoUsuario" value="3">Empresa</label>
                                             </div>
                                         </section>
-                                        
+
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3">

@@ -9,21 +9,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-	<title> Principal </title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title> Principal </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Daniel Felipe">
-   	<link rel="icon" href="img/icon.png">
+        <link rel="icon" href="img/icon.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
-   	<link href="css/style.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
         <div class="container">
             <%@include  file="menu.jsp" %>
-            
+
             <section class="conteudo">
-                fasfasfa
+                <%   
+                    /* Boolean erro = false;
+                    try{
+                        erro = (Boolean) request.getAttribute("erro");
+                    }catch(Exception ex){
+                        erro = false;
+                    }
+                    
+                    if (erro) {*/
+                %>
+                <p class="erro">
+                    Ops... Ocorreu um erro tente novamente mais tarde.
+                </p>
+                <% /*} else { */%>
+                <p class="welcome">
+                   Bem vindo...
+                </p>
+
+                <% /* } */%>
             </section>
         </div>
     </body>

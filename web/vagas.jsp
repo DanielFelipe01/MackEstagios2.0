@@ -71,8 +71,10 @@
                         <td><input type="submit" value="Mostrar" class="btn btn-default"></td>
                     </form>
                     </tr>
-                    <%      }
-                        }%>
+                    <% }
+                    } else { %>
+                    <p class="informa"> Ops... Sem Vagas. </p>
+                    <% }%>
                     </tbody>
                 </table>
             </div>

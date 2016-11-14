@@ -35,68 +35,84 @@ public class ControllerUsuario extends HttpServlet {
 
         //CADASTRA O USUARIO
         if (action.equalsIgnoreCase("cadastro")) {
-            String tipo = request.getParameter("tipoUsuario");
-            String email = request.getParameter("email");
-            String senha = request.getParameter("senha");
-
-            Usuario usuario = null;
-
             try {
+                String tipo = request.getParameter("tipoUsuario");
+                String email = request.getParameter("email");
+                String senha = request.getParameter("senha");
+
+                Usuario usuario = null;
                 usuario = serviceUsuario.cadastrarUsuario(email, senha, tipo);
+
+                if (usuario != null) {
+                    request.getSession().setAttribute("usuario", usuario);
+                    response.sendRedirect("index.jsp");
+                } else {
+                    RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+                    request.setAttribute("mensagem", 2);
+                    disp.forward(request, response);
+                }
             } catch (Exception ex) {
-                usuario = null;
-            }
-            if (usuario != null) {
-                request.getSession().setAttribute("usuario", usuario);
-                response.sendRedirect("index.jsp");
-            } else {
+                System.out.println("Erro: " + ex);
+                request.setAttribute("mensagem", 3);
                 RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-                request.setAttribute("mensagem", 2);
                 disp.forward(request, response);
             }
 
             //ALTERAR O CADASTRO DO USUARIO 
         } else if (action.equalsIgnoreCase("perfil")) {
-            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-
             try {
-                usuario = serviceUsuario.alteraCadastro(request, usuario);
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+                serviceUsuario.alteraCadastro(request, usuario);
                 request.getSession().invalidate();
                 response.sendRedirect("index.jsp");
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex);
-                response.sendRedirect("perfil.jsp");
+                request.setAttribute("erro", true);
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
             }
 
             //CADASTRA O TIPO DE USUARIO
         } else if (action.equalsIgnoreCase("terminaCadastro")) {
-            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             try {
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
                 usuario = serviceUsuario.cadastrarUsuarioTipo(request, usuario);
                 request.getSession().setAttribute("usuario", usuario);
                 response.sendRedirect("principal.jsp");
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex);
-                response.sendRedirect("principal.jsp");
-            }
-
-        }else if(!action.equalsIgnoreCase("sair")){
-            String email, senha;
-            email = request.getParameter("email");
-            senha = request.getParameter("senha");
-
-            Usuario usuario = serviceUsuario.validarUsuario(email, senha);
-            if(usuario != null){
-                request.getSession().setAttribute("usuario", usuario);
-                
+                request.setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
-            }else{
+            }
+
+        } else if (!action.equalsIgnoreCase("sair")) {
+            try {
+                String email, senha;
+                email = request.getParameter("email");
+                senha = request.getParameter("senha");
+
+                Usuario usuario = serviceUsuario.validarUsuario(email, senha);
+                if (usuario != null) {
+                    request.getSession().setAttribute("usuario", usuario);
+
+                    request.setAttribute("erro", false);
+                    RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                    disp.forward(request, response);
+                } else {
+                    RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+                    request.setAttribute("mensagem", 1);
+                    disp.forward(request, response);
+                }
+            } catch (Exception ex) {
+                System.out.println("Erro: " + ex);
+                request.setAttribute("mensagem", 3);
                 RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
-                request.setAttribute("mensagem", 1);
                 disp.forward(request, response);
             }
-        }else if (action.equalsIgnoreCase("sair")){
+        } else if (action.equalsIgnoreCase("sair")) {
             request.getSession().invalidate();
             response.sendRedirect("index.jsp");
         }

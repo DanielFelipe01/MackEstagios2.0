@@ -22,6 +22,7 @@
         <div class="container">
             <%@include  file="menu.jsp" %>
 
+
             <div class="conteudo">
                 <form action="ControllerAluno" method="Post" id="pesquisa-form" class="form-inline">
                     <div class="title"> Alunos</div>
@@ -31,6 +32,7 @@
                         <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>
                 </form>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -43,27 +45,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%  
-                            List<Aluno> alunos = (List<Aluno>) request.getAttribute("alunos");
-                            if (alunos != null) {
-                                for (Aluno a : alunos) {
-                        %>
 
+                        <%  List<Aluno> alunos = (List<Aluno>) request.getAttribute("alunos");
+                            if (alunos != null) {
+                                for (Aluno a : alunos) { %>   
                         <tr>
-                            <form method="post" action="ControllerAluno">
-                                <input type="hidden" name="action" value="mostrarAluno">
-                                <input type="hidden" name="idAluno" value="<% out.write(Integer.toString(a.getIdAluno())); %>">
-                                <td><% out.write(a.getNome()); %></td>
-                                <td><% out.write(a.getUsuario().getEmail()); %></td>
-                                <td><% out.write(a.getTelefone()); %></td>
-                                <td><% out.write(a.getTia()); %></td>
-                                <td><% out.write(a.getFormacao().getCurso()); %></td>
-                                <td><% out.write(Integer.toString(a.getFormacao().getSemestre())); %></td>
-                                <td><input type="submit" value="Mostrar" class="btn btn-default"></td>
-                            </form>
-                        </tr>
-                    <%      }
-                        }%>
+
+                    <form method="post" action="ControllerAluno">
+                        <input type="hidden" name="action" value="mostrarAluno">
+                        <input type="hidden" name="idAluno" value="<% out.write(Integer.toString(a.getIdAluno())); %>">
+                        <td><% out.write(a.getNome()); %></td>
+                        <td><% out.write(a.getUsuario().getEmail()); %></td>
+                        <td><% out.write(a.getTelefone()); %></td>
+                        <td><% out.write(a.getTia()); %></td>
+                        <td><% out.write(a.getFormacao().getCurso()); %></td>
+                        <td><% out.write(Integer.toString(a.getFormacao().getSemestre())); %></td>
+                        <td><input type="submit" value="Mostrar" class="btn btn-default"></td>
+                    </form>
+                    </tr>
+                    <%  }
+                    } else { %>
+                    <p class="informa"> Ops... Sem alunos. </p>
+                    <% }%>
                     </tbody>
                 </table>
             </div>

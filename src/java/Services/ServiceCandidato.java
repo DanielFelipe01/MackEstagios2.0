@@ -7,7 +7,9 @@ package Services;
 
 import DAOs.CandidatoDBDAO;
 import Entidades.Candidato;
+import Entidades.Vaga;
 import Factory.UsuarioFactory;
+import java.util.List;
 
 /**
  *
@@ -36,6 +38,15 @@ public class ServiceCandidato {
     public Candidato descandidatar(Candidato candidato){
         try {
             return candidatoDB.deleteCandidato(candidato);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+            return null;
+        }
+    }
+    
+    public List<Candidato> listarCandidatos(Vaga v){
+        try {
+            return candidatoDB.selectCandidatos(v.getIdVaga());
         } catch (Exception ex) {
             System.out.println("Erro: " + ex);
             return null;

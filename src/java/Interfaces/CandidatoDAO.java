@@ -6,6 +6,7 @@
 package Interfaces;
 
 import Entidades.Candidato;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,7 @@ public interface CandidatoDAO {
     public Candidato insertCandidato(Candidato candidato);
     
     public Candidato deleteCandidato(Candidato candidato);
+    
+    public List<Candidato> selectCandidatos(int idVaga);
+
 }

@@ -9,6 +9,7 @@ import Conexao.Conexao;
 import Entidades.Candidato;
 import Interfaces.CandidatoDAO;
 import java.sql.PreparedStatement;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -26,28 +27,58 @@ public class CandidatoDBDAO implements CandidatoDAO {
 
     @Override
     public Candidato insertCandidato(Candidato candidato) {
+        Conexao c = new Conexao();
+        
+        String sql = "INSERT INTO candidatos (idAluno, idVaga) VALUES(?,?)";
+        
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setInt(1, candidato.getAluno().getIdAluno());
+            stmt.setInt(2, candidato.getVaga().getIdVaga());
 
-        manager.getTransaction().begin();
-        manager.persist(candidato);
-        manager.getTransaction().commit();
-
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+        
         return candidato;
     }
 
     @Override
-    public Candidato deleteCandidato(Candidato candidato
-    ) {
-        try {
-            manager.remove(candidato);
-            manager.getTransaction().commit();
-            manager.close();
+    public Candidato deleteCandidato(Candidato candidato) {
+        Conexao c = new Conexao();
+        
+        String sql = "DELETE FROM candidatos WHERE idAluno = ? and idVaga = ? ";
+        
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setInt(1, candidato.getAluno().getIdAluno());
+            stmt.setInt(2, candidato.getVaga().getIdVaga());
 
-            return null;
-        } catch (Exception ex) {
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
             System.out.println("Erro: " + ex);
-            return candidato;
+            return null;
+        }finally{
+            c.close();
         }
+        
+        return null;
+    }
+    
+    @Override
+    public List<Candidato> selectCandidatos(int idVaga) {
+        List<Candidato> candidatos = manager.createQuery("select c from Candidato c where idVaga = :idVaga")
+                .setParameter("idVaga", idVaga).getResultList();
 
+        return candidatos;
     }
 
 }

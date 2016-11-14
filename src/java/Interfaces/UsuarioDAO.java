@@ -23,6 +23,8 @@ public interface UsuarioDAO {
     public List<Usuario> selectUsuarios();
     
     public Usuario selectUsuario(String email, String senha);
+    
+    public Usuario selectEmailUsuario(String email);
 
 
 }
