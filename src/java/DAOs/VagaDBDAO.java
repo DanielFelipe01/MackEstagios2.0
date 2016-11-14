@@ -63,12 +63,17 @@ public class VagaDBDAO implements VagaDAO {
     }
 
     @Override
-    public List<Vaga> selectVagas(String pesquisa, String empresa) {
+    public List<Vaga> selectVagas(String pesquisa, String empresa, String filtro) {
         List<Vaga> vagas = null;
         try {
-            if (!empresa.equals(null)) {
+            if (!empresa.equals(null) && filtro.equalsIgnoreCase("todas")) {
                 vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa and idEmpresa = :empresa")
                         .setParameter("pesquisa", pesquisa).setParameter("empresa", empresa).getResultList();
+            }
+            else if (!empresa.equals(null)){
+                boolean filtroBoolean = Boolean.parseBoolean(filtro);
+                vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa and idEmpresa = :empresa and status = :filtro")
+                        .setParameter("pesquisa", pesquisa).setParameter("empresa", empresa).setParameter("filtro", filtroBoolean).getResultList();
             }
         } catch (Exception ex) {
             vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa")
@@ -87,12 +92,25 @@ public class VagaDBDAO implements VagaDAO {
     }
 
     @Override
-    public Vaga deleteVaga(Vaga idVaga) {
-        manager.getTransaction().begin();
-        manager.remove(idVaga);
-        manager.getTransaction().commit();
-        manager.close();
-
-        return idVaga;
+    public Vaga changeStatusVaga(Vaga vaga) {
+        Conexao c = new Conexao();
+        
+        String sql = "UPDATE vaga set status = ? WHERE idVaga = ?";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setBoolean(1, vaga.isStatus());
+            stmt.setInt(2, vaga.getIdVaga());
+            
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return null;
+        }finally{
+            c.close();
+        }
+       
+        return vaga;
     }
 }

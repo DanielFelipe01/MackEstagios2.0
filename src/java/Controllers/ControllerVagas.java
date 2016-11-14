@@ -38,10 +38,13 @@ public class ControllerVagas extends HttpServlet {
 
         //CADASTRA UMA VAGA
         if (action.equalsIgnoreCase("cadastro")) {
-
-            if (serviceVaga.cadastrarVaga(request) != null) {
-                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+            Vaga vaga = serviceVaga.cadastrarVaga(request);
+            if (vaga != null) {
+                RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
                 disp.forward(request, response);
+            }
+            else {
+            //MOSTRAR MENSAGEM DE ERRO NA CRIAÇÂO
             }
 
             //PESQUISA AS VAGAS
@@ -49,6 +52,7 @@ public class ControllerVagas extends HttpServlet {
             try {
                 String pesquisa = "%" + request.getParameter("pesquisa") + "%";
                 String tipo = request.getParameter("tipo");
+                String filtro = request.getParameter("filtro");
 
                 String empresa = null;
                 try {
@@ -60,7 +64,7 @@ public class ControllerVagas extends HttpServlet {
                     System.out.println("Tipo de empresa igual a null");
                 }
 
-                List<Vaga> vagas = serviceVaga.listarVagas(pesquisa, empresa);
+                List<Vaga> vagas = serviceVaga.listarVagas(pesquisa, empresa, filtro);
 
                 if (!vagas.isEmpty()) {
                     request.setAttribute("vagas", vagas);
@@ -98,10 +102,12 @@ public class ControllerVagas extends HttpServlet {
             }
 
             //DESATIVA VAGA SELECIONADA
-        } else if (action.equalsIgnoreCase("desabilitarVaga")) {
+        } else if (action.equalsIgnoreCase("trocarStatusVaga")) {
             try {
                 int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
-                Vaga vaga = serviceVaga.deletarVaga(IdVaga);
+                int operacao = Integer.parseInt(request.getParameter("operacao"));
+                
+                Vaga vaga = serviceVaga.changeStatusVagaVaga(IdVaga, operacao);
 
                 request.setAttribute("vaga", vaga);
                 RequestDispatcher disp = request.getRequestDispatcher("mostrarVaga.jsp");

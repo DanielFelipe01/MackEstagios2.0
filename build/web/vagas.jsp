@@ -36,7 +36,10 @@
                         <input type="hidden" name="tipo" value="empresa">
                         <% }%>
                         <input type="text" name="pesquisa" id="pesquisa" >
-                        <input type="hidden" name="action" value="pesquisaVagas">
+                        <input type="hidden" name="action" value="pesquisaVagas"><br/>
+                        <input type="radio" name="filtro" value="true">Somente vagas ativas.<br/>
+                        <input type="radio" name="filtro" value="false">Somente vagas desativadas.<br/>
+                        <input type="radio" name="filtro" value="todas" checked>Todas as vagas.<br/>
                         <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>
                 </form>

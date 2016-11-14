@@ -36,10 +36,10 @@ public class ServiceVaga {
         return vaga;
     }
     
-    public List<Vaga> listarVagas(String pesquisa, String empresa){
+    public List<Vaga> listarVagas(String pesquisa, String empresa, String filtro){
         
         try{
-            return (List<Vaga>) vagaDB.selectVagas(pesquisa, empresa);
+            return (List<Vaga>) vagaDB.selectVagas(pesquisa, empresa, filtro);
         }catch(Exception ex){
             System.out.println("Erro: " + ex);
             return null;
@@ -55,10 +55,13 @@ public class ServiceVaga {
         }
     }
     
-    public Vaga deletarVaga(int idVaga) {
+    public Vaga changeStatusVagaVaga(int idVaga, int op) {
         try {
             Vaga v = (Vaga) vagaDB.selectVaga(idVaga);
-            return (Vaga) vagaDB.deleteVaga(v);
+            if (op == 1) v.setStatus(false);
+            else v.setStatus(true);
+            
+            return (Vaga) vagaDB.changeStatusVaga(v);
         } catch (Exception ex) {
             System.out.println("Erro: " + ex);
             return null;

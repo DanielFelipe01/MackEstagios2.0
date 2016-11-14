@@ -54,7 +54,7 @@
                         <li><a href="principal.jsp">Inicio</a></li>
                         <li><a href="perfil.jsp">Perfil</a></li>
                         <li><a href="cadastrarVaga.jsp">Cadastrar vaga</a></li>
-                        <li><a href="ControllerVagas?action=pesquisaVagas&pesquisa=&tipo=empresa">Minha vagas</a></li>
+                        <li><a href="ControllerVagas?action=pesquisaVagas&pesquisa=&tipo=empresa">Minhas vagas</a></li>
                     </ul>
                     <% } else {%>
                     <ul class="nav navbar-nav" name="empresa" >
