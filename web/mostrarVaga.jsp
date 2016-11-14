@@ -105,15 +105,23 @@
                                     <%} else if (excluir) { %>
                             <input type="hidden" name="action" value="descandidatar">
                             <input type="submit" class="btn-simples" value="Descantidatar-se">
-                                    <% } %>
-
-                            <% } else if (usuario instanceof Empresa) { %> 
-                            <input type="hidden" name="action" value="desabilitarVaga">
-                            <input type="submit" class="btn-simples" value="Excluir vaga">
-                            <% } else { %>
-
-                            <% }%>
+                                    <% }} %>
                         </form>
+                        <form action="ControllerVagas" method="Post">
+                            <%if (usuario instanceof Empresa) { %> 
+                            <input type="hidden" name="idVaga" value="<%out.write(Integer.toString(v.getIdVaga()));%>">
+                            <input type="hidden" name="action" value="trocarStatusVaga">
+                                <% if (v.isStatus() == true){ %>
+                                    <input type="hidden" name="operacao" value="1">
+                                    <input type="submit" class="btn-simples" value="Desabilitar vaga">
+                                <%} else { %>
+                                    <input type="hidden" name="operacao" value="2">
+                                    <input type="submit" class="btn-simples" value="Habilitar vaga">
+                                <% } %>
+                            <% } %>
+                        </form>
+
+                        
 
                         <%       if (usuario instanceof Empresa || usuario instanceof Administrador) {
                                 request.getSession().setAttribute("candidatos", v.getCandidatos());
