@@ -51,7 +51,7 @@
                             <th>Empresa</th>
                             <th>Semestre</th>
                             <th>Bolsa</th>
-                            <th>Horário</th>
+                            <th>Carga Horária</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -113,4 +113,38 @@ public class VagaDBDAO implements VagaDAO {
        
         return vaga;
     }
+    
+    public boolean updateVaga(int idVaga, Vaga newVaga) {
+        Conexao c = new Conexao();
+        
+        String sql = "UPDATE vaga set curso = ?, nome = ?, semestre = ?, valorBolsa = ?, valeRefeicao = ?, valeTransporte = ?, descricao = ?, atividades = ?, adicionais = ?, validade = ?, horario = ?, idEmpresa = ?, status = ? WHERE idVaga = ?";
+        try{
+            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            stmt.setString(1, newVaga.getCurso());
+            stmt.setString(2, newVaga.getNome());
+            stmt.setInt(3, newVaga.getSemestre());
+            stmt.setDouble(4, newVaga.getBolsa());
+            stmt.setDouble(5, newVaga.getRefeicao());
+            stmt.setDouble(6, newVaga.getTransporte());
+            stmt.setString(7, newVaga.getDescricao());
+            stmt.setString(8, newVaga.getAtividades());
+            stmt.setString(9, newVaga.getAdicionais());
+            stmt.setString(10, newVaga.getValidade());
+            stmt.setString(11, newVaga.getHorario());
+            stmt.setInt(12, newVaga.getEmpresa().getIdEmpresa());
+            stmt.setBoolean(13, newVaga.isStatus());
+            stmt.setInt(14, idVaga);
+            
+            stmt.execute();
+            stmt.close();
+            
+        }catch(Exception ex){
+            System.out.println("Erro: " + ex);
+            return false;
+        }finally{
+            c.close();
+        }
+       
+        return true;
+    }
 }

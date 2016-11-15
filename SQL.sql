@@ -123,4 +123,4 @@ insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFo
 values(20, 40, 'Ramon Cardoso', '80.800.808-8', '778.788.788-77', '949518125', 30, 20, '1978-01-10', '41582802');
 
 INSERT INTO vaga (idEmpresa,curso, nome, semestre, valorBolsa, valeRefeicao, valeTransporte, descricao, atividades, adicionais, validade, horario, status)
-VALUES(10,'Sistemas', 'Programador', 6, 2000, 25, 10, 'Trabalhar programando', 'Programar com sql,e afins', 'possivel efetivação', '1998-06-26', '9:00', true );
+VALUES(10,'Sistemas', 'Programador', 6, 2000, 25, 10, 'Trabalhar programando', 'Programar com sql,e afins', 'possivel efetivação', '1998-06-26', '9', true );

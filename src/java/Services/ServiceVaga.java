@@ -55,7 +55,7 @@ public class ServiceVaga {
         }
     }
     
-    public Vaga changeStatusVagaVaga(int idVaga, int op) {
+    public Vaga trocaStatusVagaVaga(int idVaga, int op) {
         try {
             Vaga v = (Vaga) vagaDB.selectVaga(idVaga);
             if (op == 1) v.setStatus(false);
@@ -65,6 +65,19 @@ public class ServiceVaga {
         } catch (Exception ex) {
             System.out.println("Erro: " + ex);
             return null;
+        }
+    }
+    
+    public boolean alterarVaga(int idVaga, HttpServletRequest request) {
+        try {
+            Vaga oldVaga = (Vaga) vagaDB.selectVaga(idVaga);
+            Vaga newVaga = factory.criarVaga(request);
+            newVaga.setStatus(oldVaga.isStatus());          
+            
+            return vagaDB.updateVaga(idVaga, newVaga);
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+            return false;
         }
     }
     

@@ -107,7 +107,7 @@ public class ControllerVagas extends HttpServlet {
                 int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
                 int operacao = Integer.parseInt(request.getParameter("operacao"));
                 
-                Vaga vaga = serviceVaga.changeStatusVagaVaga(IdVaga, operacao);
+                Vaga vaga = serviceVaga.trocaStatusVagaVaga(IdVaga, operacao);
 
                 request.setAttribute("vaga", vaga);
                 RequestDispatcher disp = request.getRequestDispatcher("mostrarVaga.jsp");
@@ -118,7 +118,38 @@ public class ControllerVagas extends HttpServlet {
                 request.setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
+                
             }
+        } else if (action.equalsIgnoreCase("alterarVaga")){
+                int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
+                
+                Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
+                
+                request.setAttribute("vaga", vaga);
+                request.setAttribute("action", "alterarVaga");
+                RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
+                disp.forward(request, response);
+            
+        } else if (action.equalsIgnoreCase("finalizarAlterarVaga")){
+                
+                int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
+                boolean op = serviceVaga.alterarVaga(IdVaga, request);
+                
+                if (op){
+                    Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
+
+                    request.setAttribute("vaga", vaga);
+                    RequestDispatcher disp = request.getRequestDispatcher("mostrarVaga.jsp");
+                    disp.forward(request, response);
+                }
+                else {
+                    Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
+                    request.setAttribute("vaga", vaga);
+                    request.setAttribute("action", "alterarVaga");
+                    RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
+                    disp.forward(request, response);
+                }
         }
+        
     }
 }
