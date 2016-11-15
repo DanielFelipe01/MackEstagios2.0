@@ -101,10 +101,10 @@
                                     if (!excluir) {
                             %>
                             <input type="hidden" name="action" value="candidatar">
-                            <input type="submit" class="btn-simples" value="Cantidatar-se">
+                            <input type="submit" class="btn-vagas" value="Cantidatar-se">
                                     <%} else if (excluir) { %>
                             <input type="hidden" name="action" value="descandidatar">
-                            <input type="submit" class="btn-simples" value="Descantidatar-se">
+                            <input type="submit" class="btn-vagas" value="Descantidatar-se">
                                     <% }} %>
                         </form>
                         <form action="ControllerVagas" method="Post">
@@ -113,11 +113,18 @@
                             <input type="hidden" name="action" value="trocarStatusVaga">
                                 <% if (v.isStatus() == true){ %>
                                     <input type="hidden" name="operacao" value="1">
-                                    <input type="submit" class="btn-simples" value="Desabilitar vaga">
+                                    <input type="submit" class="btn-vagas" value="Desabilitar vaga">
                                 <%} else { %>
                                     <input type="hidden" name="operacao" value="2">
-                                    <input type="submit" class="btn-simples" value="Habilitar vaga">
+                                    <input type="submit" class="btn-vagas" value="Habilitar vaga">
                                 <% } %>
+                            <% } %>
+                        </form>
+                        <form action="ControllerVagas" method="Post">
+                            <%if (usuario instanceof Empresa) { %> 
+                            <input type="hidden" name="idVaga" value="<%out.write(Integer.toString(v.getIdVaga()));%>">
+                            <input type="hidden" name="action" value="alterarVaga">
+                            <input type="submit" class="btn-vagas" value="Alterar vaga">
                             <% } %>
                         </form>
 
@@ -129,7 +136,7 @@
                         %>
                         <form action="ControllerCandidato" method="Post">
                             <input type="hidden" name="action" value="mostrarCandidatos">
-                            <input type="submit" class="btn-simples" value="Ver candidatos">
+                            <input type="submit" class="btn-vagas" value="Ver candidatos">
                         </form>
                         <%}%>
                     </div>

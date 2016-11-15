@@ -22,4 +22,6 @@ public interface VagaDAO {
     
     public Vaga changeStatusVaga(Vaga vaga);
     
+    public boolean updateVaga(int idVaga, Vaga newVaga);
+    
 }

@@ -22,7 +22,7 @@ public class VagaFactory implements FactoryVaga {
             String curso = request.getParameter("cursos");
             String nome = request.getParameter("nome");
             int semestre = Integer.parseInt(request.getParameter("semestre"));
-            double bolsa = Integer.parseInt(request.getParameter("bolsa"));
+            double bolsa = Double.parseDouble(request.getParameter("bolsa"));
             double refeicao = Double.parseDouble(request.getParameter("refeicao"));
             double transporte = Double.parseDouble(request.getParameter("transporte"));
             String descricao = request.getParameter("descricao");
