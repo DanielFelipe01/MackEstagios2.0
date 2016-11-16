@@ -33,12 +33,12 @@
                     
                     if (erro) {*/
                 %>
-                <p class="erro">
-                    Ops... Ocorreu um erro tente novamente mais tarde.
+                 <p class="informa"> Ops... Ocorreu um erro tente novamente mais tarde. </p>
+                   
                 </p>
                 <% /*} else { */%>
-                <p class="welcome">
-                   Bem vindo...
+                <p class="informa">
+                   Bem vindo!
                 </p>
 
                 <% /* } */%>

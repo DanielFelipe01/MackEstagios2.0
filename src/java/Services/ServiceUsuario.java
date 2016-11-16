@@ -76,7 +76,8 @@ public class ServiceUsuario {
             ServiceEmpresa empresaServ = new ServiceEmpresa();
             Empresa e = (Empresa) usuarioTipo;
             Empresa user = (Empresa) usuario;
-
+            
+            e.getEndereco().setIdEndereco(user.getEndereco().getIdEndereco());
             e.setIdEmpresa(user.getIdEmpresa());
 
             return empresaServ.alterarEmpresa(e);

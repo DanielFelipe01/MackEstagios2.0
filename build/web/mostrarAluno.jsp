@@ -53,7 +53,7 @@
                         <label for="tia"><% out.write(a.getTia());%></label>
                     </div>
                     <div class="form-group">
-                        <label for="telefone">Telefone</label>
+                        <label for="telefone">Telefone:</label>
                         <label for="telefone"><% out.write(a.getTelefone());%></label>
                     </div>
                 </section>
