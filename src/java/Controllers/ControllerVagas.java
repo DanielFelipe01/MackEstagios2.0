@@ -44,9 +44,10 @@ public class ControllerVagas extends HttpServlet {
             if (vaga != null) {
                 RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
                 disp.forward(request, response);
-            }
-            else {
-            //MOSTRAR MENSAGEM DE ERRO NA CRIAÇÂO
+            } else {
+                request.setAttribute("erro", true);
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
             }
 
             //PESQUISA AS VAGAS
@@ -113,7 +114,7 @@ public class ControllerVagas extends HttpServlet {
             try {
                 int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
                 int operacao = Integer.parseInt(request.getParameter("operacao"));
-                
+
                 Vaga vaga = serviceVaga.trocaStatusVagaVaga(IdVaga, operacao);
 
                 request.setAttribute("vaga", vaga);
@@ -125,39 +126,38 @@ public class ControllerVagas extends HttpServlet {
                 request.setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
-                
+
             }
-        } else if (action.equalsIgnoreCase("alterarVaga")){
-                int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
-                
+        } else if (action.equalsIgnoreCase("alterarVaga")) {
+            int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
+
+            Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
+
+            request.setAttribute("vaga", vaga);
+            request.setAttribute("action", "alterarVaga");
+            RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
+            disp.forward(request, response);
+
+        } else if (action.equalsIgnoreCase("finalizarAlterarVaga")) {
+
+            int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
+            boolean op = serviceVaga.alterarVaga(IdVaga, request);
+
+            if (op) {
                 Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
-                
+
+                request.setAttribute("pesquisa", "");
+                request.setAttribute("action", "pesquisaVagas");
+                RequestDispatcher disp = request.getRequestDispatcher("vagas.jsp");
+                disp.forward(request, response);
+            } else {
+                Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
                 request.setAttribute("vaga", vaga);
                 request.setAttribute("action", "alterarVaga");
                 RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
                 disp.forward(request, response);
-            
-        } else if (action.equalsIgnoreCase("finalizarAlterarVaga")){
-                
-                int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
-                boolean op = serviceVaga.alterarVaga(IdVaga, request);
-                
-                if (op){
-                    Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
-
-                    request.setAttribute("pesquisa", "");
-                    request.setAttribute("action", "pesquisaVagas");
-                    RequestDispatcher disp = request.getRequestDispatcher("vagas.jsp");
-                    disp.forward(request, response);
-                }
-                else {
-                    Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
-                    request.setAttribute("vaga", vaga);
-                    request.setAttribute("action", "alterarVaga");
-                    RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
-                    disp.forward(request, response);
-                }
+            }
         }
-        
+
     }
 }
