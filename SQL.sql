@@ -87,11 +87,10 @@ CREATE TABLE vaga(
 );
 
 CREATE TABLE candidatos(
-    idCandidato INTEGER NOT NULL,
+    idCandidato INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     idAluno INTEGER NOT NULL,
     idVaga INTEGER NOT NULL,
 	
-    PRIMARY KEY (idCandidato),
     FOREIGN KEY (idAluno) REFERENCES aluno,
     FOREIGN KEY (idVaga ) REFERENCES vaga
 );
