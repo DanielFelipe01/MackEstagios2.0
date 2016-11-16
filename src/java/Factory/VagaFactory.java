@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Cardo
+ * @author Ramon Cardoso
  */
 public class VagaFactory implements FactoryVaga {
 
