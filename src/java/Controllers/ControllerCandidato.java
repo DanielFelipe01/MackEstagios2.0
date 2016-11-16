@@ -52,7 +52,7 @@ public class ControllerCandidato extends HttpServlet {
                 Candidato c = new Candidato(a, v);
 
                 serviceCandi.candidatar(c);
-                RequestDispatcher disp = request.getRequestDispatcher("candidatos.jsp");
+                RequestDispatcher disp = request.getRequestDispatcher("ControllerVagas?action=pesquisaVagas&pesquisa=&filtro=true");
                 disp.forward(request, response);
 
             } catch (Exception ex) {

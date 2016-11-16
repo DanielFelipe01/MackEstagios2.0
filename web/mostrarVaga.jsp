@@ -103,10 +103,10 @@
                                     if (!excluir) {
                             %>
                             <input type="hidden" name="action" value="candidatar">
-                            <input type="submit" class="btn-vagas" value="Cantidatar-se">
-                                    <%} else if (excluir) { %>
+                            <input type="submit" class="btn-simples" value="Candidatar-se">
+                                    <%} else { %>
                             <input type="hidden" name="action" value="descandidatar">
-                            <input type="submit" class="btn-vagas" value="Descantidatar-se">
+                            <input type="submit" class="btn-simples" value="Descandidatar-se">
                                     <% }} %>
                         </form>
                         <form action="ControllerVagas" method="Post">
