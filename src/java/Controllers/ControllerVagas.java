@@ -138,8 +138,9 @@ public class ControllerVagas extends HttpServlet {
                 if (op){
                     Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
 
-                    request.setAttribute("vaga", vaga);
-                    RequestDispatcher disp = request.getRequestDispatcher("mostrarVaga.jsp");
+                    request.setAttribute("pesquisa", "");
+                    request.setAttribute("action", "pesquisaVagas");
+                    RequestDispatcher disp = request.getRequestDispatcher("vagas.jsp");
                     disp.forward(request, response);
                 }
                 else {

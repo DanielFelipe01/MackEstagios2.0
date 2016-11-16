@@ -23,7 +23,9 @@
             <%@include  file="menu.jsp" %>
 
             <section class="conteudo">
-                <% Vaga v = (Vaga) request.getAttribute("vaga"); %>
+                <% Vaga v = (Vaga) request.getAttribute("vaga");
+                   Vaga newVaga = (Vaga) request.getAttribute("newVaga");
+                   if (newVaga != null) v = newVaga; %>
 
                 <div class="title"> Dados da Vaga</div>
                 <section class="form-group" name="dados" >
