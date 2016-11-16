@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author Cardo
+ * @author Ramon Cardoso
  */
 public class VagaDBDAO implements VagaDAO {
 
@@ -63,17 +63,31 @@ public class VagaDBDAO implements VagaDAO {
     }
 
     @Override
-    public List<Vaga> selectVagas(String pesquisa, String empresa, String filtro) {
+    public List<Vaga> selectVagas(String pesquisa, String usuario, String filtro) {
         List<Vaga> vagas = null;
         try {
-            if (!empresa.equals(null) && filtro.equalsIgnoreCase("todas")) {
-                vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa and idEmpresa = :empresa")
-                        .setParameter("pesquisa", pesquisa).setParameter("empresa", empresa).getResultList();
+            
+            if (usuario == "aluno"){
+                vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa and status = :filtro")
+                        .setParameter("pesquisa", pesquisa).setParameter("filtro", true).getResultList();
             }
-            else if (!empresa.equals(null)){
+            else if (usuario == "adm" && filtro.equalsIgnoreCase("todas")){
+                vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa")
+                        .setParameter("pesquisa", pesquisa).getResultList();
+            }
+            else if (usuario == "adm"){
+                boolean filtroBoolean = Boolean.parseBoolean(filtro);
+                vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa and status = :filtro")
+                        .setParameter("pesquisa", pesquisa).setParameter("filtro", filtroBoolean).getResultList();
+            }
+            else if ( filtro.equalsIgnoreCase("todas")) {
+                vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa and idEmpresa = :empresa")
+                        .setParameter("pesquisa", pesquisa).setParameter("empresa", usuario).getResultList();
+            }
+            else{
                 boolean filtroBoolean = Boolean.parseBoolean(filtro);
                 vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa and idEmpresa = :empresa and status = :filtro")
-                        .setParameter("pesquisa", pesquisa).setParameter("empresa", empresa).setParameter("filtro", filtroBoolean).getResultList();
+                        .setParameter("pesquisa", pesquisa).setParameter("empresa", usuario).setParameter("filtro", filtroBoolean).getResultList();
             }
         } catch (Exception ex) {
             vagas = manager.createQuery("select v from Vaga v where nome LIKE :pesquisa")

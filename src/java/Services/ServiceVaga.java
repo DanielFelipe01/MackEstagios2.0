@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Cardo
+ * @author Ramon Cardoso
  */
 public class ServiceVaga {
     private VagaDBDAO vagaDB;
@@ -36,10 +36,10 @@ public class ServiceVaga {
         return vaga;
     }
     
-    public List<Vaga> listarVagas(String pesquisa, String empresa, String filtro){
+    public List<Vaga> listarVagas(String pesquisa, String usuario, String filtro){
         
         try{
-            return (List<Vaga>) vagaDB.selectVagas(pesquisa, empresa, filtro);
+            return (List<Vaga>) vagaDB.selectVagas(pesquisa, usuario, filtro);
         }catch(Exception ex){
             System.out.println("Erro: " + ex);
             return null;

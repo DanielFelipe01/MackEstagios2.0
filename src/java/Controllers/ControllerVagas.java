@@ -5,8 +5,10 @@
  */
 package Controllers;
 
+import Entidades.Aluno;
 import Services.ServiceVaga;
 import Entidades.Empresa;
+import Entidades.Usuario;
 import Entidades.Vaga;
 import Services.ServiceCandidato;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Cardo
+ * @author Ramon Cardoso
  */
 public class ControllerVagas extends HttpServlet {
 
@@ -51,20 +53,25 @@ public class ControllerVagas extends HttpServlet {
         } else if (action.equalsIgnoreCase("pesquisaVagas")) {
             try {
                 String pesquisa = "%" + request.getParameter("pesquisa") + "%";
-                String tipo = request.getParameter("tipo");
-                String filtro = request.getParameter("filtro");
-
-                String empresa = null;
+                Usuario user = (Usuario) request.getSession().getAttribute("usuario");
+                String usuario = null;
+                String filtro = request.getParameter("filtro") == null ? "todas" : request.getParameter("filtro");
                 try {
-                    if (tipo.equals("empresa")) {
+                    if (user instanceof Empresa) {
                         Empresa e = (Empresa) request.getSession().getAttribute("usuario");
-                        empresa = String.valueOf(e.getIdEmpresa());
+                        usuario = String.valueOf(e.getIdEmpresa());
+                    }
+                    else if (user instanceof Aluno){
+                        usuario = "aluno";
+                    }
+                    else {
+                        usuario = "adm";
                     }
                 } catch (Exception ex) {
                     System.out.println("Tipo de empresa igual a null");
                 }
 
-                List<Vaga> vagas = serviceVaga.listarVagas(pesquisa, empresa, filtro);
+                List<Vaga> vagas = serviceVaga.listarVagas(pesquisa, usuario, filtro);
 
                 if (!vagas.isEmpty()) {
                     request.setAttribute("vagas", vagas);

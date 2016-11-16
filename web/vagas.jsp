@@ -1,7 +1,7 @@
 <%-- 
     Document   : alunos
     Created on : 27/10/2016, 11:09:41
-    Author     : Daniel
+    Author     : Daniel Felipe e Ramon Cardoso
 --%>
 
 <%@page import="java.util.List"%>
@@ -32,14 +32,18 @@
                     <% } %>
 
                     <div class="form-group-pesquisa">
-                        <% if (usuario instanceof Empresa) { %>
+                        <% if (usuario instanceof Empresa || usuario instanceof Administrador) { %>
                         <input type="hidden" name="tipo" value="empresa">
-                        <% }%>
-                        <input type="text" name="pesquisa" id="pesquisa" >
-                        <input type="hidden" name="action" value="pesquisaVagas"><br/>
-                        <input type="radio" name="filtro" value="true">Somente vagas ativas.<br/>
+                         <input type="radio" name="filtro" value="true">Somente vagas ativas.<br/>
                         <input type="radio" name="filtro" value="false">Somente vagas desativadas.<br/>
                         <input type="radio" name="filtro" value="todas" checked>Todas as vagas.<br/>
+                        <input type="hidden" name="tipo" value="empresa">
+                        <% } else if (usuario instanceof Aluno) {%>
+                        <input type="hidden" name="tipo" value="aluno">
+                        <input type="hidden" name="filtro" value="true">
+                        <% } %>
+                        <input type="text" name="pesquisa" id="pesquisa" >
+                        <input type="hidden" name="action" value="pesquisaVagas"><br/>
                         <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>
                 </form>

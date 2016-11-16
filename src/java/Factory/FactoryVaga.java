@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Cardo
+ * @author Ramon Cardoso
  */
 public interface FactoryVaga {
     

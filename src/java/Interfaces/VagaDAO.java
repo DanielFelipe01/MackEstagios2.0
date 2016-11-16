@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Cardo
+ * @author Ramon Cardoso
  */
 public interface VagaDAO {
     

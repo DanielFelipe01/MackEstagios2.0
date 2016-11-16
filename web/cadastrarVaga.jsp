@@ -1,7 +1,7 @@
 <%-- 
     Document   : vagas
     Created on : 31/10/2016, 17:39:56
-    Author     : Ramon Cardoso 41582802
+    Author     : Ramon Cardoso 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
