@@ -76,12 +76,12 @@ $(document).ready(function () {
                 required: true
             },
             rg: {
-                minlength: 10,
+                minlength: 8,
                 maxlength: 15,
                 required: true
             },
             cpf: {
-                minlength: 13,
+                minlength: 11,
                 maxlength: 15,
                 required: true
             },
@@ -128,7 +128,6 @@ $(document).ready(function () {
             complemento: {
                 minlength: 5,
                 maxlength: 80,
-                required: true
             },
             curso: {
                 minlength: 5,
