@@ -57,7 +57,7 @@ public class ControllerCandidato extends HttpServlet {
 
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
@@ -76,7 +76,7 @@ public class ControllerCandidato extends HttpServlet {
 
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
@@ -102,7 +102,7 @@ public class ControllerCandidato extends HttpServlet {
 
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }

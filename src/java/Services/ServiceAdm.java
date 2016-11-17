@@ -15,36 +15,32 @@ import java.util.List;
  * @author Daniel
  */
 public class ServiceAdm {
-    
+
     private UsuarioFactory factory;
     private AdmDBDAO admDB;
-    
-    
-    public ServiceAdm(){
+
+    public ServiceAdm() {
         this.factory = new UsuarioFactory();
         this.admDB = new AdmDBDAO();
     }
-    public List<Administrador> listarAdm(String pesquisa){
-        try{
-            return (List<Administrador>) admDB.selectAdms(pesquisa);
-        }catch(Exception ex){
-            return null;
-        }
+
+    public List<Administrador> listarAdm(String pesquisa) {
+        return (List<Administrador>) admDB.selectAdms(pesquisa);
     }
-    
-    public Administrador selecionarAdm(int idEmpresa){
-        try{
+
+    public Administrador selecionarAdm(int idEmpresa) {
+        try {
             return (Administrador) admDB.selectAdm(idEmpresa);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return null;
         }
     }
-    
-    public Administrador alterarAdm(Administrador adm){
-       try{
+
+    public Administrador alterarAdm(Administrador adm) {
+        try {
             return (Administrador) admDB.updateAdm(adm);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return null;
-        } 
+        }
     }
 }

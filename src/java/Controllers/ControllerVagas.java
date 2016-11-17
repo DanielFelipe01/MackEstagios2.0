@@ -45,7 +45,7 @@ public class ControllerVagas extends HttpServlet {
                 RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
                 disp.forward(request, response);
             } else {
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
@@ -61,15 +61,16 @@ public class ControllerVagas extends HttpServlet {
                     if (user instanceof Empresa) {
                         Empresa e = (Empresa) request.getSession().getAttribute("usuario");
                         usuario = String.valueOf(e.getIdEmpresa());
-                    }
-                    else if (user instanceof Aluno){
+                    } else if (user instanceof Aluno) {
                         usuario = "aluno";
-                    }
-                    else {
+                    } else {
                         usuario = "adm";
                     }
                 } catch (Exception ex) {
-                    System.out.println("Tipo de empresa igual a null");
+                    System.out.println("Erro: " + ex);
+                    request.getSession().setAttribute("erro", true);
+                    RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                    disp.forward(request, response);
                 }
 
                 List<Vaga> vagas = serviceVaga.listarVagas(pesquisa, usuario, filtro);
@@ -84,7 +85,7 @@ public class ControllerVagas extends HttpServlet {
                 disp.forward(request, response);
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
@@ -104,7 +105,7 @@ public class ControllerVagas extends HttpServlet {
 
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
@@ -123,20 +124,27 @@ public class ControllerVagas extends HttpServlet {
 
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
 
             }
         } else if (action.equalsIgnoreCase("alterarVaga")) {
-            int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
+            try {
+                int IdVaga = Integer.parseInt(request.getParameter("idVaga"));
 
-            Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
+                Vaga vaga = serviceVaga.selecionarVaga(IdVaga);
 
-            request.setAttribute("vaga", vaga);
-            request.setAttribute("action", "alterarVaga");
-            RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
-            disp.forward(request, response);
+                request.setAttribute("vaga", vaga);
+                request.setAttribute("action", "alterarVaga");
+                RequestDispatcher disp = request.getRequestDispatcher("cadastrarVaga.jsp");
+                disp.forward(request, response);
+            } catch (Exception ex) {
+                System.out.println("Erro: " + ex);
+                request.getSession().setAttribute("erro", true);
+                RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
+                disp.forward(request, response);
+            }
 
         } else if (action.equalsIgnoreCase("finalizarAlterarVaga")) {
 

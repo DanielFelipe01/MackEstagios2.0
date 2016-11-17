@@ -34,6 +34,7 @@ public class ServiceAluno {
         try {
             return (List<Aluno>) alunoDB.selectAlunos(pesquisa);
         } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
             return null;
         }
     }
@@ -53,7 +54,6 @@ public class ServiceAluno {
             formacaoDB.insertFormacao(aluno.getFormacao());
             return alunoDB.insertAluno(aluno);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
 

@@ -96,7 +96,6 @@ public class ServiceUsuario {
         try {
             return usuarioDB.selectUsuario(email, senha);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
     }

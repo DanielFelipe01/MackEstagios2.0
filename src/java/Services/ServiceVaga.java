@@ -41,7 +41,6 @@ public class ServiceVaga {
         try{
             return (List<Vaga>) vagaDB.selectVagas(pesquisa, usuario, filtro);
         }catch(Exception ex){
-            System.out.println("Erro: " + ex);
             return null;
         }
     }
@@ -50,7 +49,6 @@ public class ServiceVaga {
         try {
             return (Vaga) vagaDB.selectVaga(idVaga);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
     }
@@ -63,7 +61,6 @@ public class ServiceVaga {
             
             return (Vaga) vagaDB.changeStatusVaga(v);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
     }
@@ -76,7 +73,6 @@ public class ServiceVaga {
             
             return vagaDB.updateVaga(idVaga, newVaga);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return false;
         }
     }

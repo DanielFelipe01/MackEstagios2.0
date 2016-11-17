@@ -61,7 +61,6 @@ public class ServiceEmpresa {
             enderecoDB.insertEndereco(empresa.getEndereco());
             return empresaDB.insertEmpresa(empresa);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
     

@@ -1,13 +1,12 @@
 $(document).ready(function () {
     $('#register-form').validate({
         rules: {
-            email: {
+            emailTo: {
                 maxlength: 80,
                 required: true
             },
             confirmaEmail: {
-                required: true,
-                //equalTo: "#email",
+                equalTo: "#emailTo"
             },
             senha: {
                 minlength: 6,
@@ -15,8 +14,7 @@ $(document).ready(function () {
                 required: true
             },
             confirmaSenha: {
-                required: true,
-                //equalTo
+                equalTo: "#senhaTo"
             }
 
 
@@ -26,8 +24,11 @@ $(document).ready(function () {
         },
         unhighlight: function (element) {
             $(element).closest('.form-group').removeClass('has-error');
-        },
+                
+
+        }
     });
+    
 
     $('#login-form').validate({
         rules: {

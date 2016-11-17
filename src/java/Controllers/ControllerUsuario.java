@@ -37,14 +37,15 @@ public class ControllerUsuario extends HttpServlet {
         if (action.equalsIgnoreCase("cadastro")) {
             try {
                 String tipo = request.getParameter("tipoUsuario");
-                String email = request.getParameter("email");
-                String senha = request.getParameter("senha");
+                String email = request.getParameter("emailTo");
+                String senha = request.getParameter("senhaTo");
 
                 Usuario usuario = null;
                 usuario = serviceUsuario.cadastrarUsuario(email, senha, tipo);
 
                 if (usuario != null) {
                     request.getSession().setAttribute("usuario", usuario);
+                    request.getSession().setAttribute("erro", false);
                     response.sendRedirect("index.jsp");
                 } else {
                     RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
@@ -68,7 +69,7 @@ public class ControllerUsuario extends HttpServlet {
                 response.sendRedirect("index.jsp");
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
@@ -83,7 +84,7 @@ public class ControllerUsuario extends HttpServlet {
                 response.sendRedirect("principal.jsp");
             } catch (ParseException ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }

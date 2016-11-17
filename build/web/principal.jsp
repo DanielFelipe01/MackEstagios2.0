@@ -26,24 +26,27 @@
             <%@include  file="menu.jsp" %>
 
             <section class="conteudo">
-                <%                    /* Boolean erro = false;
+                <%                     Boolean erro = false;
                     try{
-                        erro = (Boolean) request.getAttribute("erro");
+                        if((Boolean)request.getSession().getAttribute("erro"))
+                            erro = true;
                     }catch(Exception ex){
                         erro = false;
                     }
                     
-                    if (erro) {*/
+                    if (erro) {
                 %>
                 <p class="informa"> Ops... Ocorreu um erro tente novamente mais tarde. </p>
 
                 </p>
-                <% /*} else { */%>
+                <% } else { %>
                 <p class="informa">
                     Bem vindo!
                 </p>
 
-                <% /* } */%>
+                <% } 
+                
+                request.getSession().setAttribute("erro", false);%>
             </section>
         </div>
     </body>

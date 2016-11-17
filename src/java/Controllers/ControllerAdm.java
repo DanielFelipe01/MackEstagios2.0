@@ -48,27 +48,27 @@ public class ControllerAdm extends HttpServlet {
                 disp.forward(request, response);
             } catch (Exception ex) {
                 System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
 
             //MOSTRAR DADOS DE UM ADMINISTRADOR SELECIONADO
         } else if (action.equalsIgnoreCase("mostrarAdm")) {
-            try {
-                int IdUsuario = Integer.parseInt(request.getParameter("idAdm"));
-                Administrador adm = serviceAdm.selecionarAdm(IdUsuario);
+            int IdUsuario = Integer.parseInt(request.getParameter("idAdm"));
 
+            Administrador adm = serviceAdm.selecionarAdm(IdUsuario);
+
+            if (adm != null) {
                 request.setAttribute("adm", adm);
                 RequestDispatcher disp = request.getRequestDispatcher("mostrarAdm.jsp");
                 disp.forward(request, response);
-
-            } catch (Exception ex) {
-                System.out.println("Erro: " + ex);
-                request.setAttribute("erro", true);
+            } else {
+                request.getSession().setAttribute("erro", true);
                 RequestDispatcher disp = request.getRequestDispatcher("principal.jsp");
                 disp.forward(request, response);
             }
+
         }
     }
 

@@ -87,16 +87,16 @@
                                     </form>
                                     <form id="register-form" action="ControllerUsuario" method="post" role="form" style="display: none;">
                                         <div class="form-group">
-                                            <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+                                            <input type="email" name="emailTo" id="emailTo" tabindex="1" class="form-control" placeholder="Email">
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="confirmaEmail" id="confirmaEmail" tabindex="1" class="form-control" placeholder="Email" value="">
+                                            <input type="email" name="confirmaEmail" id="confirmaEmail" tabindex="2" class="form-control" placeholder="Email" value="">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="senha" id="senha" tabindex="2" class="form-control" placeholder="Senha">
+                                            <input type="password" name="senhaTo" id="senhaTo" tabindex="3" class="form-control" placeholder="Senha">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="confirmaSenha" id="confirmaSenha" tabindex="2" class="form-control" placeholder="Confirmação da senha">
+                                            <input type="password" name="confirmaSenha" id="confirmaSenha" tabindex="4" class="form-control" placeholder="Confirmação da senha">
                                         </div>
                                         <section class="form-group text-center">
                                             <div class="radio-inline">
@@ -111,7 +111,7 @@
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3">
                                                     <input type="hidden" name="action" value="cadastro">
-                                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registrar-se agora">
+                                                    <input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn btn-register" value="Registrar-se agora">
                                                 </div>
                                             </div>
                                         </div>

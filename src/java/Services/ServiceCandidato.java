@@ -30,7 +30,6 @@ public class ServiceCandidato {
         try {
             return candidatoDB.insertCandidato(candidato);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
     }
@@ -39,7 +38,6 @@ public class ServiceCandidato {
         try {
             return candidatoDB.deleteCandidato(candidato);
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
     }
@@ -48,7 +46,6 @@ public class ServiceCandidato {
         try {
             return candidatoDB.selectCandidatos(v.getIdVaga());
         } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
             return null;
         }
     }
