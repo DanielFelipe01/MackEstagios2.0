@@ -13,8 +13,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Daniel Felipe">
         <link rel="icon" href="img/icon.png">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+        <script src='js/bootstrap.min.js'></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
@@ -40,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nivel">Nível:</label>
-                        <input type="text" name="nivel" id="nivel" tabindex="4" class="form-control" placeholder="Nível" disabled="true">
+                        <input type="number" name="nivel" id="nivel" tabindex="4" class="form-control" placeholder="Nível" disabled="true" min="1" max="3">
                     </div>
                     <% } else if (usuario.getTipo().equals("2")) {%>
                     <div class="form-group">
@@ -73,7 +75,7 @@
                         </div>
                         <div class="form-group">
                             <label for="número">Número:</label>
-                            <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número">
+                            <input type="number" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número"  min="1" max="999999">
                         </div>
                         <div class="form-group">
                             <label for="bairro">Bairro:</label>
@@ -104,7 +106,7 @@
                         </div>
                         <div class="form-group">
                             <label for="semestre">Semestre:</label>
-                            <input type="text" name="semestre" id="semestre" tabindex="17" class="form-control" placeholder="Semestre">
+                            <input type="number" name="semestre" id="semestre" tabindex="17" class="form-control" placeholder="Semestre" min="1" max="20">
                         </div>
                         <div class="form-group">
                             <label for="cidade">Faculdade/Universidade:</label>
@@ -144,7 +146,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="número">Número:</label>
-                                <input type="text" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número">
+                                <input type="number" name="numero" id="numero" tabindex="9" class="form-control" placeholder="Número"  min="1" max="999999">
                             </div>
                             <div class="form-group">
                                 <label for="bairro">Bairro:</label>

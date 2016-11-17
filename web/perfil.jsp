@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dataNascimento">Data nascimento:</label>
-                        <input type="date" name="dataNascimento" id="dataNascimento" class="form-control" placeholder="Data de nascimento" value="<% String.valueOf(aluno.getDataNascimento());%>">
+                        <input type="date" name="dataNascimento" id="dataNascimento" class="form-control" placeholder="Data de nascimento" value="<% out.write(String.valueOf(aluno.getDataNascimento()));%>">
                     </div>
                     <div class="form-group">
                         <label for="rg">RG:</label>
