@@ -4,6 +4,9 @@
     Author     : Daniel
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Services.ServiceVaga"%>
+<%@page import="Services.ServiceAluno"%>
 <%@page import="Entidades.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,8 +45,22 @@
                 <% } else { %>
                 <p class="informa">
                     Bem vindo!
-                </p>
-
+                </p>  
+                    <% 
+                    ServiceVaga service = new ServiceVaga();                    
+                    List<Vaga> vagas = service.listarVagas("%%", "aluno", "true");
+                    String id;
+                    for (Vaga vaga : vagas){ %>
+                    <% id = String.valueOf(vaga.getIdVaga()); %>
+                        <a href="ControllerVagas?action=mostrarVaga&idVaga=<%out.write(id);%>">
+                            <div class="printVaga">
+                                <label>Vaga: <% out.write(vaga.getNome()); %></label><br>
+                                <label>Cursos: <% out.write(vaga.getCurso()); %></label><br>
+                                <label>Bolsa-auxilio: <% out.write(String.valueOf(vaga.getBolsa())); %></label><br>
+                            </div>
+                        </a>
+                        <br>
+                    <% } %>
                 <% } 
                 
                 request.getSession().setAttribute("erro", false);%>

@@ -1,0 +1,119 @@
+CREATE TABLE usuario(
+    idUsuario INTEGER NOT NULL,
+    email VARCHAR(80),
+    senha VARCHAR(15) NOT NULL,
+    tipo VARCHAR(15) NOT NULL,
+    PRIMARY KEY (idUsuario)
+);
+
+CREATE TABLE formacao(
+    idFormacao INTEGER NOT NULL,
+    curso VARCHAR(70) NOT NULL,
+    semestre INTEGER NOT NULL,
+    faculdade VARCHAR(60) NOT NULL,
+    unidade VARCHAR(60) NOT NULL,
+    PRIMARY KEY (idFormacao)
+);
+
+CREATE TABLE endereco(
+    idEndereco INTEGER NOT NULL,
+    rua VARCHAR(50) NOT NULL,
+    bairro VARCHAR(50) NOT NULL,
+    cidade VARCHAR(50) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    numero INTEGER NOT NULL,
+    complemento VARCHAR(80),
+    cep VARCHAR(12) NOT NULL,
+    PRIMARY KEY (idEndereco)
+);
+
+CREATE TABLE aluno(
+    idAluno INTEGER,
+    idUsuario INTEGER NOT NULL,
+    nome VARCHAR(80) NOT NULL,
+    rg VARCHAR(15) NOT NULL,
+    cpf VARCHAR(15) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    idEndereco INTEGER,
+    idFormacao INTEGER,
+    dataNascimento VARCHAR(10) NOT NULL,
+    tia VARCHAR(15) NOT NULL,
+    PRIMARY KEY (idAluno),
+    CONSTRAINT idEnderecoAluno FOREIGN KEY (idEndereco) REFERENCES endereco,
+    CONSTRAINT idFormacaoAluno FOREIGN KEY (idFormacao) REFERENCES formacao,
+    CONSTRAINT idUsuarioAluno FOREIGN KEY (idUsuario) REFERENCES usuario
+);
+
+CREATE TABLE empresa(
+    idEmpresa INTEGER NOT NULL,
+    idUsuario INTEGER NOT NULL,
+    nome VARCHAR(80) NOT NULL,
+    cnpj VARCHAR(30) NOT NULL,
+    site VARCHAR(100) NOT NULL,
+    telefone VARCHAR(50) NOT NULL,
+    idEndereco INTEGER NOT NULL,
+    situacao BOOLEAN NOT NULL,
+    PRIMARY KEY (idEmpresa),
+    CONSTRAINT idEnderecoEmpresa FOREIGN KEY (idEndereco) REFERENCES endereco,
+    CONSTRAINT idUsuarioEmpresa FOREIGN KEY (idUsuario) REFERENCES usuario
+
+);
+
+CREATE TABLE administrador(
+    idAdm INTEGER NOT NULL,
+    nome VARCHAR(80) NOT NULL,
+    idUsuario INTEGER NOT NULL,
+    nivel INTEGER NOT NULL,
+    PRIMARY KEY (idAdm),
+    FOREIGN KEY (idUsuario) REFERENCES usuario
+);
+
+CREATE TABLE vaga(
+    idVaga INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    curso VARCHAR(70) NOT NULL,
+    nome VARCHAR(80) NOT NULL,
+    semestre INTEGER NOT NULL,
+    valorBolsa FLOAT(5) NOT NULL,
+    valeRefeicao FLOAT(5),
+    valeTransporte FLOAT(5),
+    descricao VARCHAR(1500) NOT NULL,
+    atividades VARCHAR(1500) NOT NULL,
+    adicionais VARCHAR(1000),
+    validade Date NOT NULL,
+    horario VARCHAR(15),
+    idEmpresa INTEGER NOT NULL,
+    status BOOLEAN NOT NULL,
+    FOREIGN KEY (idEmpresa) REFERENCES empresa
+);
+
+CREATE TABLE candidatos(
+    idCandidato INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    idAluno INTEGER NOT NULL,
+    idVaga INTEGER NOT NULL,
+	
+    FOREIGN KEY (idAluno) REFERENCES aluno,
+    FOREIGN KEY (idVaga ) REFERENCES vaga
+);
+
+
+INSERT INTO usuario (idUsuario, email, senha, tipo) VALUES(10, 'empresa@empresa.com','empresa','3');
+INSERT INTO usuario (idUsuario, email, senha, tipo) VALUES(20, 'aluno@aluno.com','alunos','2');
+INSERT INTO usuario (idUsuario, email, senha, tipo) VALUES(30, 'adm@adm.com','admadm','1');
+
+INSERT INTO administrador (idAdm, nome, idUsuario, nivel) VALUES(30, 'Administrador',30 ,1);
+
+insert into formacao (idFormacao, curso, semestre, faculdade, unidade) values(10, 'Sistemas de informação ', 6, 'FCI', 'Mackenzie consolacao');
+insert into endereco (idEndereco, rua, bairro, cidade, estado, numero, complemento, cep) values(10, 'Rua aracitaba', 'Bonsucesso', 'Guarulhos', 'Sao paulo', 205, 'Viela', '07176-371');
+
+insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)
+values(10, 20, 'Aluno Aluno', '37.557.102-4', '475.488.288-10', '2438-1731', 10, 10, '1998-06-26', '41584945');
+
+insert into endereco (idEndereco, rua, bairro, cidade, estado, numero, complemento, cep) values(20, 'Avenida Paulista', 'Centro', 'São Paulo', 'Sao paulo', 1148, 'Prédio', '07178-311');
+
+INSERT INTO empresa (idEmpresa, idUsuario, nome, cnpj, site, telefone, idEndereco, situacao) VALUES(10, 10, 'Empresa Empresa','46489498498','www.empresa.com.br', '94952-4381', 20, True);
+
+INSERT INTO vaga (idEmpresa,curso, nome, semestre, valorBolsa, valeRefeicao, valeTransporte, descricao, atividades, adicionais, validade, horario, status)
+VALUES(10,'Sistemas de informação', 'Desenvolvedor front-end', 3, 1200, 25, 10, 'Trabalhar trabalhando', 'Programar com html, css e js', 'possivel efetivação', '1998-06-26', '6', true );
+
+INSERT INTO vaga (idEmpresa,curso, nome, semestre, valorBolsa, valeRefeicao, valeTransporte, descricao, atividades, adicionais, validade, horario, status)
+VALUES(10,'Ciências da computação', 'Desenvolvedor back-end', 6, 2000, 25, 10, 'Trabalhar programando', 'Programar com java, sql e php', 'possivel efetivação', '1998-06-26', '6', true );

@@ -1,0 +1,11 @@
+Autores: Daniel Felipe de Fonte Almeida - 41584945 - 03J11
+	 Ramon Cardoso Barbosa - 41582802 - 03J11
+	 Gilberto de Paulo Junior - 31343511 - 03J11
+
+Para um melhor funcionamento do nosso projeto é necessário:
+
+- Estar conectado a internet, porque usamos bibliotecas que estão armazenadas na nuvem (Bootstrap e jQuery).
+- Criar o banco de dados DerbyDB com o nome "MackEstagios", usuario "adm" e senha "adm" e os arquivos necessários para a criação do banco esta dentro da pasta compactada "DerbyDB" junto aos arquivos do projeto.
+- Executar os comandos SQl contidos no arquivo "SQL.txt" que está junto aos arquivos do projeto para a criação das tabelas e alguns registros(Nesses comandos já vai inserir um usuario de cada tipo, 2 vagas, formação e endereço).
+
+OBSERVAÇÔES: Caso der algum problema com as bibliotecas do projeto ir até MackEstagios2.0 -> propriedades -> bibliotecas e adicionar as bibliotecas que estão na pasta jars.
