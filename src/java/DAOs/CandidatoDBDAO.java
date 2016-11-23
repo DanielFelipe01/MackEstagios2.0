@@ -8,6 +8,7 @@ package DAOs;
 import Conexao.Conexao;
 import Entidades.Candidato;
 import Interfaces.CandidatoDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.*;
@@ -19,20 +20,21 @@ import javax.persistence.*;
 public class CandidatoDBDAO implements CandidatoDAO {
 
     private EntityManager manager;
+    private Connection c;
 
     public CandidatoDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
         this.manager = factory.createEntityManager();
+        this.c = Conexao.getConexao();
     }
 
     @Override
     public Candidato insertCandidato(Candidato candidato) {
-        Conexao c = new Conexao();
         
         String sql = "INSERT INTO candidatos (idAluno, idVaga) VALUES(?,?)";
         
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, candidato.getAluno().getIdAluno());
             stmt.setInt(2, candidato.getVaga().getIdVaga());
 
@@ -43,7 +45,7 @@ public class CandidatoDBDAO implements CandidatoDAO {
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
         
         return candidato;
@@ -51,12 +53,11 @@ public class CandidatoDBDAO implements CandidatoDAO {
 
     @Override
     public Candidato deleteCandidato(Candidato candidato) {
-        Conexao c = new Conexao();
         
         String sql = "DELETE FROM candidatos WHERE idAluno = ? and idVaga = ? ";
         
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, candidato.getAluno().getIdAluno());
             stmt.setInt(2, candidato.getVaga().getIdVaga());
 
@@ -67,7 +68,7 @@ public class CandidatoDBDAO implements CandidatoDAO {
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
         
         return null;

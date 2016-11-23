@@ -44,7 +44,7 @@
                         <input type="hidden" name="tipo" value="aluno">
                         <input type="hidden" name="filtro" value="true">
                         <% } %>
-                        <input type="text" name="pesquisa" id="pesquisa" >
+                        <input type="text" name="pesquisa" id="pesquisa" placeholder="Nome da vaga">
                         <input type="hidden" name="action" value="pesquisaVagas"><br/>
                         <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-default" value="Buscar">
                     </div>

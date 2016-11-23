@@ -8,6 +8,7 @@ package DAOs;
 import Conexao.Conexao;
 import Entidades.Endereco;
 import Interfaces.EnderecoDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,10 +20,12 @@ import javax.persistence.Persistence;
  */
 public class EnderecoDBDAO implements EnderecoDAO{
     private EntityManager manager;
+    private Connection c;
 
     public EnderecoDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
         this.manager = factory.createEntityManager();
+        this.c = Conexao.getConexao();
     }
     
     @Override
@@ -36,12 +39,11 @@ public class EnderecoDBDAO implements EnderecoDAO{
     
     @Override
     public Endereco updateEndereco(Endereco end) {
-        Conexao c = new Conexao();
         
         String sql = "UPDATE endereco set rua = ?, bairro = ?, cidade = ?, estado = ?, numero = ?, "
                 + "complemento = ?, cep = ? WHERE idEndereco = ?";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, end.getRua());
             stmt.setString(2, end.getBairro());
             stmt.setString(3, end.getCidade());
@@ -58,7 +60,7 @@ public class EnderecoDBDAO implements EnderecoDAO{
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
        
         return end;

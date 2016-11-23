@@ -8,6 +8,7 @@ package DAOs;
 import Conexao.Conexao;
 import Entidades.Aluno;
 import Interfaces.AlunoDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,10 +22,12 @@ import javax.persistence.Persistence;
 public class AlunoDBDAO implements AlunoDAO{
 
     private EntityManager manager;
+    private Connection c;
 
     public AlunoDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
         this.manager = factory.createEntityManager();
+        this.c = Conexao.getConexao();
     }
     
     @Override
@@ -45,12 +48,11 @@ public class AlunoDBDAO implements AlunoDAO{
     
     @Override
     public Aluno insertAluno(Aluno aluno) {
-        Conexao c = new Conexao();
         
         String sql = "insert into aluno (idAluno, idUsuario, nome, rg, cpf, telefone, idEndereco, idFormacao, dataNascimento, tia)"
                 + "values(?,?,?,?,?,?,?,?,?,?)";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, aluno.getUsuario().getIdUsuario());
             stmt.setInt(2, aluno.getUsuario().getIdUsuario());
             stmt.setString(3, aluno.getNome());
@@ -69,7 +71,7 @@ public class AlunoDBDAO implements AlunoDAO{
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
        
         return aluno;
@@ -77,12 +79,11 @@ public class AlunoDBDAO implements AlunoDAO{
     
     @Override
     public Aluno updateAluno(Aluno aluno) {
-        Conexao c = new Conexao();
         
         String sql = "UPDATE aluno set nome = ?, rg = ?, cpf = ?, telefone = ?, dataNascimento = ?,"
                 + " tia = ? WHERE idAluno = ?";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, aluno.getNome());
             stmt.setString(2, aluno.getRg());
             stmt.setString(3, aluno.getCpf());
@@ -98,7 +99,7 @@ public class AlunoDBDAO implements AlunoDAO{
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
        
         return aluno;

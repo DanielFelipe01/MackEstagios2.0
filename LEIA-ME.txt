@@ -1,6 +1,5 @@
 Autores: Daniel Felipe de Fonte Almeida - 41584945 - 03J11
 	 Ramon Cardoso Barbosa - 41582802 - 03J11
-	 Gilberto de Paulo Junior - 31343511 - 03J11
 
 Para um melhor funcionamento do nosso projeto é necessário:
 
@@ -9,3 +8,9 @@ Para um melhor funcionamento do nosso projeto é necessário:
 - Executar os comandos SQl contidos no arquivo "SQL.txt" que está junto aos arquivos do projeto para a criação das tabelas e alguns registros(Nesses comandos já vai inserir um usuario de cada tipo, 2 vagas, formação e endereço).
 
 OBSERVAÇÔES: Caso der algum problema com as bibliotecas do projeto ir até MackEstagios2.0 -> propriedades -> bibliotecas e adicionar as bibliotecas que estão na pasta jars.
+
+Usamos os seguintes padrões:
+
+Invenção pura - Grasp - Classes DAO
+Singleton - Gof - Classe de conexão
+Abstract factory - Gof - Factory para criação do objetos.

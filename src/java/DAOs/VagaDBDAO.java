@@ -8,6 +8,7 @@ package DAOs;
 import Conexao.Conexao;
 import Entidades.Vaga;
 import Interfaces.VagaDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,20 +22,22 @@ import javax.persistence.Persistence;
 public class VagaDBDAO implements VagaDAO {
 
     private EntityManager manager;
+    private Connection c;
+
 
     public VagaDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
         this.manager = factory.createEntityManager();
+        this.c = Conexao.getConexao();
     }
 
     @Override
     public Vaga insertVaga(Vaga vaga) {
-        Conexao c = new Conexao();
 
         String sql = "insert into vaga (curso, nome, semestre, valorbolsa, valerefeicao, valetransporte, descricao, atividades, adicionais, validade, horario, idempresa, status)"
                 + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, vaga.getCurso());
             stmt.setString(2, vaga.getNome());
             stmt.setInt(3, vaga.getSemestre());
@@ -56,7 +59,7 @@ public class VagaDBDAO implements VagaDAO {
             System.out.println("Erro: " + ex);
             return null;
         } finally {
-            c.close();
+            Conexao.close();
         }
 
         return vaga;
@@ -107,11 +110,10 @@ public class VagaDBDAO implements VagaDAO {
 
     @Override
     public Vaga changeStatusVaga(Vaga vaga) {
-        Conexao c = new Conexao();
         
         String sql = "UPDATE vaga set status = ? WHERE idVaga = ?";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setBoolean(1, vaga.isStatus());
             stmt.setInt(2, vaga.getIdVaga());
             
@@ -122,18 +124,17 @@ public class VagaDBDAO implements VagaDAO {
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
        
         return vaga;
     }
     
     public boolean updateVaga(int idVaga, Vaga newVaga) {
-        Conexao c = new Conexao();
         
         String sql = "UPDATE vaga set curso = ?, nome = ?, semestre = ?, valorBolsa = ?, valeRefeicao = ?, valeTransporte = ?, descricao = ?, atividades = ?, adicionais = ?, validade = ?, horario = ?, idEmpresa = ?, status = ? WHERE idVaga = ?";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, newVaga.getCurso());
             stmt.setString(2, newVaga.getNome());
             stmt.setInt(3, newVaga.getSemestre());
@@ -156,7 +157,7 @@ public class VagaDBDAO implements VagaDAO {
             System.out.println("Erro: " + ex);
             return false;
         }finally{
-            c.close();
+            Conexao.close();
         }
        
         return true;

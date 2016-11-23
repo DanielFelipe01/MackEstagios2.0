@@ -8,6 +8,7 @@ package DAOs;
 import Conexao.Conexao;
 import Entidades.Empresa;
 import Interfaces.EmpresaDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,19 +21,20 @@ import javax.persistence.Persistence;
  */
 public class EmpresaDBDAO implements EmpresaDAO{
     private EntityManager manager;
+    private Connection c;
 
     public EmpresaDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
         this.manager = factory.createEntityManager();
+        this.c = Conexao.getConexao();
     }
     
     @Override
     public Empresa updateEmpresa(Empresa emp) {
-        Conexao c = new Conexao();
         
         String sql = "UPDATE empresa set nome = ?, cnpj = ?, site = ?, telefone = ?, situacao = ? WHERE idEmpresa = ?";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, emp.getNome());
             stmt.setString(2, emp.getCnpj());
             stmt.setString(3, emp.getSite());
@@ -47,7 +49,7 @@ public class EmpresaDBDAO implements EmpresaDAO{
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
        
         return emp;
@@ -71,12 +73,11 @@ public class EmpresaDBDAO implements EmpresaDAO{
     
     @Override
     public Empresa insertEmpresa(Empresa emp) {
-        Conexao c = new Conexao();
         
         String sql = "INSERT INTO empresa (idEmpresa, idUsuario, nome, cnpj, site, telefone, idEndereco,"
                 + " situacao) VALUES(?,?,?,?,?,?,?,?)";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setInt(1, emp.getUsuario().getIdUsuario());
             stmt.setInt(2, emp.getUsuario().getIdUsuario());
             stmt.setString(3, emp.getNome());
@@ -93,7 +94,7 @@ public class EmpresaDBDAO implements EmpresaDAO{
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
 
         return emp;

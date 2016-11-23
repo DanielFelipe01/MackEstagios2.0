@@ -7,7 +7,6 @@ package Conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
 
 /**
  *
@@ -15,9 +14,12 @@ import java.sql.Statement;
  */
 public class Conexao {
 
-    private Connection conexao;
+    private static Connection conexao;
 
-    public Connection getConexao() {
+    private Conexao() {
+    }
+    
+    public static Connection getConexao() {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
 
@@ -34,7 +36,7 @@ public class Conexao {
         }
     }
 
-    public void close() {
+    public static void close() {
         try {
             conexao.close();
         } catch (Exception ex) {

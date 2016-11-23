@@ -8,6 +8,7 @@ package DAOs;
 import Conexao.Conexao;
 import Entidades.Formacao;
 import Interfaces.FormacaoDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,10 +20,12 @@ import javax.persistence.Persistence;
  */
 public class FormacaoDBDAO implements FormacaoDAO{
     private EntityManager manager;
+    private Connection c;
 
     public FormacaoDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
         this.manager = factory.createEntityManager();
+        this.c = Conexao.getConexao();
     }
     
     @Override
@@ -36,12 +39,11 @@ public class FormacaoDBDAO implements FormacaoDAO{
     
     @Override
     public Formacao updateFormacao(Formacao form) {
-        Conexao c = new Conexao();
         
         String sql = "UPDATE formacao set curso = ?, semestre = ?, faculdade = ?, unidade = ?"
                 + " WHERE idFormacao = ?";
         try{
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
             stmt.setString(1, form.getCurso());
             stmt.setInt(2, form.getSemestre());
             stmt.setString(3, form.getFaculdade());
@@ -56,7 +58,7 @@ public class FormacaoDBDAO implements FormacaoDAO{
             System.out.println("Erro: " + ex);
             return null;
         }finally{
-            c.close();
+            Conexao.close();
         }
        
         return form;

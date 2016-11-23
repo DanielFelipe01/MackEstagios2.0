@@ -8,6 +8,7 @@ package DAOs;
 import Conexao.Conexao;
 import Entidades.*;
 import Interfaces.UsuarioDAO;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.*;
@@ -19,10 +20,12 @@ import javax.persistence.*;
 public class UsuarioDBDAO implements UsuarioDAO {
 
     private EntityManager manager;
+    private Connection c;
 
     public UsuarioDBDAO() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
         this.manager = factory.createEntityManager();
+        this.c = Conexao.getConexao();
     }
 
     @Override
@@ -36,11 +39,10 @@ public class UsuarioDBDAO implements UsuarioDAO {
 
     @Override
     public Usuario updateUsuario(Usuario usuario) {
-        Conexao c = new Conexao();
 
         String sql = "UPDATE usuario set senha = ? WHERE idUsuario = ?";
         try {
-            PreparedStatement stmt = c.getConexao().prepareStatement(sql);
+            PreparedStatement stmt = c.prepareStatement(sql);
 
             stmt.setString(1, usuario.getSenha());
             stmt.setInt(2, usuario.getIdUsuario());
@@ -52,7 +54,7 @@ public class UsuarioDBDAO implements UsuarioDAO {
             System.out.println("Erro: " + ex);
             return null;
         } finally {
-            c.close();
+            Conexao.close();
         }
 
         return usuario;
